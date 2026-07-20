@@ -369,22 +369,34 @@
         .hidden { display: none !important; }
 
         /* CONFIGURAÇÕES DE IMPRESSÃO / PDF */
-        @media print {
-            body { background: #fff; padding: 0; }
-            .container { box-shadow: none; padding: 0; max-width: 100%; }
-            .tabs-buttons, .btn, .form-actions, .signature-tools { display: none !important; }
-            .tab-content { display: block !important; }
-            .accordion-body { display: block !important; }
-            .accordion-header::after { display: none; }
-            .accordion-item, .form-group, .field-container, .authorization-box, .signature-container {
-                page-break-inside: avoid !important;
-                break-inside: avoid !important;
-            }
-            h1, h2, h3, h4, .accordion-header {
-                page-break-after: avoid !important;
-                break-after: avoid !important;
-            }
-        }
+@media print {
+    body { background: #fff; padding: 0; }
+    .container { box-shadow: none; padding: 0; max-width: 100%; }
+    
+    /* Esconde botões e navegações na impressão */
+    .tabs-buttons, .btn, .form-actions, .signature-tools, .tabs-nav, .btn-next, .action-buttons { 
+        display: none !important; 
+    }
+    
+    /* Exibe os conteúdos das abas */
+    .tab-content { display: block !important; }
+    
+    /* Oculta a aba de responsáveis se for maior de 19 anos sem preenchimento */
+    .tab-content.hidden-print { display: none !important; }
+
+    .accordion-body { display: block !important; }
+    .accordion-header::after { display: none; }
+    
+    /* Evita quebras desnecessárias no PDF/Impressão */
+    .accordion-item, .form-group, .field-container, .authorization-box, .signature-container {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    h1, h2, h3, h4, .accordion-header {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -1556,87 +1568,139 @@
         return canvas.toDataURL() === blank.toDataURL();
     }
 
-    // ================= 7. GERAÇÃO, SALVAMENTO E COMPARTILHAMENTO DE PDF (CORRIGIDO) =================
-    async function executarAcao(acao) {
-        const abaGerais = document.getElementById('tab-gerais');
-        const abaResp = document.getElementById('tab-responsaveis');
-        const abaMedica = document.getElementById('tab-medica');
+   // 7. GERAÇÃO, SALVAMENTO E COMPARTILHAMENTO DE PDF / IMPRESSÃO (OTIMIZADO)
+async function executarAcao(acao) {
+    const abaGerais = document.getElementById('tab-gerais');
+    const abaResp = document.getElementById('tab-responsaveis');
+    const abaMedica = document.getElementById('tab-medica');
 
-        if (!validarAbaAtual(abaGerais)) { switchTab('tab-gerais'); return; }
-        if (!validarAbaAtual(abaResp)) { switchTab('tab-responsaveis'); return; }
-        if (!validarAbaAtual(abaMedica)) { switchTab('tab-medica'); return; }
+    // Validações antes de prosseguir
+    if (!validarAbaAtual(abaGerais)) { switchTab('tab-gerais'); return; }
+    if (!validarAbaAtual(abaResp)) { switchTab('tab-responsaveis'); return; }
+    if (!validarAbaAtual(abaMedica)) { switchTab('tab-medica'); return; }
 
-        const auth = document.getElementById('auth_check').checked;
-        const signed = !isCanvasBlank(canvas);
+    const auth = document.getElementById('auth_check')?.checked;
+    const signed = !isCanvasBlank(canvas);
 
-        if (!auth) {
-            alert('Você precisa autorizar a inclusão dos dados marcando a caixa de seleção obrigatória.');
-            return;
-        }
-
-        if (!signed) {
-            alert('É obrigatório assinar no campo de assinatura antes de prosseguir.');
-            return;
-        }
-
-        if (acao === 'imprimir') {
-            window.print();
-            return;
-        }
-
-        // 1. Torna visíveis temporariamente todas as abas e acórdions para captura perfeita do PDF
-        const abas = document.querySelectorAll('.tab-content');
-        const accordions = document.querySelectorAll('.accordion-item');
-        const tabAtivaAnterior = document.querySelector('.tab-content.active')?.id || 'tab-medica';
-
-        abas.forEach(a => { a.style.display = 'block'; });
-        accordions.forEach(acc => acc.classList.add('open'));
-
-        const element = document.getElementById('printable-area');
-        const nomeAssociado = document.getElementById('nome_associado').value.trim() || 'Associado';
-        const nomeArquivo = `Ficha_Inscricao_${nomeAssociado.replace(/\s+/g, '_')}.pdf`;
-
-        const opt = {
-            margin:       [0.3, 0.3, 0.3, 0.3],
-            filename:     nomeArquivo,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true, logging: false, scrollY: 0 },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
-            pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
-        };
-
-        try {
-            // Garante inicialização limpa do html2pdf
-            const worker = html2pdf().set(opt).from(element);
-
-            if (acao === 'salvar') {
-                await worker.save();
-            } else if (acao === 'compartilhar') {
-                const pdfBlob = await worker.output('blob');
-                const pdfFile = new File([pdfBlob], nomeArquivo, { type: 'application/pdf' });
-
-                if (navigator.share && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
-                    await navigator.share({
-                        files: [pdfFile],
-                        title: 'Ficha de Inscrição Escoteira',
-                        text: `Ficha de inscrição de ${nomeAssociado}.`
-                    });
-                } else {
-                    // Fallback para download caso o navegador não suporte Web Share API de arquivos
-                    await html2pdf().set(opt).from(element).save();
-                    alert('Seu navegador/dispositivo não permite o compartilhamento direto de arquivos. O arquivo PDF foi baixado para o seu aparelho.');
-                }
-            }
-        } catch (err) {
-            console.error('Erro ao gerar/compartilhar o PDF:', err);
-            alert('Não foi possível gerar o PDF. Certifique-se de que está utilizando um navegador moderno e tente novamente.');
-        } finally {
-            // Restore visual original
-            abas.forEach(a => { a.style.display = ''; });
-            accordions.forEach(acc => acc.classList.remove('open'));
-            mudarAbaAtiva(tabAtivaAnterior);
-        }
+    if (!auth) {
+        alert('Você precisa autorizar a inclusão dos dados marcando a caixa de seleção obrigatória.');
+        return;
     }
+
+    if (!signed) {
+        alert('É obrigatório assinar no campo de assinatura antes de prosseguir.');
+        return;
+    }
+
+    // 1. Identificar se o responsável deve ser ocultado no PDF
+    const dataNascInput = document.getElementById('data_nascimento')?.value;
+    let eMaiorDe19 = false;
+
+    if (dataNascInput) {
+        const dataNasc = new Date(dataNascInput);
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - dataNasc.getFullYear();
+        const mes = hoje.getMonth() - dataNasc.getMonth();
+        if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) idade--;
+        if (idade >= 19) eMaiorDe19 = true;
+    }
+
+    // Verifica se os campos do responsável possuem conteúdo preenchido
+    const camposResp = abaResp ? abaResp.querySelectorAll('input, select') : [];
+    let temDadosResp = false;
+    camposResp.forEach(input => {
+        if (input.value && input.value.trim() !== '' && input.type !== 'button' && input.type !== 'submit') {
+            temDadosResp = true;
+        }
+    });
+
+    const esconderAbaResp = eMaiorDe19 && !temDadosResp;
+
+    // 2. Elementos interativos que NÃO devem sair na impressão/PDF
+    const elementosParaEsconder = document.querySelectorAll(
+        '.tabs-nav, .btn-next, button[onclick*="addMedicamento"], button[onclick*="removerMedicamento"], ' +
+        'button[onclick*="toggleSegundoResponsavel"], button[onclick*="clearCanvas"], .action-buttons, ' +
+        '#lbl-resp-obrigatorio, #alerta-idade'
+    );
+
+    // Salva o estado ativo anterior
+    const tabAtivaAnterior = document.querySelector('.tab-content.active')?.id || 'tab-medica';
+
+    // 3. Preparação Visual para o PDF
+    elementosParaEsconder.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
+    const abas = document.querySelectorAll('.tab-content');
+    const accordions = document.querySelectorAll('.accordion-item');
+
+    abas.forEach(a => {
+    if (a.id === 'tab-responsaveis' && esconderAbaResp) {
+        a.style.display = 'none';
+        a.classList.add('hidden-print'); // Garante que o CSS @media print também esconda
+    } else {
+        a.style.display = 'block';
+        a.classList.remove('hidden-print');
+    }
+});
+
+    accordions.forEach(acc => acc.classList.add('open'));
+
+    // Tratamento direto para a opção IMPRIMIR (Browser Native Print)
+    if (acao === 'imprimir') {
+        window.print();
+        
+        // Restaura a visualização da tela
+        elementosParaEsconder.forEach(el => el.style.display = '');
+        abas.forEach(a => { a.style.display = ''; });
+        accordions.forEach(acc => acc.classList.remove('open'));
+        mudarAbaAtiva(tabAtivaAnterior);
+        return;
+    }
+
+    // 4. Configuração da biblioteca html2pdf
+    const element = document.getElementById('printable-area');
+    const nomeAssociado = document.getElementById('nome_associado')?.value.trim() || 'Associado';
+    const nomeArquivo = `Ficha_Inscricao_${nomeAssociado.replace(/\s+/g, '_')}.pdf`;
+
+    const opt = {
+        margin:       [0.3, 0.3, 0.3, 0.3],
+        filename:     nomeArquivo,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false, scrollY: 0 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    try {
+        const worker = html2pdf().set(opt).from(element);
+
+        if (acao === 'salvar') {
+            await worker.save();
+        } else if (acao === 'compartilhar') {
+            const pdfBlob = await worker.output('blob');
+            const pdfFile = new File([pdfBlob], nomeArquivo, { type: 'application/pdf' });
+
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+                await navigator.share({
+                    files: [pdfFile],
+                    title: 'Ficha de Inscrição Escoteira',
+                    text: `Ficha de inscrição de ${nomeAssociado}.`
+                });
+            } else {
+                await html2pdf().set(opt).from(element).save();
+                alert('Seu dispositivo não permite o compartilhamento direto de arquivos. O PDF foi baixado para o aparelho.');
+            }
+        }
+    } catch (err) {
+        console.error('Erro ao processar o PDF:', err);
+        alert('Não foi possível gerar o PDF. Tente novamente.');
+    } finally {
+        // Restaura a tela ao estado original do usuário
+        elementosParaEsconder.forEach(el => el.style.display = '');
+        abas.forEach(a => { a.style.display = ''; });
+        accordions.forEach(acc => acc.classList.remove('open'));
+        mudarAbaAtiva(tabAtivaAnterior);
+    }
+}
 
     // 8. AUTOSAVE / RESTAURAÇÃO DE DADOS (localStorage)
     const STORAGE_KEY = 'ficha_escoteira_data';
