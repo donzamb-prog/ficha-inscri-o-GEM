@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Inscrição - Grupo Escoteiro Memorial 350 SP</title>
+    <!-- CSS / Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- html2pdf.js para exportar em PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #111111;
+            --secondary-color: #f1b80d;
+            --accent-color: #005a2b;
+            --bg-light: #f8f9fa;
+            --border-color: #ced4da;
+            --text-dark: #212529;
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            color: var(--text-dark);
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Estilização Responsiva e Alinhada do Cabeçalho */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .header-logo-left, 
+        .header-logo-right {
+            flex: 0 0 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 90px;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header-title h2 {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title h1 {
+            font-size: 1.35rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 3px 0;
+        }
+
+        .header-title p {
+            font-size: 0.82rem;
+            color: #444;
+            line-height: 1.3;
+        }
+
+        /* AJUSTE DO CABEÇALHO PARA CELULAR */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px 5px;
+            }
+            .container {
+                padding: 12px;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+            .header-logo-left, .header-logo-right {
+                flex: none;
+            }
+            .logo-img {
+                max-height: 55px;
+                max-width: 75px;
+            }
+            .header-title h2 {
+                font-size: 0.75rem;
+            }
+            .header-title h1 {
+                font-size: 1.05rem;
+            }
+            .header-title p {
+                font-size: 0.72rem;
+            }
+        }
+
+        /* NAVEGAÇÃO / TABS INDEPENDENTES E LADO A LADO */
+        .tabs-container {
+            margin-bottom: 25px;
+        }
+
+        .tabs-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .tabs-buttons {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-btn {
+            background: #fff;
+            border: 2px solid var(--border-color);
+            color: #555;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .tab-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* CONTEÚDO DAS SEÇÕES */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ACCORDIONS E CONTROLADORES DE QUEBRA DE PÁGINA */
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .accordion-header {
+            background: #f1f3f5;
+            padding: 14px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary-color);
+            user-select: none;
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .accordion-item.open .accordion-header::after {
+            transform: rotate(180deg);
+        }
+
+        .accordion-body {
+            display: none;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .accordion-item.open .accordion-body {
+            display: block;
+        }
+
+        /* ESTRUTURA DOS CAMPOS (GRID) */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 5px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .field-container {
+            position: relative;
+            margin-top: 8px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .field-container label {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: #fff;
+            padding: 0 5px;
+            font-size: 0.78rem;
+            color: #666;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .field-container input,
+        .field-container select,
+        .field-container textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+
+        .field-container input:focus,
+        .field-container select:focus,
+        .field-container textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(17,17,17,0.1);
+        }
+
+        /* RADIOS E CHECKBOXES */
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+
+        .radio-label, .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* BOTÕES DE AÇÃO */
+        .btn {
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary { background: var(--primary-color); color: #fff; }
+        .btn-primary:hover { background: #333; }
+        .btn-secondary { background: var(--secondary-color); color: #000; }
+        .btn-secondary:hover { background: #d9a40a; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
+        .btn-outline:hover { background: var(--primary-color); color: #fff; }
+        .btn-danger { background: #dc3545; color: #fff; }
+        .btn-danger:hover { background: #bd2130; }
+
+        /* QUADRO DE ASSINATURA */
+        .signature-container {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius);
+            padding: 10px;
+            text-align: center;
+            background: #fafafa;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        canvas#sig-canvas {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fff;
+            cursor: crosshair;
+            touch-action: none;
+            max-width: 100%;
+        }
+
+        /* RODAPÉ DO FORMULÁRIO */
+        .form-actions {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .authorization-box {
+            background: #fff9e6;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin: 25px 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .hidden { display: none !important; }
+
+        /* CONFIGURAÇÕES DE IMPRESSÃO / PDF */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .tabs-buttons, .btn, .form-actions, .signature-tools { display: none !important; }
+            .tab-content { display: block !important; }
+            .accordion-body { display: block !important; }
+            .accordion-header::after { display: none; }
+            .accordion-item, .form-group, .field-container, .authorization-box, .signature-container {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            h1, h2, h3, h4, .accordion-header {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="printable-area">
+    
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <div class="header-logo-left">
+            <img src="logo_gem.png" alt="Logo GEM" class="logo-img">
+        </div>
+        <div class="header-title">
+            <h2>UNIÃO DOS ESCOTEIROS DO BRASIL</h2>
+            <h1>Grupo Escoteiro Memorial 350 SP</h1>
+            <p>Av. Doutor Altair Martins, 520 - Raposo Tavares, Osasco SP</p>
+            <p>CEP: 06149-020 • E-mail: grupoescoteiromemorial.350@gmail.com</p>
+            <p>Tel: (11) 2884-5555 • Whats: (11) 99745-7599 / (11) 94077-4175</p>
+        </div>
+        <div class="header-logo-right">
+            <img src="logo_ueb.png" alt="Logo Escoteiros do Brasil" class="logo-img">
+        </div>
+    </header>
+
+    <!-- MENU DE ABA DA FICHA DE INSCRIÇÃO -->
+    <div class="tabs-container">
+        <h2 class="tabs-title">Novo Associado</h2>
+        <div class="tabs-buttons">
+            <button class="tab-btn active" onclick="switchTab('tab-gerais')">Informações Gerais</button>
+            <button class="tab-btn" id="btn-tab-responsaveis" onclick="switchTab('tab-responsaveis')">Responsáveis</button>
+            <button class="tab-btn" id="btn-tab-medica" onclick="switchTab('tab-medica')">Ficha Médica</button>
+        </div>
+    </div>
+
+    <form id="escoteiroForm" onsubmit="event.preventDefault();">
+
+        <!-- ================= ABA 1: INFORMAÇÕES GERAIS ================= -->
+        <div id="tab-gerais" class="tab-content active">
+            
+            <div class="form-group full-width" style="margin-bottom: 20px;">
+                <div class="field-container">
+                    <label>Nome do associado *</label>
+                    <input type="text" id="nome_associado" required placeholder="Digite o nome completo">
+                </div>
+            </div>
+
+            <!-- Caixinha de aviso de menoridade -->
+            <div id="alerta-idade" style="display: none; background-color: #e8f4fd; color: #1d6f8a; padding: 10px; margin: 10px 0; border-radius: 5px;">
+                📌 Associado menor de 19 anos identificado. O preenchimento dos dados do responsável é obrigatório.
+            </div>
+
+            <!-- Subseção 1: Informações Pessoais -->
+            <div class="accordion-item open">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Informações Pessoais</div>
+                <div class="accordion-body">
+                    <div class="form-grid">
+                        <div class="field-container">
+                            <label>Apelido ou nome social</label>
+                            <input type="text" id="nome_social">
+                        </div>
+                        <div class="field-container">
+                            <label>Data de nascimento *</label>
+                            <input type="date" id="data_nascimento" required onchange="verificarIdade(this)">
+                        </div>
+                        <div class="field-container">
+                            <label>Etnia *</label>
+                            <select id="etnia" required>
+                                <option value="">Selecione</option>
+                                <option value="Amarela">Amarela</option>
+                                <option value="Branca">Branca</option>
+                                <option value="Indígena">Indígena</option>
+                                <option value="Parda">Parda</option>
+                                <option value="Preta">Preta</option>
+                                <option value="Não desejo informar">Não desejo informar</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Sexo *</label>
+                            <select id="sexo" required>
+                                <option value="">Selecione o sexo</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Masculino">Masculino</option>
+                            </select>
+                        </div>
+
+                        <!-- É Estrangeiro? -->
+                        <div class="form-group full-width">
+                            <label style="font-size: 0.85rem; color: #555; font-weight: 600;">É estrangeiro?</label>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="estrangeiro" value="Sim" onchange="toggleEstrangeiro(true)"> Sim</label>
+                                <label class="radio-label"><input type="radio" name="estrangeiro" value="Não" checked onchange="toggleEstrangeiro(false)"> Não</label>
+                            </div>
+                        </div>
+
+                        <div class="field-container">
+                            <label>País de Nascimento *</label>
+                            <input type="text" id="pais_nascimento" value="Brasil" required>
+                        </div>
+
+                        <div class="field-container" id="box-uf-nasc">
+                            <label>UF de nascimento *</label>
+                            <select id="uf_nascimento" required>
+                                <option value="">Selecione a UF</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PR">Paraná</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="AC">Acre</option><option value="AL">Alagoas</option><option value="AP">Amapá</option><option value="AM">Amazonas</option><option value="BA">Bahia</option><option value="CE">Ceará</option><option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option><option value="GO">Goiás</option><option value="MA">Maranhão</option><option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option><option value="PA">Pará</option><option value="PB">Paraíba</option><option value="PE">Pernambuco</option><option value="PI">Piauí</option><option value="RN">Rio Grande do Norte</option><option value="RO">Rondônia</option><option value="RR">Roraima</option><option value="SE">Sergipe</option><option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+
+                        <div class="field-container" id="box-cidade-nasc">
+                            <label>Cidade de nascimento *</label>
+                            <input type="text" id="cidade_nascimento" placeholder="Digite a cidade" required>
+                        </div>
+
+                        <div class="field-container">
+                            <label>RG</label>
+                            <input type="text" id="rg">
+                        </div>
+                        <div class="field-container">
+                            <label>Órgão expedidor</label>
+                            <input type="text" id="orgao_expedidor">
+                        </div>
+                        <div class="field-container">
+                            <label>CPF *</label>
+                            <input type="text" id="cpf" required placeholder="000.000.000-00">
+                        </div>
+                        <div class="field-container">
+                            <label>Estado Civil *</label>
+                            <select id="estado_civil" required>
+                                <option value="">Selecione o estado civil</option>
+                                <option value="Não informado">Não informado</option>
+                                <option value="Solteiro (a)">Solteiro (a)</option>
+                                <option value="Casado (a)">Casado (a)</option>
+                                <option value="Divorciado (a)">Divorciado (a)</option>
+                                <option value="Viúvo (a)">Viúvo (a)</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Religião</label>
+                            <select id="religiao">
+                                <option value="">Selecione a religião</option>
+                                <option value="Anglicana">Anglicana</option><option value="Afro-Brasileira">Afro-Brasileira</option><option value="Budismo">Budismo</option><option value="Católica">Católica</option><option value="Espírita">Espírita</option><option value="Espiritualista">Espiritualista</option><option value="Evangélico/Pentecostal">Evangélico/Pentecostal</option><option value="Hinduísmo">Hinduísmo</option><option value="Islâmica">Islâmica</option><option value="Judaísmo">Judaísmo</option><option value="Messiânica">Messiânica</option><option value="Mórmon">Mórmon</option><option value="Protestante">Protestante</option><option value="Testemunha de Jeová">Testemunha de Jeová</option><option value="Tradições Esotéricas">Tradições Esotéricas</option><option value="Tradições Indígenas">Tradições Indígenas</option><option value="Xintoísmo">Xintoísmo</option><option value="Sem Religião">Sem Religião</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subseção 2: Profissionais e Acadêmicas -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Informações profissionais e acadêmicas</div>
+                <div class="accordion-body">
+                    <div class="form-grid">
+                        <div class="field-container">
+                            <label>Escolaridade *</label>
+                            <select id="escolaridade" required>
+                                <option value="">Selecione a escolaridade</option>
+                                <option value="Não informado">Não informado</option>
+                                <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+                                <option value="Ensino fundamental completo">Ensino fundamental completo</option>
+                                <option value="Ensino médio incompleto">Ensino médio incompleto</option>
+                                <option value="Ensino médio completo">Ensino médio completo</option>
+                                <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+                                <option value="Ensino superior completo">Ensino superior completo</option>
+                                <option value="Especialização incompleta">Especialização incompleta</option>
+                                <option value="Especialização completa">Especialização completa</option>
+                                <option value="Mestrado incompleto">Mestrado incompleto</option>
+                                <option value="Mestrado completo">Mestrado completo</option>
+                                <option value="Doutorado incompleto">Doutorado incompleto</option>
+                                <option value="Doutorado completo">Doutorado completo</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Profissão *</label>
+                            <select id="profissao" required>
+                                <option value="">Selecione uma profissão</option>
+                                <option value="Estudante">Estudante</option>
+                                <option value="Outras Profissões">Outras Profissões</option>
+                                <option value="Administrador(a)">Administrador(a)</option>
+                                <option value="Advogado(a)">Advogado(a)</option>
+                                <option value="Autônomo(a)">Autônomo(a)</option>
+                                <option value="Engenheiro(a)">Engenheiro(a)</option>
+                                <option value="Professor(a)">Professor(a)</option>
+                                <option value="Servidor(a) Público(a)">Servidor(a) Público(a)</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Local de trabalho</label>
+                            <input type="text" id="local_trabalho" placeholder="Digite o local de trabalho">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subseção 3: Endereço e dados de contato -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Endereço e dados de contato</div>
+                <div class="accordion-body">
+                    <div class="form-grid">
+                        <div class="field-container">
+                            <label>CEP do endereço residencial *</label>
+                            <input type="text" id="cep" required placeholder="00000-000" onkeyup="buscaCEP(this.value, 'associado')">
+                        </div>
+                        <div class="field-container">
+                            <label>Endereço *</label>
+                            <input type="text" id="endereco" required>
+                        </div>
+                        <div class="field-container">
+                            <label>Número *</label>
+                            <input type="text" id="numero" required>
+                        </div>
+                        <div class="field-container">
+                            <label>Complemento</label>
+                            <input type="text" id="complemento">
+                        </div>
+                        <div class="field-container">
+                            <label>Estado *</label>
+                            <input type="text" id="estado" required>
+                        </div>
+                        <div class="field-container">
+                            <label>Cidade *</label>
+                            <input type="text" id="cidade" required>
+                        </div>
+                        <div class="field-container">
+                            <label>Bairro *</label>
+                            <input type="text" id="bairro" required>
+                        </div>
+                        <div class="field-container">
+                            <label>E-mail *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="field-container">
+                            <label>E-mail Escoteiros do Brasil</label>
+                            <input type="email" id="email_ueb">
+                        </div>
+                        <div class="field-container">
+                            <label>Celular *</label>
+                            <input type="tel" id="celular" required placeholder="(11) 90000-0000">
+                        </div>
+                        <div class="field-container">
+                            <label>Telefone secundário</label>
+                            <input type="tel" id="tel_secundario">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subseção 4: Informações Adicionais -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Informações adicionais</div>
+                <div class="accordion-body">
+                    <div class="form-grid">
+                        <div class="field-container">
+                            <label>Clube de Serviço</label>
+                            <select id="clube_servico">
+                                <option value="">Selecione o Clube</option>
+                                <option value="Lions">Lions</option>
+                                <option value="Loja Maçônica">Loja Maçônica</option>
+                                <option value="Rotary Clube">Rotary Clube</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Indicativo de Chamada de Rádio Amador</label>
+                            <input type="text" id="radio_amador" placeholder="Digite o indicativo">
+                        </div>
+                        <div class="field-container">
+                            <label>Classe</label>
+                            <select id="classe_radio">
+                                <option value="">Selecione</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; text-align:right;">
+                <button type="button" class="btn btn-primary" onclick="nextTab('tab-responsaveis')">Próximo: Responsáveis →</button>
+            </div>
+        </div>
+
+        <!-- ================= ABA 2: RESPONSÁVEIS ================= -->
+        <div id="tab-responsaveis" class="tab-content">
+            <h3 style="margin-bottom: 15px;">Primeiro Responsável <span id="lbl-resp-obrigatorio" style="font-size: 0.85rem; color: #dc3545;">(Obrigatório para menores de 19 anos)</span></h3>
+            
+            <div class="form-grid">
+                <div class="field-container">
+                    <label>Parentesco <span class="req-resp">*</span></label>
+                    <input type="text" id="resp1_parentesco" class="resp-campo" placeholder="Pai, Mãe, Tutor...">
+                </div>
+                <div class="field-container">
+                    <label>Nome completo <span class="req-resp">*</span></label>
+                    <input type="text" id="resp1_nome" class="resp-campo">
+                </div>
+                <div class="field-container">
+                    <label>Nome abreviado</label>
+                    <input type="text" id="resp1_nome_abreviado">
+                </div>
+                <div class="field-container">
+                    <label>Data de Nascimento <span class="req-resp">*</span></label>
+                    <input type="date" id="resp1_data_nasc" class="resp-campo">
+                </div>
+                <div class="field-container">
+                    <label>Sexo <span class="req-resp">*</span></label>
+                    <select id="resp1_sexo" class="resp-campo">
+                        <option value="">Selecione</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Masculino">Masculino</option>
+                    </select>
+                </div>
+                <div class="field-container">
+                    <label>CPF <span class="req-resp">*</span></label>
+                    <input type="text" id="resp1_cpf" class="resp-campo">
+                </div>
+                <div class="field-container">
+                    <label>RG</label>
+                    <input type="text" id="resp1_rg">
+                </div>
+                <div class="field-container">
+                    <label>E-mail <span class="req-resp">*</span></label>
+                    <input type="email" id="resp1_email" class="resp-campo">
+                </div>
+                <div class="field-container">
+                    <label>Celular <span class="req-resp">*</span></label>
+                    <input type="tel" id="resp1_celular" class="resp-campo">
+                </div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <button type="button" class="btn btn-secondary" onclick="copiarEnderecoAssociado('resp1')">Mesmo endereço do associado</button>
+            </div>
+
+            <div class="form-grid">
+                <div class="field-container">
+                    <label>CEP residencial <span class="req-resp">*</span></label>
+                    <input type="text" id="resp1_cep" class="resp-campo" onkeyup="buscaCEP(this.value, 'resp1')">
+                </div>
+                <div class="field-container">
+                    <label>Endereço <span class="req-resp">*</span></label>
+                    <input type="text" id="resp1_endereco" class="resp-campo">
+                </div>
+                <div class="field-container">
+                    <label>Número <span class="req-resp">*</span></label>
+                    <input type="text" id="resp1_numero" class="resp-campo">
+                </div>
+                <div class="field-container">
+                    <label>Escolaridade <span class="req-resp">*</span></label>
+                    <select id="resp1_escolaridade" class="resp-campo">
+                        <option value="">Selecione a escolaridade</option>
+                        <option value="Não informado">Não informado</option>
+                        <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+                        <option value="Ensino fundamental completo">Ensino fundamental completo</option>
+                        <option value="Ensino médio incompleto">Ensino médio incompleto</option>
+                        <option value="Ensino médio completo">Ensino médio completo</option>
+                        <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+                        <option value="Ensino superior completo">Ensino superior completo</option>
+                        <option value="Especialização incompleta">Especialização incompleta</option>
+                        <option value="Especialização completa">Especialização completa</option>
+                        <option value="Mestrado incompleto">Mestrado incompleto</option>
+                        <option value="Mestrado completo">Mestrado completo</option>
+                        <option value="Doutorado incompleto">Doutorado incompleto</option>
+                        <option value="Doutorado completo">Doutorado completo</option>
+                    </select>
+                </div>
+                <div class="field-container">
+                    <label>Profissão <span class="req-resp">*</span></label>
+                    <select id="resp1_profissao" class="resp-campo">
+                        <option value="">Selecione uma profissão</option>
+                        <option value="Estudante">Estudante</option>
+                        <option value="Outras Profissões">Outras Profissões</option>
+                        <option value="Administrador(a)">Administrador(a)</option>
+                        <option value="Advogado(a)">Advogado(a)</option>
+                        <option value="Autônomo(a)">Autônomo(a)</option>
+                        <option value="Engenheiro(a)">Engenheiro(a)</option>
+                        <option value="Professor(a)">Professor(a)</option>
+                        <option value="Servidor(a) Público(a)">Servidor(a) Público(a)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Botão Segundo Responsável -->
+            <div style="margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 15px;">
+                <button type="button" class="btn btn-outline" onclick="toggleSegundoResponsavel()">+ Adicionar Segundo Responsável</button>
+            </div>
+
+            <!-- ESTRUTURA COMPLETA DO SEGUNDO RESPONSÁVEL -->
+            <div id="container-segundo-resp" class="hidden" style="margin-top: 20px; background: #fafafa; padding: 20px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+                <h4 style="margin-bottom: 15px; color: var(--primary-color);">Segundo Responsável</h4>
+                
+                <div class="form-grid">
+                    <div class="field-container">
+                        <label>Parentesco</label>
+                        <input type="text" id="resp2_parentesco" placeholder="Pai, Mãe, Tutor...">
+                    </div>
+                    <div class="field-container">
+                        <label>Nome completo</label>
+                        <input type="text" id="resp2_nome">
+                    </div>
+                    <div class="field-container">
+                        <label>Nome abreviado</label>
+                        <input type="text" id="resp2_nome_abreviado">
+                    </div>
+                    <div class="field-container">
+                        <label>Data de Nascimento</label>
+                        <input type="date" id="resp2_data_nasc">
+                    </div>
+                    <div class="field-container">
+                        <label>Sexo</label>
+                        <select id="resp2_sexo">
+                            <option value="">Selecione</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Masculino">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="field-container">
+                        <label>CPF</label>
+                        <input type="text" id="resp2_cpf">
+                    </div>
+                    <div class="field-container">
+                        <label>RG</label>
+                        <input type="text" id="resp2_rg">
+                    </div>
+                    <div class="field-container">
+                        <label>E-mail</label>
+                        <input type="email" id="resp2_email">
+                    </div>
+                    <div class="field-container">
+                        <label>Celular</label>
+                        <input type="tel" id="resp2_celular">
+                    </div>
+                </div>
+
+                <div style="margin: 20px 0;">
+                    <button type="button" class="btn btn-secondary" onclick="copiarEnderecoAssociado('resp2')">Mesmo endereço do associado</button>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field-container">
+                        <label>CEP residencial</label>
+                        <input type="text" id="resp2_cep" onkeyup="buscaCEP(this.value, 'resp2')">
+                    </div>
+                    <div class="field-container">
+                        <label>Endereço</label>
+                        <input type="text" id="resp2_endereco">
+                    </div>
+                    <div class="field-container">
+                        <label>Número</label>
+                        <input type="text" id="resp2_numero">
+                    </div>
+                    <div class="field-container">
+                        <label>Escolaridade</label>
+                        <select id="resp2_escolaridade">
+                            <option value="">Selecione a escolaridade</option>
+                            <option value="Não informado">Não informado</option>
+                            <option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+                            <option value="Ensino fundamental completo">Ensino fundamental completo</option>
+                            <option value="Ensino médio incompleto">Ensino médio incompleto</option>
+                            <option value="Ensino médio completo">Ensino médio completo</option>
+                            <option value="Ensino superior incompleto">Ensino superior incompleto</option>
+                            <option value="Ensino superior completo">Ensino superior completo</option>
+                            <option value="Especialização incompleta">Especialização incompleta</option>
+                            <option value="Especialização completa">Especialização completa</option>
+                            <option value="Mestrado incompleto">Mestrado incompleto</option>
+                            <option value="Mestrado completo">Mestrado completo</option>
+                            <option value="Doutorado incompleto">Doutorado incompleto</option>
+                            <option value="Doutorado completo">Doutorado completo</option>
+                        </select>
+                    </div>
+                    <div class="field-container">
+                        <label>Profissão</label>
+                        <select id="resp2_profissao">
+                            <option value="">Selecione uma profissão</option>
+                            <option value="Estudante">Estudante</option>
+                            <option value="Outras Profissões">Outras Profissões</option>
+                            <option value="Administrador(a)">Administrador(a)</option>
+                            <option value="Advogado(a)">Advogado(a)</option>
+                            <option value="Autônomo(a)">Autônomo(a)</option>
+                            <option value="Engenheiro(a)">Engenheiro(a)</option>
+                            <option value="Professor(a)">Professor(a)</option>
+                            <option value="Servidor(a) Público(a)">Servidor(a) Público(a)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; text-align:right;">
+                <button type="button" class="btn btn-primary" onclick="nextTab('tab-medica')">Próximo: Ficha Médica →</button>
+            </div>
+        </div>
+
+        <!-- ================= ABA 3: FICHA MÉDICA ================= -->
+        <div id="tab-medica" class="tab-content">
+            
+            <!-- SUBSEÇÃO 1: Dados Biométricos -->
+            <div class="accordion-item open">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Dados Biométricos</div>
+                <div class="accordion-body">
+                    <div class="form-grid">
+                        <div class="field-container">
+                            <label>Altura (m) *</label>
+                            <input type="text" id="med_altura" required placeholder="Ex: 1.65">
+                        </div>
+                        <div class="field-container">
+                            <label>Peso (kg) *</label>
+                            <input type="text" id="med_peso" required placeholder="Ex: 60">
+                        </div>
+                        <div class="field-container">
+                            <label>Tipo Sanguíneo *</label>
+                            <select id="tipo_sanguineo" required>
+                                <option value="">Selecione</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option value="O">O</option>
+                                <option value="Não sei">Não sei</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Fator RH *</label>
+                            <select id="fator_rh" required>
+                                <option value="">Selecione</option>
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="Não sei">Não sei</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBSEÇÃO 2: Saúde física e mental -->
+            <div class="accordion-item open">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Saúde física e mental</div>
+                <div class="accordion-body">
+                    
+                    <!-- Equipamentos de Auxílio -->
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Utiliza equipamento de auxílio? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="auxilio_opt" value="Sim" onchange="toggleGroup('box-auxilios-lista', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="auxilio_opt" value="Não" checked onchange="toggleGroup('box-auxilios-lista', false)"> Não</label>
+                        </div>
+                        <div id="box-auxilios-lista" class="hidden" style="margin-top: 10px; background: #f9f9f9; padding: 15px; border-radius: var(--radius);">
+                            <p style="font-size: 0.85rem; margin-bottom: 10px; color: #555;">Selecione todas as opções que se aplicam:</p>
+                            <div class="form-grid">
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Óculos"> Óculos</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Lentes de Contato"> Lentes de Contato</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Aparelho Dentário"> Aparelho Dentário</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Sondas"> Sondas</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Marca-passos"> Marca-passos</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Aparelho de Audição"> Aparelho de Audição</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Bomba de Insulina"> Bomba de Insulina</label>
+                                <label class="checkbox-label"><input type="checkbox" name="auxilio_item" value="Outros" onchange="toggleFieldByCheckbox(this, 'box-auxilio-outros')"> Outros (descreva)</label>
+                            </div>
+                            <div id="box-auxilio-outros" class="field-container hidden" style="margin-top: 10px;">
+                                <label>Descreva outros equipamentos *</label>
+                                <input type="text" id="desc_auxilio_outros">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Faz acompanhamento médico regular? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="acompanhamento" value="Sim" onchange="toggleGroup('box-acompanhamento-desc', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="acompanhamento" value="Não" checked onchange="toggleGroup('box-acompanhamento-desc', false)"> Não</label>
+                        </div>
+                        <div id="box-acompanhamento-desc" class="field-container hidden">
+                            <label>Descreva *</label>
+                            <input type="text" id="desc_acompanhamento">
+                        </div>
+                    </div>
+
+                    <!-- Problema Crônico de Saúde -->
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Apresenta algum problema crônico de saúde? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="cronico_opt" value="Sim" onchange="toggleGroup('box-cronico-lista', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="cronico_opt" value="Não" checked onchange="toggleGroup('box-cronico-lista', false)"> Não</label>
+                        </div>
+                        <div id="box-cronico-lista" class="hidden" style="margin-top: 10px; background: #f9f9f9; padding: 15px; border-radius: var(--radius);">
+                            <p style="font-size: 0.85rem; margin-bottom: 10px; color: #555;">Selecione todas as opções que se aplicam:</p>
+                            <div class="form-grid">
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Asma"> Asma</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Bronquite"> Bronquite</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Sinusite"> Sinusite</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Hipertensão"> Hipertensão</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Diabetes"> Diabetes</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Epilepsia"> Epilepsia</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Problemas Dermatológicos"> Problemas Dermatológicos</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Problemas Cardíacos"> Problemas Cardíacos</label>
+                                <label class="checkbox-label"><input type="checkbox" name="cronico_item" value="Outros" onchange="toggleFieldByCheckbox(this, 'box-cronico-outros')"> Outros (descreva)</label>
+                            </div>
+                            <div id="box-cronico-outros" class="field-container hidden" style="margin-top: 10px;">
+                                <label>Descreva outros problemas crônicos *</label>
+                                <input type="text" id="desc_cronico_outros">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alergias -->
+                    <div class="form-group full-width" style="margin-bottom: 25px;">
+                        <label style="font-weight: 600;">Possui alguma das alergias abaixo? Selecione todas que se aplicam.</label>
+                        <div class="form-grid" style="margin-top: 10px;">
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_acaro" onchange="toggleFieldByCheckbox(this, 'box-alergia-acaro')"> Ácaro</label>
+                                <div id="box-alergia-acaro" class="field-container hidden" style="margin-top: 5px;">
+                                    <label>Descreva a alergia a ácaro *</label>
+                                    <input type="text" id="desc_alergia_acaro">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_alimentos" onchange="toggleFieldByCheckbox(this, 'box-alergia-alimentos')"> Alimentos</label>
+                                <div id="box-alergia-alimentos" class="field-container hidden" style="margin-top: 5px;">
+                                    <label>Descreva a alergia alimentar *</label>
+                                    <input type="text" id="desc_alergia_alimentos">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_fungos" onchange="toggleFieldByCheckbox(this, 'box-alergia-fungos')"> Fungos</label>
+                                <div id="box-alergia-fungos" class="field-container hidden" style="margin-top: 5px;">
+                                    <label>Descreva a alergia a fungos *</label>
+                                    <input type="text" id="desc_alergia_fungos">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_insetos" onchange="toggleFieldByCheckbox(this, 'box-alergia-insetos')"> Picada de Inseto</label>
+                                <div id="box-alergia-insetos" class="field-container hidden" style="margin-top: 5px;">
+                                    <label>Descreva a alergia a insetos *</label>
+                                    <input type="text" id="desc_alergia_insetos">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_plantas" onchange="toggleFieldByCheckbox(this, 'box-alergia-plantas')"> Plantas</label>
+                                <div id="box-alergia-plantas" class="field-container hidden" style="margin-top: 5px;">
+                                    <label>Descreva a alergia a plantas *</label>
+                                    <input type="text" id="desc_alergia_plantas">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_alergia_outros" onchange="toggleFieldByCheckbox(this, 'box-alergia-outros')"> Outros</label>
+                                <div id="box-alergia-outros" class="field-container hidden" style="margin-top: 5px;">
+                                    <label>Descreva outras alergias *</label>
+                                    <input type="text" id="desc_alergia_outros">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transtorno ou Condição -->
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Apresenta algum transtorno ou condição? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="transtorno_opt" value="Sim" onchange="toggleGroup('box-transtorno-desc', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="transtorno_opt" value="Não" checked onchange="toggleGroup('box-transtorno-desc', false)"> Não</label>
+                        </div>
+                        <div id="box-transtorno-desc" class="field-container hidden">
+                            <label>Descreva *</label>
+                            <input type="text" id="desc_transtorno">
+                        </div>
+                    </div>
+
+                    <!-- Medicação para Transtorno -->
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Faz uso de medicação para este transtorno?</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="med_transtorno_opt" value="Sim" onchange="toggleGroup('box-med-transtorno-desc', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="med_transtorno_opt" value="Não" checked onchange="toggleGroup('box-med-transtorno-desc', false)"> Não</label>
+                        </div>
+                        <div id="box-med-transtorno-desc" class="field-container hidden">
+                            <label>Descreva a medicação *</label>
+                            <input type="text" id="desc_med_transtorno">
+                        </div>
+                    </div>
+
+                    <!-- Condições Específicas -->
+                    <div class="form-group full-width" style="margin-bottom: 25px;">
+                        <label style="font-weight: 600;">Possui alguma das condições abaixo? Selecione todas que se aplicam.</label>
+                        <div class="form-grid" style="margin-top: 10px;">
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_cond_fisica" onchange="toggleFieldByCheckbox(this, 'box-cond-fisica')"> Física</label>
+                                <div id="box-cond-fisica" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_cond_fisica"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_cond_visual" onchange="toggleFieldByCheckbox(this, 'box-cond-visual')"> Visual</label>
+                                <div id="box-cond-visual" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_cond_visual"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_cond_auditiva" onchange="toggleFieldByCheckbox(this, 'box-cond-auditiva')"> Auditiva</label>
+                                <div id="box-cond-auditiva" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_cond_auditiva"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_cond_intelectual" onchange="toggleFieldByCheckbox(this, 'box-cond-intelectual')"> Intelectual</label>
+                                <div id="box-cond-intelectual" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_cond_intelectual"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_cond_autismo" onchange="toggleFieldByCheckbox(this, 'box-cond-autismo')"> Autismo</label>
+                                <div id="box-cond-autismo" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_cond_autismo"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comportamentos -->
+                    <div class="form-group full-width" style="margin-bottom: 25px;">
+                        <label style="font-weight: 600;">Possui algum dos comportamentos abaixo? Selecione todos que se aplicam.</label>
+                        <div class="form-grid" style="margin-top: 10px;">
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_instrucao" onchange="toggleFieldByCheckbox(this, 'box-comp-instrucao')"> Dificuldade de obedecer instruções verbais</label>
+                                <div id="box-comp-instrucao" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_instrucao"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_alimentar" onchange="toggleFieldByCheckbox(this, 'box-comp-alimentar')"> Dificuldades alimentares</label>
+                                <div id="box-comp-alimentar" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_alimentar"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_autoagressao" onchange="toggleFieldByCheckbox(this, 'box-comp-autoagressao')"> Crises em que agrida a si mesmo</label>
+                                <div id="box-comp-autoagressao" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_autoagressao"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_sono" onchange="toggleFieldByCheckbox(this, 'box-comp-sono')"> Dificuldades de sono</label>
+                                <div id="box-comp-sono" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_sono"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_heteroagressao" onchange="toggleFieldByCheckbox(this, 'box-comp-heteroagressao')"> Crises em que agrida os outros</label>
+                                <div id="box-comp-heteroagressao" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_heteroagressao"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_fugas" onchange="toggleFieldByCheckbox(this, 'box-comp-fugas')"> Tendência a fugas</label>
+                                <div id="box-comp-fugas" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_fugas"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_comunicacao" onchange="toggleFieldByCheckbox(this, 'box-comp-comunicacao')"> Dificuldade de comunicação</label>
+                                <div id="box-comp-comunicacao" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_comunicacao"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_panico" onchange="toggleFieldByCheckbox(this, 'box-comp-panico')"> Crises de ansiedade ou pânico</label>
+                                <div id="box-comp-panico" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_panico"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_autodestrutivo" onchange="toggleFieldByCheckbox(this, 'box-comp-autodestrutivo')"> Comportamento autodestrutivo</label>
+                                <div id="box-comp-autodestrutivo" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_autodestrutivo"></div>
+                            </div>
+                            <div>
+                                <label class="checkbox-label"><input type="checkbox" id="chk_comp_agitacao" onchange="toggleFieldByCheckbox(this, 'box-comp-agitacao')"> Agitação psicomotora que atrapalhe a concentração</label>
+                                <div id="box-comp-agitacao" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_agitacao"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medicamentos com Remoção -->
+                    <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                        <label style="font-weight: 600;">Faz uso de algum medicamento? Informe quais.</label>
+                        <div id="lista-medicamentos" style="margin-top: 10px;"></div>
+                        <button type="button" class="btn btn-outline" style="margin-top: 10px;" onclick="addMedicamento()">+ Adicionar novo</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SUBSEÇÃO 3: Informações gerais -->
+            <div class="accordion-item open">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Informações gerais</div>
+                <div class="accordion-body">
+                    
+                    <div class="form-grid">
+                        <!-- Impedimento Físico -->
+                        <div class="form-group full-width">
+                            <label style="font-weight: 600;">Possui impedimento físico?</label>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="impedimento_fisico_opt" value="Sim" onchange="toggleGroup('box-impedimento-desc', true)"> Sim</label>
+                                <label class="radio-label"><input type="radio" name="impedimento_fisico_opt" value="Não" checked onchange="toggleGroup('box-impedimento-desc', false)"> Não</label>
+                            </div>
+                            <div id="box-impedimento-desc" class="field-container hidden">
+                                <label>Descreva o impedimento físico *</label>
+                                <input type="text" id="desc_impedimento_fisico">
+                            </div>
+                        </div>
+
+                        <!-- Restrição Alimentar -->
+                        <div class="form-group full-width">
+                            <label style="font-weight: 600;">Possui restrição alimentar?</label>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="restricao_alimentar_opt" value="Sim" onchange="toggleGroup('box-restricao-desc', true)"> Sim</label>
+                                <label class="radio-label"><input type="radio" name="restricao_alimentar_opt" value="Não" checked onchange="toggleGroup('box-restricao-desc', false)"> Não</label>
+                            </div>
+                            <div id="box-restricao-desc" class="field-container hidden">
+                                <label>Descreva a restrição alimentar *</label>
+                                <input type="text" id="desc_restricao_alimentar">
+                            </div>
+                        </div>
+
+                        <div class="field-container">
+                            <label>Sabe Nadar? *</label>
+                            <select id="sabe_nadar" required>
+                                <option value="">Selecione</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                        </div>
+
+                        <div class="field-container">
+                            <label>É Sonâmbulo? *</label>
+                            <select id="sonambulo" required>
+                                <option value="">Selecione</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                        </div>
+
+                        <div class="field-container">
+                            <label>Utiliza plano de Saúde? *</label>
+                            <select id="plano_saude_opt" required onchange="togglePlanoSaude(this.value)">
+                                <option value="">Selecione</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não (SUS)">Não (SUS)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dados Plano de Saúde e Médico -->
+                    <div id="box-plano-saude" class="form-grid hidden" style="margin-top: 15px;">
+                        <div class="field-container">
+                            <label>Convênio Médico</label>
+                            <select id="convenio_lista">
+                                <option value="">Selecione</option>
+                                <option>Agemed</option><option>Amil</option><option>Bradesco</option><option>Notre Dame</option><option>Porto Seguro</option><option>Unimed</option><option>Outro</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Número da carteirinha</label>
+                            <input type="text" id="num_carteirinha">
+                        </div>
+                        <div class="field-container">
+                            <label>Possui médico de preferência?</label>
+                            <input type="text" id="medico_preferencia" placeholder="Nome do médico">
+                        </div>
+                        <div class="field-container">
+                            <label>Telefone do médico de preferência</label>
+                            <input type="tel" id="tel_medico_preferencia" placeholder="(11) 90000-0000">
+                        </div>
+                    </div>
+
+                    <div class="form-grid" style="margin-top: 15px;">
+                        <div class="field-container">
+                            <label>Contato de emergência</label>
+                            <input type="text" id="nome_emergencia" placeholder="Nome do contato">
+                        </div>
+                        <div class="field-container">
+                            <label>Telefone do contato</label>
+                            <input type="tel" id="tel_emergencia">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBSEÇÃO 4: Observações -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">Observações</div>
+                <div class="accordion-body">
+                    <div class="field-container">
+                        <label>Há alguma outra informação importante sobre a saúde do associado?</label>
+                        <textarea id="obs_saude" rows="4" placeholder="Descreva aqui..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= AUTORIZAÇÃO E ASSINATURA ================= -->
+        <div class="authorization-box">
+            <label class="checkbox-label" style="align-items: flex-start;">
+                <input type="checkbox" id="auth_check" style="margin-top: 3px;">
+                <span>Autorizo a inclusão dos dados fornecidos neste formulário nos sistemas PAXTU/PAXTU100 da União dos Escoteiros do Brasil (UEB), para fins de registro e associação. Outrossim, declaro que as informações preenchidas são verídicas, exatas e de minha exclusiva responsabilidade. *</span>
+            </label>
+        </div>
+
+        <div class="signature-container">
+            <label style="font-weight: 700; display: block; margin-bottom: 8px;">Assinatura do Responsável / Associado *</label>
+            <canvas id="sig-canvas" width="450" height="150"></canvas>
+            <div class="signature-tools" style="margin-top: 8px;">
+                <button type="button" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.8rem;" onclick="clearCanvas()">Limpar Assinatura</button>
+            </div>
+        </div>
+
+        <!-- BOTÕES FINAIS -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-primary" onclick="executarAcao('salvar')">Salvar PDF</button>
+            <button type="button" class="btn btn-secondary" onclick="executarAcao('compartilhar')">Compartilhar PDF</button>
+            <button type="button" class="btn btn-outline" onclick="executarAcao('imprimir')">Imprimir PDF</button>
+            <button type="button" class="btn btn-danger" onclick="limparDados()">Limpar Dados</button>
+        </div>
+
+    </form>
+
+</div>
+
+<footer style="background-color: var(--primary-color); color: #dddddd; padding: 25px 20px; border-top: 4px solid var(--secondary-color); font-size: 0.9rem; text-align: center; width: 100%; margin-top: 40px;">
+    <div style="max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <img src="https://i.ibb.co/CKWP9CmS/logo-GE-M-2025.jpg" alt="Logo Grupo Escoteiro Memorial 350 SP" style="width: 60px; height: 60px; object-fit: contain; border-radius: 50%;">
+        <div>
+            <p style="margin-bottom: 5px; line-height: 1.4;"><strong>Grupo Escoteiro Memorial 350 SP</strong></p>
+            <p style="margin-bottom: 5px; line-height: 1.4;">Av. Doutor Altair Martins, 520 - Raposo Tavares, Osasco - SP, 06149-020</p>
+        </div>
+        <div>
+            <a href="https://www.instagram.com/gememorial?igsh=Z2dycGZ5bDVqdmw1" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-weight: bold;">Siga-nos no Instagram: @gememorial</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 1. Navegação por Abas
+    function switchTab(tabId) {
+        const abaAtual = document.querySelector('.tab-content.active');
+        if (abaAtual && abaAtual.id !== tabId) {
+            if (!validarAbaAtual(abaAtual)) {
+                return;
+            }
+        }
+        mudarAbaAtiva(tabId);
+    }
+
+    function mudarAbaAtiva(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        const targetTab = document.getElementById(tabId);
+        if (targetTab) targetTab.classList.add('active');
+        
+        const btnCorrespondente = document.querySelector(`button[onclick*="${tabId}"]`);
+        if (btnCorrespondente) {
+            btnCorrespondente.classList.add('active');
+        }
+    }
+
+    // 2. Navegação pelo Botão "Avançar"
+    function nextTab(nextTabId) {
+        const abaAtual = document.querySelector('.tab-content.active');
+        if (validarAbaAtual(abaAtual)) {
+            mudarAbaAtiva(nextTabId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // 3. Validador de Campos Obrigatórios
+    function validarAbaAtual(containerAba) {
+        if (!containerAba) return true;
+
+        const camposObrigatorios = containerAba.querySelectorAll('[required]');
+        let abaValida = true;
+
+        for (let campo of camposObrigatorios) {
+            if (campo.closest('.hidden')) continue;
+
+            if (!campo.checkValidity()) {
+                abaValida = false;
+
+                const accordionItem = campo.closest('.accordion-item');
+                if (accordionItem && !accordionItem.classList.contains('open')) {
+                    accordionItem.classList.add('open');
+                }
+
+                campo.reportValidity();
+                break;
+            }
+        }
+
+        return abaValida;
+    }
+
+    // 4. Regra de Idade (< 19 anos)
+    function verificarIdade(inputData) {
+        if (!inputData.value) return;
+
+        const dataNasc = new Date(inputData.value);
+        const hoje = new Date();
+
+        let idade = hoje.getFullYear() - dataNasc.getFullYear();
+        const mes = hoje.getMonth() - dataNasc.getMonth();
+
+        if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
+            idade--;
+        }
+
+        const eMenorDe19 = idade < 19;
+        
+        const camposResp = document.querySelectorAll('.resp-campo');
+        const reqAst = document.querySelectorAll('.req-resp');
+        const lblResp = document.getElementById('lbl-resp-obrigatorio');
+        const msgAlerta = document.getElementById('alerta-idade');
+
+        camposResp.forEach(input => { input.required = eMenorDe19; });
+        reqAst.forEach(ast => { ast.style.display = eMenorDe19 ? 'inline' : 'none'; });
+
+        if (lblResp) lblResp.style.display = eMenorDe19 ? 'inline' : 'none';
+        if (msgAlerta) msgAlerta.style.display = eMenorDe19 ? 'block' : 'none';
+    }
+
+    function toggleEstrangeiro(isEstrangeiro) {
+        const pais = document.getElementById('pais_nascimento');
+        if (isEstrangeiro) {
+            if (pais.value === 'Brasil') pais.value = '';
+        } else {
+            pais.value = 'Brasil';
+        }
+    }
+
+    // 5. Accordion e Toggles Condicionais
+    function toggleAccordion(header) {
+        header.parentElement.classList.toggle('open');
+    }
+
+    function toggleGroup(id, show) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (show) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+            el.querySelectorAll('input[type="text"]').forEach(inp => { inp.value = ''; inp.required = false; });
+        }
+    }
+
+    function toggleFieldByCheckbox(chk, containerId) {
+        const box = document.getElementById(containerId);
+        if (!box) return;
+        if (chk.checked) {
+            box.classList.remove('hidden');
+            const inp = box.querySelector('input[type="text"]');
+            if (inp) inp.required = true;
+        } else {
+            box.classList.add('hidden');
+            const inp = box.querySelector('input[type="text"]');
+            if (inp) {
+                inp.required = false;
+                inp.value = '';
+            }
+        }
+    }
+
+    function togglePlanoSaude(val) {
+        toggleGroup('box-plano-saude', val === 'Sim');
+    }
+
+    // 6. Medicamentos Dinâmicos
+    function addMedicamento() {
+        const container = document.getElementById('lista-medicamentos');
+        const idUnico = 'med_' + Date.now();
+        const div = document.createElement('div');
+        div.className = 'form-grid';
+        div.id = idUnico;
+        div.style.marginBottom = '15px';
+        div.style.background = '#f9f9f9';
+        div.style.padding = '12px';
+        div.style.borderRadius = 'var(--radius)';
+        div.style.position = 'relative';
+
+        div.innerHTML = `
+            <div class="field-container"><label>Medicamento</label><input type="text" class="med-nome"></div>
+            <div class="field-container">
+                <label>Uso contínuo?</label>
+                <select class="med-continuo"><option>Sim</option><option>Não</option></select>
+            </div>
+            <div class="field-container full-width">
+                <label>Informações</label>
+                <input type="text" class="med-info" placeholder="Descreva horários ou dosagem">
+            </div>
+            <button type="button" onclick="removerMedicamento('${idUnico}')" class="btn btn-danger" style="position:absolute; top:8px; right:8px; padding:2px 8px; font-size:0.75rem;">🗑️ Remover</button>
+        `;
+        container.appendChild(div);
+        salvarAutomacao();
+    }
+
+    function removerMedicamento(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.remove();
+            salvarAutomacao();
+        }
+    }
+
+    function copiarEnderecoAssociado(alvo) {
+        document.getElementById(`${alvo}_cep`).value = document.getElementById('cep').value;
+        document.getElementById(`${alvo}_endereco`).value = document.getElementById('endereco').value;
+        document.getElementById(`${alvo}_numero`).value = document.getElementById('numero').value;
+        salvarAutomacao();
+    }
+
+    function buscaCEP(valor, tipo) {
+        const cep = valor.replace(/\D/g, '');
+        if (cep.length === 8) {
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.erro) {
+                        if (tipo === 'associado') {
+                            document.getElementById('endereco').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                        } else if (tipo === 'resp1' || tipo === 'resp2') {
+                            document.getElementById(`${tipo}_endereco`).value = data.logradouro;
+                        }
+                        salvarAutomacao();
+                    }
+                });
+        }
+    }
+
+    function toggleSegundoResponsavel() {
+        document.getElementById('container-segundo-resp').classList.toggle('hidden');
+        salvarAutomacao();
+    }
+
+    // Assinatura Canvas
+    const canvas = document.getElementById('sig-canvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let isDrawing = false;
+
+    if (canvas) {
+        canvas.addEventListener('mousedown', () => isDrawing = true);
+        canvas.addEventListener('mouseup', () => { isDrawing = false; ctx.beginPath(); salvarAutomacao(); });
+        canvas.addEventListener('mousemove', draw);
+
+        canvas.addEventListener('touchstart', (e) => { isDrawing = true; e.preventDefault(); });
+        canvas.addEventListener('touchend', () => { isDrawing = false; ctx.beginPath(); salvarAutomacao(); });
+        canvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            e.preventDefault();
+        });
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function clearCanvas() {
+        if (ctx && canvas) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            salvarAutomacao();
+        }
+    }
+
+    function isCanvasBlank(canvas) {
+        if (!canvas) return true;
+        const blank = document.createElement('canvas');
+        blank.width = canvas.width;
+        blank.height = canvas.height;
+        return canvas.toDataURL() === blank.toDataURL();
+    }
+
+    // ================= 7. GERAÇÃO, SALVAMENTO E COMPARTILHAMENTO DE PDF (CORRIGIDO) =================
+    async function executarAcao(acao) {
+        const abaGerais = document.getElementById('tab-gerais');
+        const abaResp = document.getElementById('tab-responsaveis');
+        const abaMedica = document.getElementById('tab-medica');
+
+        if (!validarAbaAtual(abaGerais)) { switchTab('tab-gerais'); return; }
+        if (!validarAbaAtual(abaResp)) { switchTab('tab-responsaveis'); return; }
+        if (!validarAbaAtual(abaMedica)) { switchTab('tab-medica'); return; }
+
+        const auth = document.getElementById('auth_check').checked;
+        const signed = !isCanvasBlank(canvas);
+
+        if (!auth) {
+            alert('Você precisa autorizar a inclusão dos dados marcando a caixa de seleção obrigatória.');
+            return;
+        }
+
+        if (!signed) {
+            alert('É obrigatório assinar no campo de assinatura antes de prosseguir.');
+            return;
+        }
+
+        if (acao === 'imprimir') {
+            window.print();
+            return;
+        }
+
+        // 1. Torna visíveis temporariamente todas as abas e acórdions para captura perfeita do PDF
+        const abas = document.querySelectorAll('.tab-content');
+        const accordions = document.querySelectorAll('.accordion-item');
+        const tabAtivaAnterior = document.querySelector('.tab-content.active')?.id || 'tab-medica';
+
+        abas.forEach(a => { a.style.display = 'block'; });
+        accordions.forEach(acc => acc.classList.add('open'));
+
+        const element = document.getElementById('printable-area');
+        const nomeAssociado = document.getElementById('nome_associado').value.trim() || 'Associado';
+        const nomeArquivo = `Ficha_Inscricao_${nomeAssociado.replace(/\s+/g, '_')}.pdf`;
+
+        const opt = {
+            margin:       [0.3, 0.3, 0.3, 0.3],
+            filename:     nomeArquivo,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, logging: false, scrollY: 0 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+            pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+
+        try {
+            // Garante inicialização limpa do html2pdf
+            const worker = html2pdf().set(opt).from(element);
+
+            if (acao === 'salvar') {
+                await worker.save();
+            } else if (acao === 'compartilhar') {
+                const pdfBlob = await worker.output('blob');
+                const pdfFile = new File([pdfBlob], nomeArquivo, { type: 'application/pdf' });
+
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
+                    await navigator.share({
+                        files: [pdfFile],
+                        title: 'Ficha de Inscrição Escoteira',
+                        text: `Ficha de inscrição de ${nomeAssociado}.`
+                    });
+                } else {
+                    // Fallback para download caso o navegador não suporte Web Share API de arquivos
+                    await html2pdf().set(opt).from(element).save();
+                    alert('Seu navegador/dispositivo não permite o compartilhamento direto de arquivos. O arquivo PDF foi baixado para o seu aparelho.');
+                }
+            }
+        } catch (err) {
+            console.error('Erro ao gerar/compartilhar o PDF:', err);
+            alert('Não foi possível gerar o PDF. Certifique-se de que está utilizando um navegador moderno e tente novamente.');
+        } finally {
+            // Restore visual original
+            abas.forEach(a => { a.style.display = ''; });
+            accordions.forEach(acc => acc.classList.remove('open'));
+            mudarAbaAtiva(tabAtivaAnterior);
+        }
+    }
+
+    // 8. AUTOSAVE / RESTAURAÇÃO DE DADOS (localStorage)
+    const STORAGE_KEY = 'ficha_escoteira_data';
+
+    function salvarAutomacao() {
+        const formData = {};
+        const inputs = document.querySelectorAll('#escoteiroForm input, #escoteiroForm select, #escoteiroForm textarea');
+
+        inputs.forEach(el => {
+            if (el.id) {
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    formData[el.id] = el.checked;
+                } else {
+                    formData[el.id] = el.value;
+                }
+            } else if (el.name) {
+                if (el.type === 'radio') {
+                    if (el.checked) formData['radio_' + el.name] = el.value;
+                }
+            }
+        });
+
+        if (canvas) {
+            formData['sig_canvas_data'] = canvas.toDataURL();
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    }
+
+    function carregarDadosSalvos() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+
+        try {
+            const formData = JSON.parse(saved);
+
+            Object.keys(formData).forEach(key => {
+                if (key === 'sig_canvas_data') {
+                    const img = new Image();
+                    img.onload = () => ctx.drawImage(img, 0, 0);
+                    img.src = formData[key];
+                    return;
+                }
+
+                if (key.startsWith('radio_')) {
+                    const groupName = key.replace('radio_', '');
+                    const radio = document.querySelector(`input[name="${groupName}"][value="${formData[key]}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    }
+                    return;
+                }
+
+                const el = document.getElementById(key);
+                if (el) {
+                    if (el.type === 'checkbox' || el.type === 'radio') {
+                        el.checked = formData[key];
+                    } else {
+                        el.value = formData[key];
+                    }
+                    el.dispatchEvent(new Event('change'));
+                }
+            });
+
+            const inputData = document.getElementById('data_nascimento');
+            if (inputData && inputData.value) verificarIdade(inputData);
+
+        } catch (e) {
+            console.error("Erro ao carregar dados salvos do formulário", e);
+        }
+    }
+
+    function limparDados() {
+        if (confirm('Deseja limpar todo o formulário? Todos os dados digitados serão perdidos.')) {
+            document.getElementById('escoteiroForm').reset();
+            clearCanvas();
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
+        }
+    }
+
+    // Inicialização da página
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarDadosSalvos();
+
+        document.getElementById('escoteiroForm').addEventListener('input', salvarAutomacao);
+        document.getElementById('escoteiroForm').addEventListener('change', salvarAutomacao);
+    });
+</script>
+
+</body>
+</html>
