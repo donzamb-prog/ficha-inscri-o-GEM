@@ -2755,16 +2755,57 @@
         return;
     }
 
-    const nome = document.getElementById('nome_associado')?.value || 'Associado';
+    if (isCanvasBlank(canvas)) {
+        alert('É obrigatório assinar no campo de assinatura antes de prosseguir.');
+        return;
+    }
+
+    const nome = document.getElementById('nome_associado')?.value.trim() || 'Associado';
     const cpf = document.getElementById('cpf')?.value || 'Não informado';
     const cel = document.getElementById('celular')?.value || 'Não informado';
     const emailResp = document.getElementById('resp1_email')?.value || document.getElementById('email')?.value || 'Não informado';
+    const nomeArquivo = `Ficha_Inscricao_${nome.replace(/\s+/g, '_')}.pdf`;
 
     // Configuração dos destinatários
-    const whatsappDestino = '5511940774175';
+    const whatsappDestino = '5511997457599';
     const emailGrupo = 'grupoescoteiromemorial.350@gmail.com';
 
-    // 1. Disparo do e-mail em segundo plano via Web3Forms
+    // 1. Gerar o ficheiro PDF em segundo plano
+    const elementosParaEsconder = document.querySelectorAll(
+        '.tabs-buttons, .tabs-container, .btn, .form-actions, .signature-tools, #lbl-resp-obrigatorio, #alerta-idade'
+    );
+    const tabAtivaAnterior = document.querySelector('.tab-content.active')?.id || 'tab-medica';
+
+    document.body.classList.add('is-printing');
+    elementosParaEsconder.forEach(el => el.style.setProperty('display', 'none', 'important'));
+    document.querySelectorAll('.tab-content').forEach(a => a.style.display = 'block');
+    document.querySelectorAll('.accordion-item').forEach(acc => acc.classList.add('open'));
+
+    const element = document.getElementById('printable-area');
+    const opt = {
+        margin:       [0.2, 0.2, 0.2, 0.2],
+        filename:     nomeArquivo,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false, scrollY: 0 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    let pdfBlob = null;
+    try {
+        pdfBlob = await html2pdf().set(opt).from(element).output('blob');
+    } catch (err) {
+        console.error('Erro ao gerar PDF:', err);
+    } finally {
+        // Restaurar visualização original da página
+        document.body.classList.remove('is-printing');
+        elementosParaEsconder.forEach(el => el.style.display = '');
+        document.querySelectorAll('.tab-content').forEach(a => a.style.display = '');
+        document.querySelectorAll('.accordion-item').forEach(acc => acc.classList.remove('open'));
+        mudarAbaAtiva(tabAtivaAnterior);
+    }
+
+    // 2. Disparo do e-mail COM O PDF ANEXADO via Web3Forms
     const formData = new FormData();
     formData.append("access_key", "b43c3fa0-c51f-47a0-a981-b68ddc5c658f");
     formData.append("subject", `Nova Ficha de Inscrição - ${nome}`);
@@ -2775,6 +2816,10 @@
     formData.append("Celular", cel);
     formData.append("E-mail de Contato", emailResp);
 
+    if (pdfBlob) {
+        formData.append("attachment", pdfBlob, nomeArquivo);
+    }
+
     try {
         await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -2784,7 +2829,7 @@
         console.warn("Erro ao enviar e-mail em segundo plano:", err);
     }
 
-    // 2. Montagem e abertura do WhatsApp
+    // 3. Notificação via WhatsApp
     const mensagemWhats = encodeURIComponent(
         `*NOVA FICHA DE INSCRIÇÃO*\n` +
         `-----------------------------------\n` +
@@ -2793,7 +2838,7 @@
         `*Celular:* ${cel}\n` +
         `*E-mail:* ${emailResp}\n` +
         `-----------------------------------\n` +
-        `_Ficha preenchida e autorizada via site._`
+        `_Ficha preenchida e enviada. O PDF completo foi anexado ao e-mail do grupo._`
     );
 
     const urlWhatsApp = `https://wa.me/${whatsappDestino}?text=${mensagemWhats}`;
