@@ -1875,29 +1875,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group full-width" style="margin-bottom: 20px;">
-                        <label style="font-weight: 600;">Apresenta algum transtorno ou condição? *</label>
-                        <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="transtorno_opt" value="Sim" onchange="toggleGroup('box-transtorno-desc', true)"> Sim</label>
-                            <label class="radio-label"><input type="radio" name="transtorno_opt" value="Não" checked onchange="toggleGroup('box-transtorno-desc', false)"> Não</label>
-                        </div>
-                        <div id="box-transtorno-desc" class="field-container hidden">
-                            <label>Descreva *</label>
-                            <input type="text" id="desc_transtorno">
-                        </div>
-                    </div>
-
-                    <div class="form-group full-width" style="margin-bottom: 20px;">
-                        <label style="font-weight: 600;">Faz uso de medicação para este transtorno?</label>
-                        <div class="radio-group">
-                            <label class="radio-label"><input type="radio" name="med_transtorno_opt" value="Sim" onchange="toggleGroup('box-med-transtorno-desc', true)"> Sim</label>
-                            <label class="radio-label"><input type="radio" name="med_transtorno_opt" value="Não" checked onchange="toggleGroup('box-med-transtorno-desc', false)"> Não</label>
-                        </div>
-                        <div id="box-med-transtorno-desc" class="field-container hidden">
-                            <label>Descreva a medicação *</label>
-                            <input type="text" id="desc_med_transtorno">
-                        </div>
-                    </div>
+                   
 
                     <div class="form-group full-width" style="margin-bottom: 25px;">
                         <label style="font-weight: 600;">Possui alguma das condições abaixo? Selecione todas que se aplicam.</label>
@@ -1968,6 +1946,30 @@
                                 <label class="checkbox-label"><input type="checkbox" id="chk_comp_agitacao" onchange="toggleFieldByCheckbox(this, 'box-comp-agitacao')"> Agitação psicomotora que atrapalhe a concentração</label>
                                 <div id="box-comp-agitacao" class="field-container hidden" style="margin-top:5px;"><label>Descreva *</label><input type="text" id="desc_comp_agitacao"></div>
                             </div>
+                        </div>
+                    </div>
+
+                     <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Apresenta algum transtorno ou condição? *</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="transtorno_opt" value="Sim" onchange="toggleGroup('box-transtorno-desc', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="transtorno_opt" value="Não" checked onchange="toggleGroup('box-transtorno-desc', false)"> Não</label>
+                        </div>
+                        <div id="box-transtorno-desc" class="field-container hidden">
+                            <label>Descreva *</label>
+                            <input type="text" id="desc_transtorno">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width" style="margin-bottom: 20px;">
+                        <label style="font-weight: 600;">Faz uso de medicação para este transtorno?</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="med_transtorno_opt" value="Sim" onchange="toggleGroup('box-med-transtorno-desc', true)"> Sim</label>
+                            <label class="radio-label"><input type="radio" name="med_transtorno_opt" value="Não" checked onchange="toggleGroup('box-med-transtorno-desc', false)"> Não</label>
+                        </div>
+                        <div id="box-med-transtorno-desc" class="field-container hidden">
+                            <label>Descreva a medicação *</label>
+                            <input type="text" id="desc_med_transtorno">
                         </div>
                     </div>
 
