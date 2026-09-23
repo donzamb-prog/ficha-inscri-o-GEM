@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ficha-escoteira-v5';
+const CACHE_NAME = 'ficha-escoteira-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
