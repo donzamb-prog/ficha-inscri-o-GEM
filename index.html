@@ -1,144 +1,1872 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Inscrição - GE Memorial 350 SP</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupo Escoteiro Memorial 350 SP - Ficha de Inscrição</title>
+  <style>
+    :root {
+      --primary-color: #0f1301;
+      --primary-hover: #c7ce07;
+      --secondary-color: #0d1101;
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --border-color: #cccccc;
+      --required-border: #f5c227;
+      --required-bg: #fffef2;
+      --accent-teal: lch(33.46% 50.59 129.49);
+      --danger-color: #d9534f;
+    }
 
-        body {
-            background-color: #f4f6f8;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        /* Cabeçalho do GE Memorial */
-        header {
-            background-color: #003366;
-            color: #ffffff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 4px solid #f2a900;
-        }
+    /* CABEÇALHO */
+    .header {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
 
-        header h1 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    .header-logo-left, .header-logo-right {
+      flex: 0 0 80px;
+      text-align: center;
+    }
 
-        header h2 {
-            font-size: 1rem;
-            font-weight: normal;
-            opacity: 0.9;
-            margin-bottom: 12px;
-        }
+    .logo-img {
+      max-width: 80px;
+      max-height: 80px;
+      object-fit: contain;
+    }
 
-        .header-info {
-            font-size: 0.85rem;
-            line-height: 1.4;
-            opacity: 0.85;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            padding-top: 10px;
-            margin-top: 10px;
-        }
+    .header-title {
+      flex: 1;
+      text-align: center;
+    }
 
-        /* Cartão de Aviso */
-        main {
-            padding: 40px 20px;
-            text-align: center;
-        }
+    .header-title h2 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
 
-        .alert-box {
-            background-color: #fff8e1;
-            border-left: 5px solid #ffb300;
-            padding: 25px;
-            border-radius: 4px;
-            margin: 0 auto;
-            max-width: 600px;
-        }
+    .header-title h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
 
-        .alert-title {
-            color: #b78103;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+    .header-title p {
+      font-size: 0.78rem;
+      opacity: 0.9;
+      line-height: 1.3;
+    }
 
-        .alert-message {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #444;
-        }
+    @media (max-width: 650px) {
+      .header {
+        flex-direction: column;
+      }
+      .header-logo-left, .header-logo-right {
+        flex: 0 0 auto;
+      }
+    }
 
-        .alert-message strong {
-            color: #003366;
-        }
+    /* CONTAINER PRINCIPAL */
+    main {
+      flex: 1;
+      max-width: 1150px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
 
-        footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 0.8rem;
-            color: #777;
-            border-top: 1px solid #eee;
-        }
-    </style>
+    /* ABAS */
+    .tabs-nav {
+      display: flex;
+      gap: 5px;
+      border-bottom: 3px solid var(--primary-color);
+      margin-bottom: 20px;
+      background: #e9ecef;
+      border-radius: 8px 8px 0 0;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      border: none;
+      background: transparent;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      background: #dee2e6;
+      color: var(--primary-color);
+    }
+
+    .tab-btn.active {
+      background: var(--primary-color);
+      color: #ffffff;
+      border-radius: 6px 6px 0 0;
+    }
+
+    /* SUB-ABAS */
+    .sub-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
+    }
+
+    .sub-tab-btn {
+      padding: 8px 16px;
+      border: 1px solid var(--border-color);
+      background: #f8f9fa;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--accent-teal);
+    }
+
+    .sub-tab-btn.active {
+      background: var(--accent-teal);
+      color: white;
+      border-color: var(--accent-teal);
+    }
+
+    .tab-content {
+      display: none;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* FIELDSETS */
+    fieldset {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 20px;
+      background: #ffffff;
+    }
+
+    legend {
+      font-weight: 700;
+      color: var(--accent-teal);
+      padding: 0 8px;
+      font-size: 0.95rem;
+    }
+
+    /* GRID */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+
+    .col-12 { grid-column: span 12; }
+    .col-9  { grid-column: span 9; }
+    .col-8  { grid-column: span 8; }
+    .col-7  { grid-column: span 7; }
+    .col-6  { grid-column: span 6; }
+    .col-5  { grid-column: span 5; }
+    .col-4  { grid-column: span 4; }
+    .col-3  { grid-column: span 3; }
+    .col-2  { grid-column: span 2; }
+
+    @media (max-width: 768px) {
+      .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9 {
+        grid-column: span 12;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 0.88rem;
+      outline: none;
+      background-color: #fff;
+    }
+
+    /* ESTILO PAXTU - OBRIBATÓRIOS */
+    .req-field {
+      border: 1.5px solid var(--required-border) !important;
+      background-color: var(--required-bg) !important;
+    }
+
+    .req-field-container {
+      position: relative;
+    }
+
+    .req-dot {
+      position: absolute;
+      top: 50%;
+      left: 6px;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background-color: #ffc107;
+      border-radius: 50%;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: bold;
+    }
+    .req-dot::after { content: '!'; }
+
+    input.req-field, select.req-field {
+      padding-left: 22px !important;
+    }
+
+    .btn-action {
+      background-color: #ffffff;
+      border: 1px solid var(--accent-teal);
+      color: var(--accent-teal);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-action:hover {
+      background-color: var(--accent-teal);
+      color: #ffffff;
+    }
+
+    .checkbox-group, .radio-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      margin: 4px 0;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .hidden { display: none !important; }
+
+    .conditional-box {
+      background: #fdfdfd;
+      border-left: 3px solid var(--accent-teal);
+      padding: 10px 14px;
+      margin-top: 8px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* TABELA DE MEDICAMENTOS */
+    .med-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .med-table th, .med-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .med-table th {
+      background-color: var(--accent-teal);
+      color: white;
+    }
+
+    /* ASSINATURA DIGITAL */
+    .signature-area {
+      border: 2px dashed var(--accent-teal);
+      border-radius: 6px;
+      background: #fafafa;
+      text-align: center;
+      padding: 10px;
+      margin-top: 15px;
+    }
+
+    #signature-canvas {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      cursor: crosshair;
+      touch-action: none;
+      max-width: 100%;
+    }
+
+    /* BOTÕES FINAIS */
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background-color: var(--primary-color); color: #fff; }
+    .btn-primary:hover { background-color: var(--primary-hover); }
+
+    .btn-secondary { background-color: var(--accent-teal); color: #fff; }
+    .btn-secondary:hover { opacity: 0.9; }
+
+    .btn-outline { background-color: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); }
+    .btn-outline:hover { background-color: var(--primary-color); color: #fff; }
+
+    .btn-danger { background-color: var(--danger-color); color: #fff; }
+    .btn-danger:hover { opacity: 0.9; }
+
+    @media print {
+      .tabs-nav, .sub-tabs, .form-actions, .btn-action, .btn {
+        display: none !important;
+      }
+      .tab-content {
+        display: block !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      body { background-color: #fff; }
+      fieldset { page-break-inside: avoid; }
+    }
+
+    /* ESTILOS TEMPORÁRIOS PARA A GERAÇÃO DO PDF */
+    body.generating-pdf .tabs-nav,
+    body.generating-pdf .sub-tabs,
+    body.generating-pdf .form-actions,
+    body.generating-pdf .btn-action,
+    body.generating-pdf .btn {
+      display: none !important;
+    }
+
+    body.generating-pdf .tab-content {
+      display: block !important;
+      box-shadow: none !important;
+      padding: 10px 0 !important;
+      margin-bottom: 20px !important;
+    }
+
+    body.generating-pdf #subtab-resp1,
+    body.generating-pdf #subtab-resp2 {
+      display: block !important;
+    }
+
+    /* MELHORIAS VISUAIS EXCLUSIVAS PARA O PDF GENERATED */
+  body.generating-pdf {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Evita que blocos de informação sejam cortados ao meio na quebra de página */
+  body.generating-pdf fieldset {
+    page-break-inside: avoid !important;
+    margin-bottom: 12px !important;
+    border: 1px solid #b0b0b0 !important;
+  }
+
+  /* Transforma caixas de texto em linhas elegantes de formulário impresso */
+  body.generating-pdf input[type="text"],
+  body.generating-pdf input[type="email"],
+  body.generating-pdf input[type="date"],
+  body.generating-pdf select,
+  body.generating-pdf textarea {
+    border: none !important;
+    border-bottom: 1px solid #5f5b03 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 2px 4px !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove os avisos amarelos de campo obrigatório no PDF final */
+  body.generating-pdf .req-dot {
+    display: none !important;
+  }
+
+  body.generating-pdf input.req-field,
+  body.generating-pdf select.req-field {
+    padding-left: 4px !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid #595c03d2 !important;
+  }
+
+  /* Oculta os textos de exemplo (placeholders) que não foram preenchidos */
+  body.generating-pdf ::placeholder {
+    color: transparent !important;
+  }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Cabeçalho Oficial GEM -->
-        <header>
-            <h1>Grupo Escoteiro Memorial 350 SP</h1>
-            <h2>União dos Escoteiros do Brasil</h2>
-            <div class="header-info">
-                <p>Av. Doutor Altair Martins, 520 - Raposo Tavares, Osasco - SP | CEP: 06149-020</p>
-                <p>E-mail: grupoescoteiromemorial.350@gmail.com | Tel: (11) 2884-5555</p>
-            </div>
-        </header>
+  <!-- CABEÇALHO -->
+  <header class="header">
+    <div class="header-logo-left">
+      <img src="logo_gem.png" alt="Logo GEM" class="logo-img">
+    </div>
+    <div class="header-title">
+      <h2>UNIÃO DOS ESCOTEIROS DO BRASIL</h2>
+      <h1>Grupo Escoteiro Memorial 350 SP</h1>
+      <p>Av. Doutor Altair Martins, 520 - Raposo Tavares, Osasco SP</p>
+      <p>CEP: 06149-020 • E-mail: grupoescoteiromemorial.350@gmail.com</p>
+      <p>Tel: (11) 2884-5555 • Whats: (11) 99745-7599 / (11) 94077-4175</p>
+    </div>
+    <div class="header-logo-right">
+      <img src="logo_ueb.png" alt="Logo Escoteiros do Brasil" class="logo-img">
+    </div>
+  </header>
 
-        <!-- Mensagem do Index -->
-        <main>
-            <div class="alert-box">
-                <div class="alert-title">
-                    ⚠️ Aviso Importante
-                </div>
-                <p class="alert-message">
-                    A ficha de inscrição digital está sendo atualizada.<br><br>
-                    Por gentileza, <strong>peça ao administrador a ficha em papel</strong> para realizar o preenchimento.
-                </p>
-            </div>
-        </main>
-
-        <footer>
-            &copy; Grupo Escoteiro Memorial 350/SP
-        </footer>
+  <!-- MAIN -->
+  <main>
+    <div class="tabs-nav">
+      <button type="button" class="tab-btn active" id="btn-tab-basicas" onclick="tentarMudarAba('basicas')">INFORMAÇÕES BÁSICAS</button>
+      <button type="button" class="tab-btn" id="btn-tab-responsaveis" onclick="tentarMudarAba('responsaveis')">RESPONSÁVEIS</button>
+      <button type="button" class="tab-btn" id="btn-tab-medica" onclick="tentarMudarAba('medica')">FICHA MÉDICA</button>
     </div>
 
+    <form id="cadastroForm">
+
+      <!-- ABA 1: INFORMAÇÕES BÁSICAS -->
+      <div id="tab-basicas" class="tab-content active">
+        <div class="form-grid">
+          
+          <div class="form-group col-12">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="nome_completo" class="req-field" placeholder="Nome Completo" required>
+            </div>
+          </div>
+
+          <div class="form-group col-8">
+            <input type="text" id="nome_abreviado" placeholder="Nome Abreviado (Será impresso na credencial)">
+          </div>
+          <div class="form-group col-4">
+            <select id="cor_raca">
+              <option value="">Cor ou Raça</option>
+              <option value="Branca">Branca</option>
+              <option value="Preta">Preta</option>
+              <option value="Parda">Parda</option>
+              <option value="Amarela">Amarela</option>
+              <option value="Indígena">Indígena</option>
+              <option value="Não declarada">Não declarada</option>
+            </select>
+          </div>
+
+          <div class="form-group col-4">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="date" id="data_nascimento" class="req-field" required>
+            </div>
+          </div>
+          <div class="form-group col-4">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <select id="uf_nascimento" class="req-field" required>
+                <option value="">UF Nascimento</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-4">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="cidade_nascimento" class="req-field" placeholder="Cidade de Nascimento" required>
+            </div>
+          </div>
+
+          <div class="form-group col-8">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <select id="escolaridade" class="req-field" required>
+                <option value="">Selecione a escolaridade</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group col-4">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <select id="profissao" class="req-field" required>
+                <option value="">Selecione a profissão</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group col-6"><input type="text" id="area_atuacao" placeholder="Área de Atuação"></div>
+          <div class="form-group col-4"><input type="text" id="escola" placeholder="Escola"></div>
+          <div class="form-group col-2"><input type="text" id="serie" placeholder="Série"></div>
+
+          <div class="form-group col-12"><input type="text" id="local_trabalho" placeholder="Local de Trabalho"></div>
+
+          <!-- Endereço -->
+          <div class="form-group col-4">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="assoc_cep" class="req-field" placeholder="CEP 🔍 (Digitar sem traço)" required onkeyup="buscarCEP(this.value, 'assoc_')">
+            </div>
+          </div>
+          <div class="form-group col-8">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="assoc_endereco" class="req-field" placeholder="Endereço" required>
+            </div>
+          </div>
+
+          <div class="form-group col-3">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="assoc_numero" class="req-field" placeholder="Número" required>
+            </div>
+          </div>
+          <div class="form-group col-4"><input type="text" id="assoc_complemento" placeholder="Complemento"></div>
+          <div class="form-group col-5">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="assoc_bairro" class="req-field" placeholder="Bairro" required>
+            </div>
+          </div>
+
+          <div class="form-group col-6">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <select id="assoc_uf" class="req-field" required>
+                <option value="">UF</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-6">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="assoc_cidade" class="req-field" placeholder="Cidade" required>
+            </div>
+          </div>
+
+          <!-- Contatos -->
+          <div class="form-group col-4"><input type="text" id="tel_residencial" placeholder="Telefone Residencial"></div>
+          <div class="form-group col-4"><input type="text" id="tel_comercial" placeholder="Telefone Comercial"></div>
+          <div class="form-group col-4">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="tel_celular" class="req-field" placeholder="Telefone Celular" required>
+            </div>
+          </div>
+
+          <div class="form-group col-8">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="email" id="email" class="req-field" placeholder="E-mail" required>
+            </div>
+          </div>
+          <div class="form-group col-4"><input type="text" id="id_escoteiros" placeholder="id@escoteiros"></div>
+
+          <div class="form-group col-6"><input type="text" id="rg" placeholder="RG ou Passaporte"></div>
+          <div class="form-group col-6"><input type="text" id="orgao_expedidor" placeholder="Órgão Expedidor"></div>
+
+          <div class="form-group col-6">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="cpf" class="req-field" placeholder="CPF" required>
+            </div>
+          </div>
+          <div class="form-group col-6" style="display: flex; align-items: center;">
+            <label class="checkbox-group"><input type="checkbox" id="estrangeiro_sem_cpf"> Estrangeiro sem CPF</label>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+          <fieldset>
+            <legend>Clube de Serviço</legend>
+            <div class="checkbox-grid">
+              <label class="checkbox-group"><input type="checkbox" id="clube_lions"> Lions</label>
+              <label class="checkbox-group"><input type="checkbox" id="clube_maconica"> Loja maçônica</label>
+              <label class="checkbox-group"><input type="checkbox" id="clube_rotary"> Rotary clube</label>
+              <label class="checkbox-group"><input type="checkbox" id="clube_outros"> Outros</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Religião</legend>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <select id="religiao" onchange="atualizarDenominacoes()">
+                <option value="">Selecione a Religião</option>
+                <option value="Católica">Católica</option>
+                <option value="Evangélica">Evangélica</option>
+                <option value="Espírita">Espírita</option>
+                <option value="Matriz Africana">Matriz Africana</option>
+                <option value="Judaísmo">Judaísmo</option>
+                <option value="Islamismo">Islamismo</option>
+                <option value="Budismo">Budismo</option>
+                <option value="Outras">Outras</option>
+                <option value="Sem religião">Sem religião</option>
+              </select>
+              <select id="denominacao">
+                <option value="">Selecione a Denominação</option>
+              </select>
+            </div>
+          </fieldset>
+        </div>
+
+        <fieldset>
+          <legend>Radioamador</legend>
+          <div class="form-grid">
+            <div class="form-group col-8"><input type="text" id="radio_indicativo" placeholder="Indicativo de chamada (Estação de Radioamador)"></div>
+            <div class="form-group col-4"><input type="text" id="radio_classe" placeholder="Classe"></div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ABA 2: RESPONSÁVEIS -->
+      <div id="tab-responsaveis" class="tab-content">
+        <div class="sub-tabs">
+          <button type="button" class="sub-tab-btn active" id="btn-sub-resp1" onclick="switchSubTab('resp1')">1º responsável</button>
+          <button type="button" class="sub-tab-btn" id="btn-sub-resp2" onclick="switchSubTab('resp2')">2º responsável</button>
+        </div>
+
+        <!-- 1º Responsável -->
+        <div id="subtab-resp1">
+          <div class="form-grid">
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <select id="resp1_parentesco" class="req-field" required>
+                  <option value="">Parentesco</option>
+                  <option value="Pai">Pai</option>
+                  <option value="Mãe">Mãe</option>
+                  <option value="Tutor Legal">Tutor Legal</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_nome" class="req-field" placeholder="Nome Completo do Responsável" required>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <select id="resp1_escolaridade" class="req-field" required>
+                  <option value="">Selecione a escolaridade</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <select id="resp1_profissao" class="req-field" required>
+                  <option value="">Selecione a profissão</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_cpf" class="req-field" placeholder="CPF" required>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_celular" class="req-field" placeholder="Telefone Celular" required>
+              </div>
+            </div>
+          <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_e-mail" class="req-field" placeholder="E-mail" required>
+              </div>
+            </div>
+            
+            <div class="form-group col-6"><input type="text" id="resp1_area_atuacao" placeholder="Área de Atuação"></div>
+            <div class="form-group col-6"><input type="text" id="resp1_local_trabalho" placeholder="Local de Trabalho"></div>
+
+            <div class="form-group col-12" style="margin-top: 5px;">
+              <button type="button" class="btn-action" onclick="copiarEnderecoAssociado('resp1_')">Mesmo endereço do associado</button>
+            </div>
+
+            <div class="form-group col-4">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_cep" class="req-field" placeholder="CEP" required onkeyup="buscarCEP(this.value, 'resp1_')">
+              </div>
+            </div>
+            <div class="form-group col-8">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_endereco" class="req-field" placeholder="Endereço" required>
+              </div>
+            </div>
+
+            <div class="form-group col-3">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_numero" class="req-field" placeholder="Número" required>
+              </div>
+            </div>
+            <div class="form-group col-4"><input type="text" id="resp1_complemento" placeholder="Complemento"></div>
+            <div class="form-group col-5">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_bairro" class="req-field" placeholder="Bairro" required>
+              </div>
+            </div>
+
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <select id="resp1_uf" class="req-field" required>
+                  <option value="">UF</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_cidade" class="req-field" placeholder="Cidade" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2º Responsável -->
+        <div id="subtab-resp2" class="hidden">
+          <div class="form-grid">
+            <div class="form-group col-6">
+              <select id="resp2_parentesco">
+                <option value="">Parentesco</option>
+                <option value="Pai">Pai</option>
+                <option value="Mãe">Mãe</option>
+                <option value="Tutor Legal">Tutor Legal</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="form-group col-6"><input type="text" id="resp2_nome" placeholder="Nome Completo do Responsável"></div>
+
+            <div class="form-group col-6">
+              <select id="resp2_escolaridade">
+                <option value="">Selecione a escolaridade</option>
+              </select>
+            </div>
+
+            <div class="form-group col-6">
+              <select id="resp2_profissao">
+                <option value="">Selecione a profissão</option>
+              </select>
+            </div>
+
+            <div class="form-group col-6"><input type="text" id="resp2_cpf" placeholder="CPF"></div>
+            <div class="form-group col-6"><input type="text" id="resp2_celular" placeholder="Telefone Celular"></div>
+
+            <div class="form-group col-6"><input type="email" id="resp2_email" placeholder="E-mail"></div>
+            <div class="form-group col-6"><input type="text" id="resp2_area_atuacao" placeholder="Área de Atuação"></div>
+            <div class="form-group col-6"><input type="text" id="resp2_local_trabalho" placeholder="Local de Trabalho"></div>
+
+            <div class="form-group col-12" style="margin-top: 5px;">
+              <button type="button" class="btn-action" onclick="copiarEnderecoAssociado('resp2_')">Mesmo endereço do associado</button>
+            </div>
+
+            <div class="form-group col-4"><input type="text" id="resp2_cep" placeholder="CEP" onkeyup="buscarCEP(this.value, 'resp2_')"></div>
+            <div class="form-group col-8"><input type="text" id="resp2_endereco" placeholder="Endereço"></div>
+
+            <div class="form-group col-3"><input type="text" id="resp2_numero" placeholder="Número"></div>
+            <div class="form-group col-4"><input type="text" id="resp2_complemento" placeholder="Complemento"></div>
+            <div class="form-group col-5"><input type="text" id="resp2_bairro" placeholder="Bairro"></div>
+
+            <div class="form-group col-6">
+              <select id="resp2_uf">
+                <option value="">UF</option>
+              </select>
+            </div>
+            <div class="form-group col-6"><input type="text" id="resp2_cidade" placeholder="Cidade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA 3: FICHA MÉDICA COMPLETA -->
+      <div id="tab-medica" class="tab-content">
+        
+        <!-- Topo da Ficha Médica -->
+        <div class="form-grid" style="margin-bottom: 20px;">
+          <div class="form-group col-3">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="med_altura" class="req-field" placeholder="Altura (ex: 1.70)" required>
+            </div>
+          </div>
+          <div class="form-group col-3">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="med_peso" class="req-field" placeholder="Peso (ex: 65kg)" required>
+            </div>
+          </div>
+          <div class="form-group col-3">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <select id="med_tiposanguineo" class="req-field" required>
+                <option value="">Tipo Sanguíneo</option>
+                <option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-3">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <select id="med_fatorrh" class="req-field" required>
+                <option value="">Fator RH</option>
+                <option value="+">Positivo (+)</option><option value="-">Negativo (-)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. Equipamentos de Auxílio -->
+        <fieldset>
+          <legend>Utiliza os seguintes equipamentos de auxílio</legend>
+          <div class="req-field-container" style="max-width: 200px;">
+            <span class="req-dot"></span>
+            <select id="med_auxilio_opt" class="req-field" required onchange="toggleBox('auxilio_box', this.value === 'Sim')">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+          <div id="auxilio_box" class="conditional-box hidden">
+            <div class="checkbox-grid">
+              <label class="checkbox-group"><input type="checkbox" id="aux_oculos"> Óculos</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_lentes"> Lentes de contato</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_aparelho_dentario"> Aparelhos dentários</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_sondas"> Sondas</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_marcapasso"> Marca-passo</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_audicao"> Aparelhos de audição</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_bomba_insulina"> Bomba de insulina</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_outros_check" onchange="toggleBox('aux_outros_desc_box', this.checked)"> Outros</label>
+            </div>
+            <div id="aux_outros_desc_box" class="hidden" style="margin-top: 8px;">
+              <input type="text" id="aux_outros_desc" placeholder="Outros equipamentos...">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. Saúde Física -->
+        <fieldset>
+          <legend>Saúde física</legend>
+          
+          <div style="margin-bottom: 12px;">
+            <label style="font-size:0.88rem; font-weight:600;">Apresenta algum problema crônico de saúde?</label>
+            <div style="display:flex; gap:15px; margin-top:4px;">
+              <label class="radio-group"><input type="radio" name="prob_cronico" value="Não" checked onclick="toggleBox('prob_cronico_box', false)"> Não</label>
+              <label class="radio-group"><input type="radio" name="prob_cronico" value="Sim" onclick="toggleBox('prob_cronico_box', true)"> Sim</label>
+            </div>
+            <div id="prob_cronico_box" class="conditional-box hidden">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="prob_cronico_med" class="req-field" placeholder="Medicação para este problema">
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <label style="font-size:0.88rem; font-weight:600;">Faz acompanhamento médico regular?</label>
+            <div style="display:flex; gap:15px; margin-top:4px;">
+              <label class="radio-group"><input type="radio" name="acomp_medico" value="Não" checked onclick="toggleBox('acomp_medico_box', false)"> Não</label>
+              <label class="radio-group"><input type="radio" name="acomp_medico" value="Sim" onclick="toggleBox('acomp_medico_box', true)"> Sim</label>
+            </div>
+            <div id="acomp_medico_box" class="conditional-box hidden">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="acomp_medico_especialidade" class="req-field" placeholder="Especialidade">
+              </div>
+            </div>
+          </div>
+
+          <label style="font-size:0.88rem; font-weight:600; display:block; margin-top:10px;">Apresenta alguma dessas enfermidades crônicas?</label>
+          <div class="checkbox-grid">
+            <label class="checkbox-group"><input type="checkbox" id="enf_asma"> Asma ou Bronquite</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_rinite"> Rinite ou Sinusite</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_hipertensao"> Hipertensão</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_diabetes"> Diabetes</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_epilepsia"> Convulsões ou Epilepsia</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_dermato"> Problemas dermatológicos</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_cardiaco"> Problemas cardíacos</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_renal"> Problemas renais</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_reuma"> Problemas reumatológicos</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_hemato"> Problemas hematológicos</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_outros"> Outros</label>
+          </div>
+          <input type="text" id="enf_outros_desc" placeholder="Especifique outros se houver" style="margin-top: 8px;">
+        </fieldset>
+
+        <!-- 3. Medicamentos em Uso -->
+        <fieldset>
+          <legend>Medicamentos em uso (contínuos ou não)</legend>
+          <div class="req-field-container" style="max-width: 200px;">
+            <span class="req-dot"></span>
+            <select id="meds_opt" class="req-field" required onchange="toggleBox('meds_box', this.value === 'Sim')">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+
+          <div id="meds_box" class="conditional-box hidden">
+            <button type="button" class="btn-action" onclick="adicionarLinhaMedicamento()">+ Adicionar medicamento</button>
+            <table class="med-table" id="tabelaMedicamentos">
+              <thead>
+                <tr>
+                  <th>Nome do medicamento</th>
+                  <th>Uso contínuo</th>
+                  <th>Informações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="text" placeholder="Nome do remédio"></td>
+                  <td><select><option value="Sim">Sim</option><option value="Não">Não</option></select></td>
+                  <td><input type="text" placeholder="Dosagem / Horários"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="margin-top: 15px;">
+              <label style="font-size:0.85rem; font-weight:600;">Permite administrar medicamentos por profissionais em saúde que atuam no Grupo?</label>
+              <div style="display:flex; gap:15px; margin: 4px 0;">
+                <label class="radio-group"><input type="radio" name="permite_med" value="Sim"> Sim</label>
+                <label class="radio-group"><input type="radio" name="permite_med" value="Não" checked> Não</label>
+              </div>
+              <input type="text" id="permite_med_info" placeholder="Informações sobre a administração por profissionais">
+            </div>
+
+            <div style="margin-top: 15px;">
+              <label style="font-size:0.85rem; font-weight:600;">O jovem tem autonomia e está treinado para administrar a sua medicação sozinho?</label>
+              <div style="display:flex; gap:15px; margin: 4px 0;">
+                <label class="radio-group"><input type="radio" name="autonomia_med" value="Sim"> Sim</label>
+                <label class="radio-group"><input type="radio" name="autonomia_med" value="Não" checked> Não</label>
+              </div>
+              <input type="text" id="autonomia_med_info" placeholder="Informações sobre a autonomia na administração">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 4. Emergências Médicas -->
+        <fieldset>
+          <legend>Emergências médicas</legend>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <label class="checkbox-group"><input type="checkbox" id="emg_aguardar_pais"> Aguardar acompanhamento dos Pais/Responsáveis</label>
+            <label class="checkbox-group"><input type="checkbox" id="emg_aceita_decisoes"> Aceita decisões médicas</label>
+          </div>
+
+          <div style="margin-top: 12px;">
+            <label style="font-size:0.88rem; font-weight:600;">Avisar em emergências:</label>
+            <div style="display:flex; gap:15px; margin-top:4px;">
+              <label class="radio-group"><input type="radio" name="avisar_emergencia" value="Pais" checked> Pais</label>
+              <label class="radio-group"><input type="radio" name="avisar_emergencia" value="Outros"> Outros</label>
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-top: 10px;">
+            <div class="form-group col-8">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="emergencia_nome" class="req-field" placeholder="Nome do Contato de Emergência" required>
+              </div>
+            </div>
+            <div class="form-group col-4">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="emergencia_tel" class="req-field" placeholder="Telefone" required>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 5. Plano de Saúde (CORRIGIDO SEM DUPLICAÇÃO) -->
+        <fieldset>
+          <legend>Plano de saúde</legend>
+          <div class="req-field-container" style="max-width: 250px;">
+            <span class="req-dot"></span>
+            <select id="plano_opt" class="req-field" required onchange="toggleBox('plano_box', this.value !== 'Não/SUS')">
+              <option value="Não/SUS">Não/SUS</option>
+              <option value="Agemed">Agemed</option>
+              <option value="Amil">Amil</option>
+              <option value="Bradesco">Bradesco</option>
+              <option value="Notre Dame">Notre Dame</option>
+              <option value="Porto Seguro">Porto Seguro</option>
+              <option value="Unimed">Unimed</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+
+          <div id="plano_box" class="conditional-box hidden">
+            <div class="form-grid">
+              <div class="form-group col-6">
+                <div class="req-field-container">
+                  <span class="req-dot"></span>
+                  <input type="text" id="plano_carteirinha" class="req-field" placeholder="Nº Carteirinha">
+                </div>
+              </div>
+              <div class="form-group col-6">
+                <input type="text" id="plano_outro_especificar" placeholder="Especifique o Plano (caso tenha escolhido Outro)">
+              </div>
+              <div class="form-group col-8">
+                <input type="text" id="medico_preferencia" placeholder="Médico de preferência">
+              </div>
+              <div class="form-group col-4">
+                <input type="text" id="medico_telefone" placeholder="Telefone do Médico">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 6. Alergias -->
+        <fieldset>
+          <legend>Alergias</legend>
+          <div class="req-field-container" style="max-width: 200px;">
+            <span class="req-dot"></span>
+            <select id="alergia_opt" class="req-field" required onchange="toggleBox('alergia_box', this.value === 'Sim')">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+
+          <div id="alergia_box" class="conditional-box hidden">
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_inseto"> Picada de inseto</label>
+                <input type="text" id="alg_inseto_desc" placeholder="Detalhes / reações">
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_med"> Medicamentos</label>
+                <input type="text" id="alg_med_desc" placeholder="Quais remédios?">
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_plantas"> Plantas</label>
+                <input type="text" id="alg_plantas_desc" placeholder="Detalhes">
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_alimentos"> Alimentos</label>
+                <input type="text" id="alg_alimentos_desc" placeholder="Quais alimentos?">
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_acaro"> Ácaro</label>
+                <input type="text" id="alg_acaro_desc" placeholder="Detalhes">
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_fungo"> Fungo</label>
+                <input type="text" id="alg_fungo_desc" placeholder="Detalhes">
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_outros"> Outros:</label>
+                <input type="text" id="alg_outros_desc" placeholder="Especifique">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 7. Informações Gerais -->
+        <fieldset>
+          <legend>Informações gerais</legend>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div>
+              <label style="font-size:0.85rem;">Possui impedimento físico?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="imp_fisico" value="Não" checked onclick="toggleBox('imp_fisico_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="imp_fisico" value="Sim" onclick="toggleBox('imp_fisico_cite', true)"> Sim</label>
+              </div>
+              <div id="imp_fisico_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="imp_fisico_desc" class="req-field" placeholder="Cite o impedimento"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Restrições a alimentos?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="rest_alimento" value="Não" checked onclick="toggleBox('rest_alimento_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="rest_alimento" value="Sim" onclick="toggleBox('rest_alimento_cite', true)"> Sim</label>
+              </div>
+              <div id="rest_alimento_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="rest_alimento_desc" class="req-field" placeholder="Cite as restrições"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Saber nadar?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="saber_nadar" value="Não" checked> Não</label>
+                <label class="radio-group"><input type="radio" name="saber_nadar" value="Sim"> Sim</label>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">É sonâmbulo?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="sonambulo" value="Não" checked> Não</label>
+                <label class="radio-group"><input type="radio" name="sonambulo" value="Sim"> Sim</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 8. Saúde Mental -->
+        <fieldset>
+          <legend>Saúde mental</legend>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div>
+              <label style="font-size:0.85rem;">Apresenta algum transtorno?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="transtorno" value="Não" checked onclick="toggleBox('transtorno_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="transtorno" value="Sim" onclick="toggleBox('transtorno_cite', true)"> Sim</label>
+              </div>
+              <div id="transtorno_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="transtorno_desc" class="req-field" placeholder="Exemplo: Conduta, Hiperatividade por déficit de atenção, oposição desafiante, etc."></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Faz uso de medicação para este transtorno?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="med_transtorno" value="Não" checked onclick="toggleBox('med_transtorno_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="med_transtorno" value="Sim" onclick="toggleBox('med_transtorno_cite', true)"> Sim</label>
+              </div>
+              <div id="med_transtorno_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="med_transtorno_desc" class="req-field" placeholder="Qual?"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Faz acompanhamento com psicólogo?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="psicologo" value="Não" checked onclick="toggleBox('psicologo_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="psicologo" value="Sim" onclick="toggleBox('psicologo_cite', true)"> Sim</label>
+              </div>
+              <div id="psicologo_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="psicologo_desc" class="req-field" placeholder="Qual?"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Faz acompanhamento com médico?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="medico_mental" value="Não" checked onclick="toggleBox('medico_mental_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="medico_mental" value="Sim" onclick="toggleBox('medico_mental_cite', true)"> Sim</label>
+              </div>
+              <div id="medico_mental_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="medico_mental_desc" class="req-field" placeholder="Contato"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Faz acompanhamento com outro profissional?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="outro_prof" value="Não" checked onclick="toggleBox('outro_prof_cite', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="outro_prof" value="Sim" onclick="toggleBox('outro_prof_cite', true)"> Sim</label>
+              </div>
+              <div id="outro_prof_cite" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="outro_prof_desc" class="req-field" placeholder="Contato"></div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 9. Deficiências -->
+        <fieldset>
+          <legend>Deficiências</legend>
+          <div class="req-field-container" style="max-width: 200px;">
+            <span class="req-dot"></span>
+            <select id="deficiencia_opt" class="req-field" required onchange="toggleBox('deficiencia_box', this.value === 'Sim')">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+
+          <div id="deficiencia_box" class="conditional-box hidden">
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_fisica"> Física</label><input type="text" id="def_fisica_desc" placeholder="Especificar"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_visual"> Visual</label><input type="text" id="def_visual_desc" placeholder="Especificar"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_auditiva"> Auditiva</label><input type="text" id="def_auditiva_desc" placeholder="Especificar"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_intelectual"> Intelectual</label><input type="text" id="def_intelectual_desc" placeholder="Especificar"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_autismo"> Autismo</label><input type="text" id="def_autismo_desc" placeholder="Especificar"></div>
+            </div>
+            <p style="font-size:0.75rem; color:#777; margin-top:8px;">*(equiparado às deficiências pela Lei 12.764 de 2012)*</p>
+          </div>
+        </fieldset>
+
+        <!-- 10. Apresenta no Comportamento -->
+        <fieldset>
+          <legend>Apresenta no comportamento</legend>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+
+            <div>
+              <label style="font-size:0.85rem;">Crises de explosão em que agrida a si mesmo?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_agride_si" value="Não" checked onclick="toggleBox('comp_agride_si_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_agride_si" value="Sim" onclick="toggleBox('comp_agride_si_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_agride_si_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_agride_si_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Crises de explosão em que agrida os outros?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_agride_outros" value="Não" checked onclick="toggleBox('comp_agride_outros_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_agride_outros" value="Sim" onclick="toggleBox('comp_agride_outros_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_agride_outros_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_agride_outros_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Agitação psicomotora que atrapalhe a concentração?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_agitacao" value="Não" checked onclick="toggleBox('comp_agitacao_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_agitacao" value="Sim" onclick="toggleBox('comp_agitacao_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_agitacao_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_agitacao_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Dificuldade de obedecer instruções verbais? De que tipo?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_instrucao" value="Não" checked onclick="toggleBox('comp_instrucao_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_instrucao" value="Sim" onclick="toggleBox('comp_instrucao_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_instrucao_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_instrucao_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Tendência a fugas?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_fugas" value="Não" checked onclick="toggleBox('comp_fugas_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_fugas" value="Sim" onclick="toggleBox('comp_fugas_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_fugas_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_fugas_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Comportamento auto-destrutivo (cortes, arranhões, etc.)?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_autodestruicao" value="Não" checked onclick="toggleBox('comp_autodestruicao_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_autodestruicao" value="Sim" onclick="toggleBox('comp_autodestruicao_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_autodestruicao_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_autodestruicao_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Crises de ansiedade ou pânico?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_ansiedade" value="Não" checked onclick="toggleBox('comp_ansiedade_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_ansiedade" value="Sim" onclick="toggleBox('comp_ansiedade_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_ansiedade_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_ansiedade_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Dificuldade de comunicação com outras pessoas?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_comunicacao" value="Não" checked onclick="toggleBox('comp_comunicacao_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_comunicacao" value="Sim" onclick="toggleBox('comp_comunicacao_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_comunicacao_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_comunicacao_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Dificuldades alimentares?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_alimentar" value="Não" checked onclick="toggleBox('comp_alimentar_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_alimentar" value="Sim" onclick="toggleBox('comp_alimentar_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_alimentar_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_alimentar_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+            <div>
+              <label style="font-size:0.85rem;">Dificuldades de sono?</label>
+              <div style="display:flex; gap:15px;">
+                <label class="radio-group"><input type="radio" name="comp_sono" value="Não" checked onclick="toggleBox('comp_sono_obs', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_sono" value="Sim" onclick="toggleBox('comp_sono_obs', true)"> Sim</label>
+              </div>
+              <div id="comp_sono_obs" class="hidden" style="margin-top:4px;">
+                <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_sono_desc" class="req-field" placeholder="Observações"></div>
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <!-- 11. Observações Gerais -->
+        <fieldset>
+          <legend>Observações Gerais</legend>
+          <textarea id="med_obs" rows="4" placeholder="Anote aqui qualquer outra informação relevante sobre o associado..."></textarea>
+        </fieldset>
+
+        <!-- TERMO DE AUTORIZAÇÃO E DECLARAÇÃO OBRIGATÓRIO -->
+        <fieldset>
+          <legend>Termos de Autorização e Declaração *</legend>
+          <div style="max-height: 160px; overflow-y: auto; padding: 12px; border: 1px solid var(--border-color); background: #fdfdfd; font-size: 0.82rem; margin-bottom: 12px; line-height: 1.5; text-align: justify; border-radius: 4px;">
+            <p style="margin-bottom: 8px;">
+              Autorizo o <strong>GRUPO ESCOTEIRO MEMORIAL 350 (GEM) EM TODOS OS SEUS NÍVEIS</strong>, sociedade civil sem fins lucrativos, declarada de Utilidade Pública Federal, inscrita no CNPJ 46.612.339/0001-40 a utilizar-se das imagens e voz minha, ou daquele que represento ou assisto, para a edição de filmes e fotos, outorgando-lhe todos os direitos de imagem relacionados, para qualquer tipo de divulgação, publicidade e veiculação em todos e quaisquer meio de comunicação, a exclusivo critério do GEM e da União dos Escoteiros do Brasil, que poderá, ainda, reproduzir, editar, introduzir no mercado, armazenar, distribuir, executar, transmitir, criar trabalhos derivados e baseados nas imagens e informações disponibilizadas, para finalidade editorial, comercial, promocional, educacional, institucional, publicitária e todas as outras formas que venham a ser passíveis de utilização.
+            </p>
+            <p style="margin-bottom: 8px;">
+              Os associados beneficiários e contribuintes declaram que conhecem e concordam em cumprir a regulamentação interna do Grupo Escoteiro Memorial 350 e da União dos Escoteiros do Brasil.
+            </p>
+            <p>
+              Declaro que as informações acima foram por mim prestadas e são de minha inteira e total responsabilidade, especialmente o conteúdo e especificações descritos na ficha médica.
+            </p>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="termo_aceite" required style="width: 18px; height: 18px; cursor: pointer;">
+            <label for="termo_aceite" style="font-weight: bold; color: var(--primary-color); cursor: pointer; font-size: 0.88rem;">
+              Li, aceito e concordo com os termos de autorização e declarações acima. *
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ASSINATURA OBRIGATÓRIA -->
+        <fieldset>
+          <legend>Assinatura Digital Responsável / Associado *</legend>
+          <div class="signature-area">
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 8px;">Desenhe sua assinatura no quadro abaixo:</p>
+            <canvas id="signature-canvas" width="450" height="150"></canvas>
+            <div style="margin-top: 8px;">
+              <button type="button" class="btn-action" onclick="limparAssinatura()">Limpar Assinatura</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- BOTÕES FINAIS -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" onclick="executarAcao('salvar')">Salvar PDF</button>
+          <button type="button" class="btn btn-secondary" onclick="executarAcao('compartilhar')">Compartilhar PDF</button>
+          <button type="button" class="btn btn-outline" onclick="executarAcao('imprimir')">Imprimir PDF</button>
+          <button type="button" class="btn btn-danger" onclick="limparDados()">Limpar Dados</button>
+        </div>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer style="background-color: var(--primary-color); color: #dddddd; padding: 25px 20px; border-top: 4px solid var(--secondary-color); font-size: 0.9rem; text-align: center; width: 100%; margin-top: 40px;">
+    <div style="max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <img src="https://i.ibb.co/CKWP9CmS/logo-GE-M-2025.jpg" alt="Logo Grupo Escoteiro Memorial 350 SP" style="width: 60px; height: 60px; object-fit: contain; border-radius: 50%;">
+      <div>
+        <p style="margin-bottom: 5px; line-height: 1.4;"><strong>Grupo Escoteiro Memorial 350 SP</strong></p>
+        <p style="margin-bottom: 5px; line-height: 1.4;">Av. Doutor Altair Martins, 520 - Raposo Tavares, Osasco - SP, 06149-020</p>
+      </div>
+      <div>
+        <a href="https://www.instagram.com/gememorial?igsh=Z2dycGZ5bDVqdmw1" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-weight: bold;">Siga-nos no Instagram: @gememorial</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const LISTA_ESCOLARIDADE = [
+      "Não informado",
+      "Ensino fundamental incompleto",
+      "Ensino fundamental completo",
+      "Ensino médio incompleto",
+      "Ensino médio completo",
+      "Ensino superior incompleto",
+      "Ensino superior completo",
+      "Especialização incompleta",
+      "Especialização completa",
+      "Mestrado incompleto",
+      "Mestrado completo",
+      "Doutorado incompleto",
+      "Doutorado completo"
+    ];
+
+    const LISTA_PROFISSOES = [
+      "Estudante", "Outras Profissões", "Açougueiro(a)", "Administrador(a)", "Advogado(a)", "Aeronauta",
+      "Aeroviário(a)", "Afiador(a)", "Agenciador(a)", "Agente", "Agricultor(a)", "Agrimensor(a)",
+      "Agrônomo(a)", "Agropecuarista", "Ajudante", "Ajustador(a)", "Alfaiate", "Almoxarife", "Analista",
+      "Antropólogo(a)", "Apicultor(a)", "Aposentado(a)", "Apresentador(a)", "Árbitro(a)", "Arqueólogo(a)",
+      "Arquiteto(a)", "Arquivista", "Artesão(ã)", "Artista", "Ascensorista", "Assessor(a)", "Assistente",
+      "Astrônomo(a)", "Atendente", "Atleta", "Ator/atriz", "Auditor(a)", "Autônomo(a)", "Auxiliar",
+      "Avaliador(a)", "Avicultor(a)", "Baba", "Bailarino(a)", "Balconista", "Bancário(a)", "Barbeiro(a)",
+      "Barman", "Bibliotecário(a)", "Bilheteiro(a)", "Biólogo(a)", "Biomédico(a)", "Bioquímico(a)",
+      "Bloquista", "Bombeiro(a)", "Bordador(a)", "Borracheiro(a)", "Cabeleireiro(a)", "Caixa",
+      "Camareiro(a)", "Caminhoneiro(a)", "Cantor(a)", "Carpinteiro(a)", "Carregador(a)", "Carroceiro(a)",
+      "Carteiro(a)", "Cartorário(a)", "Carvoeiro(a)", "Caseiro(a)", "Cenógrafo(a)", "Ceramista",
+      "Chapeador(a)", "Chapeleiro(a)", "Chapista", "Chaveiro(a)", "Chefe", "Cientista", "Cineasta",
+      "Cinegrafista", "Classificador(a)", "Cobrador(a)", "Coletor(a)", "Comandante", "Comerciante",
+      "Comerciário(a)", "Comissário(a)", "Compositor(a)", "Comunicador(a)", "Condutor(a)", "Confeiteiro(a)",
+      "Conferente", "Construtor(a)", "Consultor(a)", "Contador(a)", "Controlador(a)", "Coordenador(a)",
+      "Copeiro(a)", "Coreógrafo(a)", "Corretor(a)", "Cortador(a)", "Costureiro(a)", "Cozinheiro(a)",
+      "Criador(a)", "Cuidador(a)", "Dançarino(a)", "Decorador(a)", "Delegado(a)", "Dentista",
+      "Desempregado(a)", "Desenhista", "Desenvolvedor(a)", "Designer", "Despachante", "Detetive",
+      "Diagramador(a)", "Diarista", "Digitador(a)", "Diretor(a)", "Distribuidor(a)", "DJ", "Do lar",
+      "Doceiro(a)", "Doméstico(a)", "Economista", "Editor(a)", "Educador(a)", "Eletricista",
+      "Eletricitário(a)", "Eletrotecnico(a)", "Embalador(a)", "Empacotador(a)", "Empreiteiro(a)",
+      "Empresário(a)", "Encaixotador(a)", "Encanador(a)", "Encarregado(a)", "Enfermeiro(a)", "Engenheiro(a)",
+      "Entregador(a)", "Escrevente", "Escritor(a)", "Escriturário(a)", "Escrivão(ã)", "Estagiário(a)",
+      "Estatístico(a)", "Esteticista", "Estilista", "Estofador(a)", "Executivo(a)", "Farmacêutico(a)",
+      "Faxineiro(a)", "Fazendeiro(a)", "Feirante", "Ferroviário(a)", "Filósofo(a)", "Fiscal", "Físico(a)",
+      "Fisioterapeuta", "Floricultor(a)", "Fonoaudiólogo(a)", "Fotógrafo(a)", "Frentista",
+      "Funcionário(a) público(a)", "Fundidor(a)", "Funileiro(a)", "Garagista", "Garçom/garçonete", "Gari",
+      "Garimpeiro(a)", "Geneticista", "Geofísico(a)", "Geógrafo(a)", "Geologista", "Geólogo(a)", "Gerente",
+      "Gesseiro(a)", "Governador(a)", "Governanta", "Gravador(a)", "Guarda", "Guia de turismo",
+      "Historiador(a)", "Impressor(a)", "Industriário(a)", "Inspetor(a)", "Instalador(a)", "Instrumentador(a)",
+      "Instrumentista", "Instrutor(a)", "Jardineiro(a)", "Joalheiro(a)", "Jóquei", "Jornaleiro(a)",
+      "Jornalista", "Juiz(a)", "Jurista", "Lapidário(a)", "Lavador(a)", "Lavrador(a)", "Leiloeiro(a)",
+      "Leiturista", "Locutor(a)", "Lustrador(a)", "Manicure", "Maquetista", "Maquiador(a)", "Maquinista",
+      "Marceneiro(a)", "Marinheiro(a)", "Marketing", "Massagista", "Massoterapeuta", "Matemático(a)",
+      "Mecânico(a)", "Medico(a)", "Mensageiro(a)", "Mestre", "Metalúrgico(a)", "Meteorologista", "Militar",
+      "Mineiro(a)", "Ministro(a)", "Modelista", "Modelo", "Moldador(a)", "Monitor(a)", "Montador(a)",
+      "Mordomo", "Moto boy", "Motorista", "Mototaxista", "Museólogo(a)", "Músico/Musicista", "Nutricionista",
+      "Oceanógrafo(a)", "Odontologo(a)", "Office boy", "Oficial", "Oleiro(a)", "Operador(a)", "Operário(a)",
+      "Orientador(a)", "Ourives", "Padeiro(a)", "Peão", "Pecuarista", "Pedagogo(a)", "Pedreiro(a)",
+      "Perito(a)", "Pescador(a)", "Pesquisador(a)", "Piloto(a)", "Pintor(a)", "Pizzaiolo(a)", "Policial",
+      "Polidor(a)", "Político", "Porteiro(a)", "Prefeito(a)", "Procurador(a)", "Produtor(a) cultural",
+      "Produtor(a) rural", "Professor(a)", "Programador(a)", "Projetista", "Promotor(a)", "Psicanalista",
+      "Psicólogo(a)", "Publicitário(a)", "Químico(a)", "Radialista", "Recepcionista", "Redator(a)",
+      "Relações públicas", "Religioso(a)", "Relojoeiro(a)", "Repórter", "Repositor(a)", "Representante",
+      "Revisor(a)", "Salgadeiro(a)", "Salva vidas", "Sapateiro(a)", "Secretario(a)", "Segurança",
+      "Serigrafista", "Seringueiro(a)", "Serralheiro(a)", "Servente", "Sociólogo(a)", "Supervisor(a)",
+      "Tabelião(ã)", "Taxista", "Tecelão(ã)", "Técnico(a)", "Técnico(a) Judiciário", "Tecnólogo(a)",
+      "Telefonista", "Terapeuta", "Tesoureiro(a)", "Topógrafo(a)", "Torneiro(a)", "Tradutor(a)",
+      "Treinador(a)", "Turismo", "Vendedor(a)", "Veterinário(a)", "Vidraceiro(a)", "Vigia", "Vigilante",
+      "Vistoriador(a)", "Zelador(a)", "Zootecnista"
+    ];
+
+    const UFS_BRASIL = [
+      "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG",
+      "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+    ];
+
+    const DENOMINACOES = {
+      "Católica": ["Católica Romana", "Católica Ortodoxa", "Outra"],
+      "Evangélica": ["Assembleia de Deus", "Batista", "Presbiteriana", "Luterana", "Adventista", "Metodista", "Outra"],
+      "Espírita": ["Kardecista", "Outra"],
+      "Matriz Africana": ["Candomblé", "Umbanda", "Outra"]
+    };
+
+    let abaAtual = 'basicas';
+    let canvas, ctx, desenhando = false, assinaturaFeita = false;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      povoarSelects();
+      inicializarCanvas();
+      carregarEstadoFormulario();
+
+      document.getElementById('cadastroForm').addEventListener('input', salvarEstadoFormulario);
+      document.getElementById('cadastroForm').addEventListener('change', salvarEstadoFormulario);
+    });
+
+    function povoarSelects() {
+      ['escolaridade', 'resp1_escolaridade', 'resp2_escolaridade'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          LISTA_ESCOLARIDADE.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item;
+            opt.textContent = item;
+            el.appendChild(opt);
+          });
+        }
+      });
+
+      ['profissao', 'resp1_profissao', 'resp2_profissao'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          LISTA_PROFISSOES.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item;
+            opt.textContent = item;
+            el.appendChild(opt);
+          });
+        }
+      });
+
+      ['uf_nascimento', 'assoc_uf', 'resp1_uf', 'resp2_uf'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          UFS_BRASIL.forEach(uf => {
+            const opt = document.createElement('option');
+            opt.value = uf;
+            opt.textContent = uf;
+            if (uf === 'SP') opt.selected = true;
+            el.appendChild(opt);
+          });
+        }
+      });
+    }
+
+    function atualizarDenominacoes() {
+      const rel = document.getElementById('religiao').value;
+      const denSelect = document.getElementById('denominacao');
+      denSelect.innerHTML = '<option value="">Selecione a Denominação</option>';
+
+      if (DENOMINACOES[rel]) {
+        DENOMINACOES[rel].forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d;
+          opt.textContent = d;
+          denSelect.appendChild(opt);
+        });
+      }
+    }
+
+    function tentarMudarAba(targetAba) {
+      const ordemAbas = ['basicas', 'responsaveis', 'medica'];
+      const indexAtual = ordemAbas.indexOf(abaAtual);
+      const indexTarget = ordemAbas.indexOf(targetAba);
+
+      if (indexTarget > indexAtual) {
+        for (let i = indexAtual; i < indexTarget; i++) {
+          if (!validarAba(ordemAbas[i])) {
+            alert('Por favor, preencha todos os campos obrigatórios da aba atual antes de avançar.');
+            return;
+          }
+        }
+      }
+
+      forcarMudancaAba(targetAba);
+    }
+
+    function forcarMudancaAba(targetAba) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      document.getElementById('btn-tab-' + targetAba).classList.add('active');
+      document.getElementById('tab-' + targetAba).classList.add('active');
+      abaAtual = targetAba;
+    }
+
+    function switchSubTab(subTabId) {
+      document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('subtab-resp1').classList.add('hidden');
+      document.getElementById('subtab-resp2').classList.add('hidden');
+
+      document.getElementById('btn-sub-' + subTabId).classList.add('active');
+      document.getElementById('subtab-' + subTabId).classList.remove('hidden');
+    }
+
+    function validarAba(abaId) {
+      const abaEl = document.getElementById('tab-' + abaId);
+      const camposObrigatorios = abaEl.querySelectorAll('[required]');
+      let tudoValido = true;
+
+      camposObrigatorios.forEach(campo => {
+        if (!campo.value.trim()) {
+          campo.classList.add('req-field');
+          tudoValido = false;
+        }
+      });
+
+      return tudoValido;
+    }
+
+    function validarFormularioCompleto() {
+      const ordemAbas = ['basicas', 'responsaveis', 'medica'];
+      for (let aba of ordemAbas) {
+        if (!validarAba(aba)) {
+          forcarMudancaAba(aba);
+          alert('Por favor, preencha todos os campos obrigatórios em destaque.');
+          return false;
+        }
+      }
+
+      // Validação do Termo de Aceite
+      const termoAceito = document.getElementById('termo_aceite');
+      if (!termoAceito || !termoAceito.checked) {
+        forcarMudancaAba('medica');
+        alert('É obrigatório marcar a caixinha concordando com os Termos de Autorização e Declaração.');
+        termoAceito.focus();
+        return false;
+      }
+
+      // Validação da Assinatura
+      if (!assinaturaFeita) {
+        forcarMudancaAba('medica');
+        alert('É obrigatório realizar a Assinatura Digital na Ficha Médica antes de prosseguir.');
+        return false;
+      }
+
+      return true;
+    }
+
+    function buscarCEP(cep, prefixo) {
+      const cleanCep = cep.replace(/\D/g, '');
+      if (cleanCep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cleanCep}/json/`)
+          .then(res => res.json())
+          .then(data => {
+            if (!data.erro) {
+              if (document.getElementById(prefixo + 'endereco')) document.getElementById(prefixo + 'endereco').value = data.logradouro || '';
+              if (document.getElementById(prefixo + 'bairro')) document.getElementById(prefixo + 'bairro').value = data.bairro || '';
+              if (document.getElementById(prefixo + 'cidade')) document.getElementById(prefixo + 'cidade').value = data.localidade || '';
+              if (document.getElementById(prefixo + 'uf')) document.getElementById(prefixo + 'uf').value = data.uf || '';
+              salvarEstadoFormulario();
+            }
+          });
+      }
+    }
+
+    function copiarEnderecoAssociado(prefixo) {
+      if (document.getElementById(prefixo + 'cep')) document.getElementById(prefixo + 'cep').value = document.getElementById('assoc_cep').value;
+      if (document.getElementById(prefixo + 'endereco')) document.getElementById(prefixo + 'endereco').value = document.getElementById('assoc_endereco').value;
+      if (document.getElementById(prefixo + 'numero')) document.getElementById(prefixo + 'numero').value = document.getElementById('assoc_numero').value;
+      if (document.getElementById(prefixo + 'complemento')) document.getElementById(prefixo + 'complemento').value = document.getElementById('assoc_complemento').value;
+      if (document.getElementById(prefixo + 'bairro')) document.getElementById(prefixo + 'bairro').value = document.getElementById('assoc_bairro').value;
+      if (document.getElementById(prefixo + 'uf')) document.getElementById(prefixo + 'uf').value = document.getElementById('assoc_uf').value;
+      if (document.getElementById(prefixo + 'cidade')) document.getElementById(prefixo + 'cidade').value = document.getElementById('assoc_cidade').value;
+      salvarEstadoFormulario();
+    }
+
+    function toggleBox(boxId, show) {
+      const box = document.getElementById(boxId);
+      if (show) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    }
+
+    function adicionarLinhaMedicamento() {
+      const tbody = document.querySelector('#tabelaMedicamentos tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" placeholder="Nome do remédio"></td>
+        <td><select><option value="Sim">Sim</option><option value="Não">Não</option></select></td>
+        <td><input type="text" placeholder="Dosagem / Horários"></td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    function inicializarCanvas() {
+      canvas = document.getElementById('signature-canvas');
+      ctx = canvas.getContext('2d');
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#000000";
+
+      canvas.addEventListener('mousedown', iniciarDesenho);
+      canvas.addEventListener('mousemove', desenhar);
+      canvas.addEventListener('mouseup', pararDesenho);
+
+      canvas.addEventListener('touchstart', (e) => { e.preventDefault(); iniciarDesenho(e.touches[0]); });
+      canvas.addEventListener('touchmove', (e) => { e.preventDefault(); desenhar(e.touches[0]); });
+      canvas.addEventListener('touchend', pararDesenho);
+    }
+
+    function iniciarDesenho(e) {
+      desenhando = true;
+      const rect = canvas.getBoundingClientRect();
+      ctx.beginPath();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    }
+
+    function desenhar(e) {
+      if (!desenhando) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+      ctx.stroke();
+      assinaturaFeita = true;
+    }
+
+    function pararDesenho() {
+      desenhando = false;
+      salvarEstadoFormulario();
+    }
+
+    function limparAssinatura() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      assinaturaFeita = false;
+      salvarEstadoFormulario();
+    }
+
+    function salvarEstadoFormulario() {
+      const data = {};
+      const inputs = document.querySelectorAll('#cadastroForm input, #cadastroForm select, #cadastroForm textarea');
+      inputs.forEach(el => {
+        if (el.id) {
+          if (el.type === 'checkbox') data[el.id] = el.checked;
+          else if (el.type === 'radio') {
+            if (el.checked) data[el.name] = el.value;
+          } else data[el.id] = el.value;
+        }
+      });
+      if (assinaturaFeita) {
+        data['assinatura_img'] = canvas.toDataURL();
+      }
+      localStorage.setItem('gem_ficha_dados', JSON.stringify(data));
+    }
+
+    function carregarEstadoFormulario() {
+      const saved = localStorage.getItem('gem_ficha_dados');
+      if (!saved) return;
+      const data = JSON.parse(saved);
+
+      Object.keys(data).forEach(key => {
+        const el = document.getElementById(key);
+        if (el) {
+          if (el.type === 'checkbox') el.checked = data[key];
+          else el.value = data[key];
+        } else {
+          const radios = document.querySelectorAll(`input[name="${key}"]`);
+          radios.forEach(r => {
+            if (r.value === data[key]) r.checked = true;
+          });
+        }
+      });
+
+      if (data['religiao']) atualizarDenominacoes();
+      if (data['denominacao']) document.getElementById('denominacao').value = data['denominacao'];
+
+      if (data['med_auxilio_opt'] === 'Sim') toggleBox('auxilio_box', true);
+      if (data['meds_opt'] === 'Sim') toggleBox('meds_box', true);
+      if (data['plano_opt'] && data['plano_opt'] !== 'Não/SUS') toggleBox('plano_box', true);
+      if (data['alergia_opt'] === 'Sim') toggleBox('alergia_box', true);
+      if (data['deficiencia_opt'] === 'Sim') toggleBox('deficiencia_box', true);
+
+      if (data['assinatura_img']) {
+        const img = new Image();
+        img.onload = function() {
+          ctx.drawImage(img, 0, 0);
+          assinaturaFeita = true;
+        };
+        img.src = data['assinatura_img'];
+      }
+    }
+
+    function limparDados() {
+      if (confirm("Tem certeza que deseja apagar todos os dados preenchidos?")) {
+        localStorage.removeItem('gem_ficha_dados');
+        document.getElementById('cadastroForm').reset();
+        limparAssinatura();
+        forcarMudancaAba('basicas');
+      }
+    }
+  async function executarAcao(acao) {
+      if (!validarFormularioCompleto()) return;
+
+      const nome = document.getElementById('nome_completo').value || 'Associado';
+      const nomeArquivo = `Ficha_Inscricao_${nome.replace(/\s+/g, '_')}.pdf`;
+
+      if (acao === 'imprimir' || acao === 'salvar') {
+        window.print();
+      } else if (acao === 'compartilhar') {
+        // 1. Rola a página para o topo absoluto para evitar páginas em branco
+        window.scrollTo(0, 0);
+
+        // 2. Aplica classe CSS que exibe todas as abas e oculta botões
+        document.body.classList.add('generating-pdf');
+
+        const elemento = document.body;
+        const opcoes = {
+          margin:       [8, 8, 8, 8],
+          filename:     nomeArquivo,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            scrollY: 0,
+            scrollX: 0
+          },
+          jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+          pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+
+        try {
+          // 3. Gera o PDF contendo todo o formulário
+          const pdfBlob = await html2pdf().set(opcoes).from(elemento).output('blob');
+          const file = new File([pdfBlob], nomeArquivo, { type: 'application/pdf' });
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'Ficha de Inscrição GEM 350 SP',
+              text: `Segue a Ficha de Inscrição de ${nome}`,
+              files: [file]
+            });
+          } else {
+            alert('Seu navegador não suporta o compartilhamento direto de arquivos. Utilize a opção "Salvar PDF" para baixar o arquivo e enviar manualmente.');
+          }
+        } catch (erro) {
+          console.error(erro);
+          alert('Não foi possível gerar o arquivo para compartilhamento. Utilize a opção Imprimir/Salvar PDF.');
+        } finally {
+          // 4. Remove a classe do PDF e restabelece a visualização da aba ativa
+          document.body.classList.remove('generating-pdf');
+          forcarMudancaAba(abaAtual);
+        }
+      }
+    }
+
+  </script>
 </body>
 </html>
