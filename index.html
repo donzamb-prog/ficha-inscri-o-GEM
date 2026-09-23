@@ -2610,13 +2610,121 @@
         }
     }
 
-    function limparDados() {
-        if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
-            document.getElementById('escoteiroForm').reset();
-            clearCanvas();
-            mudarAbaAtiva('tab-gerais');
+    // --- SISTEMA DE AUTO-SALVAMENTO (LOCALSTORAGE) ---
+
+// Salva todos os campos e a assinatura no navegador
+function salvarRascunho() {
+    const formData = {};
+    const form = document.getElementById('escoteiroForm');
+    if (!form) return;
+
+    // Salva inputs, selects e textareas com ID
+    const elementos = form.querySelectorAll('input, select, textarea');
+    elementos.forEach(el => {
+        if (!el.id) return;
+
+        if (el.type === 'checkbox') {
+            formData[el.id] = el.checked;
+        } else if (el.type === 'radio') {
+            if (el.checked) {
+                formData[el.name] = el.value;
+            }
+        } else {
+            formData[el.id] = el.value;
         }
+    });
+
+    // Salva a assinatura do Canvas em imagem Base64 (se houver assinatura)
+    if (typeof canvas !== 'undefined' && canvas && !isCanvasBlank(canvas)) {
+        formData['sig_canvas_data'] = canvas.toDataURL();
     }
+
+    localStorage.setItem('ficha_escoteira_rascunho', JSON.stringify(formData));
+}
+
+// Carrega os dados salvos quando a página é aberta
+function carregarRascunho() {
+    const dadosSalvos = localStorage.getItem('ficha_escoteira_rascunho');
+    if (!dadosSalvos) return;
+
+    try {
+        const formData = JSON.parse(dadosSalvos);
+
+        // Preenche campos de texto, select, checkbox e radio
+        Object.keys(formData).forEach(idOuNome => {
+            const el = document.getElementById(idOuNome);
+
+            if (el) {
+                if (el.type === 'checkbox') {
+                    el.checked = formData[idOuNome];
+                    // Dispara evento onchange se houver para exibir blocos condicionais
+                    el.dispatchEvent(new Event('change'));
+                } else if (el.tagName === 'SELECT' || el.tagName === 'TEXTAREA' || el.type === 'text' || el.type === 'date' || el.type === 'email' || el.type === 'tel') {
+                    el.value = formData[idOuNome];
+                    el.dispatchEvent(new Event('change'));
+                }
+            } else {
+                // Trata botões Radio (pesquisados pelo atributo name)
+                const radios = document.querySelectorAll(`input[name="${idOuNome}"]`);
+                radios.forEach(radio => {
+                    if (radio.value === formData[idOuNome]) {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    }
+                });
+            }
+        });
+
+        // Restaura a assinatura no Canvas
+        if (formData['sig_canvas_data'] && typeof ctx !== 'undefined' && ctx) {
+            const img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = formData['sig_canvas_data'];
+        }
+
+        // Reavalia regras dinâmicas (ex: idade / obrigatoriedade do responsável)
+        const inputDataNasc = document.getElementById('data_nascimento');
+        if (inputDataNasc && inputDataNasc.value) {
+            verificarIdade(inputDataNasc);
+        }
+
+    } catch (e) {
+        console.error('Erro ao carregar rascunho:', e);
+    }
+}
+
+// Configura o salvamento automático a cada alteração no formulário
+window.addEventListener('DOMContentLoaded', () => {
+    // Tenta carregar o rascunho salvo assim que a página abre
+    setTimeout(carregarRascunho, 200);
+
+    const form = document.getElementById('escoteiroForm');
+    if (form) {
+        form.addEventListener('input', salvarRascunho);
+        form.addEventListener('change', salvarRascunho);
+    }
+
+    // Salva a assinatura quando o usuário interagir com o canvas
+    const sigCanvas = document.getElementById('sig-canvas');
+    if (sigCanvas) {
+        sigCanvas.addEventListener('mouseup', salvarRascunho);
+        sigCanvas.addEventListener('touchend', salvarRascunho);
+    }
+
+function limparDados() {
+    if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
+        document.getElementById('escoteiroForm').reset();
+        clearCanvas();
+        
+        // Remove os dados salvos do navegador
+        localStorage.removeItem('ficha_escoteira_rascunho');
+        
+        mudarAbaAtiva('tab-gerais');
+        alert('Formulário e rascunho apagados com sucesso!');
+    }
+}
 
     async function executarAcao(acao) {
         const abaGerais = document.getElementById('tab-gerais');
