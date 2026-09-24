@@ -231,7 +231,7 @@
       background-color: #fff;
     }
 
-    /* ESTILO PAXTU - OBRIBATÓRIOS */
+    /* ESTILO PAXTU - OBRIGATÓRIOS */
     .req-field {
       border: 1.5px solid var(--required-border) !important;
       background-color: var(--required-bg) !important;
@@ -407,50 +407,46 @@
       display: block !important;
     }
 
-    /* MELHORIAS VISUAIS EXCLUSIVAS PARA O PDF GENERATED */
-  body.generating-pdf {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-  }
+    /* MELHORIAS VISUAIS EXCLUSIVAS PARA O PDF GERADO */
+    body.generating-pdf {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
 
-  /* Evita que blocos de informação sejam cortados ao meio na quebra de página */
-  body.generating-pdf fieldset {
-    page-break-inside: avoid !important;
-    margin-bottom: 12px !important;
-    border: 1px solid #b0b0b0 !important;
-  }
+    body.generating-pdf fieldset {
+      page-break-inside: avoid !important;
+      margin-bottom: 12px !important;
+      border: 1px solid #b0b0b0 !important;
+    }
 
-  /* Transforma caixas de texto em linhas elegantes de formulário impresso */
-  body.generating-pdf input[type="text"],
-  body.generating-pdf input[type="email"],
-  body.generating-pdf input[type="date"],
-  body.generating-pdf select,
-  body.generating-pdf textarea {
-    border: none !important;
-    border-bottom: 1px solid #5f5b03 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    padding: 2px 4px !important;
-    box-shadow: none !important;
-  }
+    body.generating-pdf input[type="text"],
+    body.generating-pdf input[type="email"],
+    body.generating-pdf input[type="date"],
+    body.generating-pdf select,
+    body.generating-pdf textarea {
+      border: none !important;
+      border-bottom: 1px solid #5f5b03 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      padding: 2px 4px !important;
+      box-shadow: none !important;
+    }
 
-  /* Remove os avisos amarelos de campo obrigatório no PDF final */
-  body.generating-pdf .req-dot {
-    display: none !important;
-  }
+    body.generating-pdf .req-dot {
+      display: none !important;
+    }
 
-  body.generating-pdf input.req-field,
-  body.generating-pdf select.req-field {
-    padding-left: 4px !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-bottom: 1px solid #595c03d2 !important;
-  }
+    body.generating-pdf input.req-field,
+    body.generating-pdf select.req-field {
+      padding-left: 4px !important;
+      background-color: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid #595c03d2 !important;
+    }
 
-  /* Oculta os textos de exemplo (placeholders) que não foram preenchidos */
-  body.generating-pdf ::placeholder {
-    color: transparent !important;
-  }
+    body.generating-pdf ::placeholder {
+      color: transparent !important;
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -643,21 +639,30 @@
           <fieldset>
             <legend>Religião</legend>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-              <select id="religiao" onchange="atualizarDenominacoes()">
+              <select id="religiao">
                 <option value="">Selecione a Religião</option>
-                <option value="Católica">Católica</option>
-                <option value="Evangélica">Evangélica</option>
-                <option value="Espírita">Espírita</option>
-                <option value="Matriz Africana">Matriz Africana</option>
-                <option value="Judaísmo">Judaísmo</option>
-                <option value="Islamismo">Islamismo</option>
+                <option value="Anglicana">Anglicana</option>
+                <option value="Afro-Brasileira">Afro-Brasileira</option>
                 <option value="Budismo">Budismo</option>
+                <option value="Católica">Católica</option>
+                <option value="Espírita">Espírita</option>
+                <option value="Evangélico/Pentecostal">Evangélico/Pentecostal</option>
+                <option value="Hinduísmo">Hinduísmo</option>
+                <option value="Islâmica">Islâmica</option>
+                <option value="Messiânica">Messiânica</option>
+                <option value="Mórmon">Mórmon</option>
+                <option value="Protestante">Protestante</option>
+                <option value="Testemunha de Jeová">Testemunha de Jeová</option>
+                <option value="Tradições Esotéricas">Tradições Esotéricas</option>
+                <option value="Tradições Indígenas">Tradições Indígenas</option>
+                <option value="Xintoísmo">Xintoísmo</option>
+                <option value="Sem Religião">Sem Religião</option>
                 <option value="Outras">Outras</option>
-                <option value="Sem religião">Sem religião</option>
               </select>
-              <select id="denominacao">
-                <option value="">Selecione a Denominação</option>
-              </select>
+
+              <div class="form-group col-12" style="margin-top: 5px;">
+                <input type="text" id="informe_denominação" placeholder="Informe a Denominação">
+              </div>
             </div>
           </fieldset>
         </div>
@@ -732,15 +737,16 @@
                 <input type="text" id="resp1_celular" class="req-field" placeholder="Telefone Celular" required>
               </div>
             </div>
-          <div class="form-group col-6">
+
+            <div class="form-group col-6">
               <div class="req-field-container">
                 <span class="req-dot"></span>
-                <input type="text" id="resp1_e-mail" class="req-field" placeholder="E-mail" required>
+                <input type="email" id="resp1_e-mail" class="req-field" placeholder="E-mail" required>
               </div>
             </div>
             
             <div class="form-group col-6"><input type="text" id="resp1_area_atuacao" placeholder="Área de Atuação"></div>
-            <div class="form-group col-6"><input type="text" id="resp1_local_trabalho" placeholder="Local de Trabalho"></div>
+            <div class="form-group col-12"><input type="text" id="resp1_local_trabalho" placeholder="Local de Trabalho"></div>
 
             <div class="form-group col-12" style="margin-top: 5px;">
               <button type="button" class="btn-action" onclick="copiarEnderecoAssociado('resp1_')">Mesmo endereço do associado</button>
@@ -822,7 +828,7 @@
 
             <div class="form-group col-6"><input type="email" id="resp2_email" placeholder="E-mail"></div>
             <div class="form-group col-6"><input type="text" id="resp2_area_atuacao" placeholder="Área de Atuação"></div>
-            <div class="form-group col-6"><input type="text" id="resp2_local_trabalho" placeholder="Local de Trabalho"></div>
+            <div class="form-group col-12"><input type="text" id="resp2_local_trabalho" placeholder="Local de Trabalho"></div>
 
             <div class="form-group col-12" style="margin-top: 5px;">
               <button type="button" class="btn-action" onclick="copiarEnderecoAssociado('resp2_')">Mesmo endereço do associado</button>
@@ -1040,7 +1046,7 @@
           </div>
         </fieldset>
 
-        <!-- 5. Plano de Saúde (CORRIGIDO SEM DUPLICAÇÃO) -->
+        <!-- 5. Plano de Saúde -->
         <fieldset>
           <legend>Plano de saúde</legend>
           <div class="req-field-container" style="max-width: 250px;">
@@ -1512,13 +1518,6 @@
       "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
     ];
 
-    const DENOMINACOES = {
-      "Católica": ["Católica Romana", "Católica Ortodoxa", "Outra"],
-      "Evangélica": ["Assembleia de Deus", "Batista", "Presbiteriana", "Luterana", "Adventista", "Metodista", "Outra"],
-      "Espírita": ["Kardecista", "Outra"],
-      "Matriz Africana": ["Candomblé", "Umbanda", "Outra"]
-    };
-
     let abaAtual = 'basicas';
     let canvas, ctx, desenhando = false, assinaturaFeita = false;
 
@@ -1570,21 +1569,6 @@
       });
     }
 
-    function atualizarDenominacoes() {
-      const rel = document.getElementById('religiao').value;
-      const denSelect = document.getElementById('denominacao');
-      denSelect.innerHTML = '<option value="">Selecione a Denominação</option>';
-
-      if (DENOMINACOES[rel]) {
-        DENOMINACOES[rel].forEach(d => {
-          const opt = document.createElement('option');
-          opt.value = d;
-          opt.textContent = d;
-          denSelect.appendChild(opt);
-        });
-      }
-    }
-
     function tentarMudarAba(targetAba) {
       const ordemAbas = ['basicas', 'responsaveis', 'medica'];
       const indexAtual = ordemAbas.indexOf(abaAtual);
@@ -1606,22 +1590,30 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-      document.getElementById('btn-tab-' + targetAba).classList.add('active');
-      document.getElementById('tab-' + targetAba).classList.add('active');
+      const btnTarget = document.getElementById('btn-tab-' + targetAba);
+      const tabTarget = document.getElementById('tab-' + targetAba);
+
+      if (btnTarget) btnTarget.classList.add('active');
+      if (tabTarget) tabTarget.classList.add('active');
       abaAtual = targetAba;
     }
 
     function switchSubTab(subTabId) {
       document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('subtab-resp1').classList.add('hidden');
-      document.getElementById('subtab-resp2').classList.add('hidden');
+      const s1 = document.getElementById('subtab-resp1');
+      const s2 = document.getElementById('subtab-resp2');
+      if (s1) s1.classList.add('hidden');
+      if (s2) s2.classList.add('hidden');
 
-      document.getElementById('btn-sub-' + subTabId).classList.add('active');
-      document.getElementById('subtab-' + subTabId).classList.remove('hidden');
+      const btnSub = document.getElementById('btn-sub-' + subTabId);
+      const subTab = document.getElementById('subtab-' + subTabId);
+      if (btnSub) btnSub.classList.add('active');
+      if (subTab) subTab.classList.remove('hidden');
     }
 
     function validarAba(abaId) {
       const abaEl = document.getElementById('tab-' + abaId);
+      if (!abaEl) return true;
       const camposObrigatorios = abaEl.querySelectorAll('[required]');
       let tudoValido = true;
 
@@ -1650,7 +1642,7 @@
       if (!termoAceito || !termoAceito.checked) {
         forcarMudancaAba('medica');
         alert('É obrigatório marcar a caixinha concordando com os Termos de Autorização e Declaração.');
-        termoAceito.focus();
+        if (termoAceito) termoAceito.focus();
         return false;
       }
 
@@ -1694,12 +1686,15 @@
 
     function toggleBox(boxId, show) {
       const box = document.getElementById(boxId);
-      if (show) box.classList.remove('hidden');
-      else box.classList.add('hidden');
+      if (box) {
+        if (show) box.classList.remove('hidden');
+        else box.classList.add('hidden');
+      }
     }
 
     function adicionarLinhaMedicamento() {
       const tbody = document.querySelector('#tabelaMedicamentos tbody');
+      if (!tbody) return;
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><input type="text" placeholder="Nome do remédio"></td>
@@ -1711,6 +1706,7 @@
 
     function inicializarCanvas() {
       canvas = document.getElementById('signature-canvas');
+      if (!canvas) return;
       ctx = canvas.getContext('2d');
       ctx.lineWidth = 2;
       ctx.strokeStyle = "#000000";
@@ -1745,6 +1741,7 @@
     }
 
     function limparAssinatura() {
+      if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       assinaturaFeita = false;
       salvarEstadoFormulario();
@@ -1761,7 +1758,7 @@
           } else data[el.id] = el.value;
         }
       });
-      if (assinaturaFeita) {
+      if (assinaturaFeita && canvas) {
         data['assinatura_img'] = canvas.toDataURL();
       }
       localStorage.setItem('gem_ficha_dados', JSON.stringify(data));
@@ -1785,16 +1782,13 @@
         }
       });
 
-      if (data['religiao']) atualizarDenominacoes();
-      if (data['denominacao']) document.getElementById('denominacao').value = data['denominacao'];
-
       if (data['med_auxilio_opt'] === 'Sim') toggleBox('auxilio_box', true);
       if (data['meds_opt'] === 'Sim') toggleBox('meds_box', true);
       if (data['plano_opt'] && data['plano_opt'] !== 'Não/SUS') toggleBox('plano_box', true);
       if (data['alergia_opt'] === 'Sim') toggleBox('alergia_box', true);
       if (data['deficiencia_opt'] === 'Sim') toggleBox('deficiencia_box', true);
 
-      if (data['assinatura_img']) {
+      if (data['assinatura_img'] && ctx) {
         const img = new Image();
         img.onload = function() {
           ctx.drawImage(img, 0, 0);
@@ -1812,7 +1806,8 @@
         forcarMudancaAba('basicas');
       }
     }
-  async function executarAcao(acao) {
+
+    async function executarAcao(acao) {
       if (!validarFormularioCompleto()) return;
 
       const nome = document.getElementById('nome_completo').value || 'Associado';
@@ -1821,10 +1816,7 @@
       if (acao === 'imprimir' || acao === 'salvar') {
         window.print();
       } else if (acao === 'compartilhar') {
-        // 1. Rola a página para o topo absoluto para evitar páginas em branco
         window.scrollTo(0, 0);
-
-        // 2. Aplica classe CSS que exibe todas as abas e oculta botões
         document.body.classList.add('generating-pdf');
 
         const elemento = document.body;
@@ -1843,7 +1835,6 @@
         };
 
         try {
-          // 3. Gera o PDF contendo todo o formulário
           const pdfBlob = await html2pdf().set(opcoes).from(elemento).output('blob');
           const file = new File([pdfBlob], nomeArquivo, { type: 'application/pdf' });
 
@@ -1860,13 +1851,11 @@
           console.error(erro);
           alert('Não foi possível gerar o arquivo para compartilhamento. Utilize a opção Imprimir/Salvar PDF.');
         } finally {
-          // 4. Remove a classe do PDF e restabelece a visualização da aba ativa
           document.body.classList.remove('generating-pdf');
           forcarMudancaAba(abaAtual);
         }
       }
     }
-
   </script>
 </body>
 </html>
