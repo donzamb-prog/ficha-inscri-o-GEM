@@ -506,25 +506,32 @@
           </div>
 
           <div class="form-group col-4">
-            <label>Gênero</label>
-            <div style="display: flex; gap: 15px; margin-top: 6px;">
-              <label class="radio-group"><input type="radio" name="assoc_sexo" value="Masculino" checked> Masculino</label>
-              <label class="radio-group"><input type="radio" name="assoc_sexo" value="Feminino"> Feminino</label>
-            </div>
-          </div>
+  <label>Gênero</label>
+  <div style="display: flex; gap: 15px; margin-top: 6px;">
+    <label class="radio-group">
+      <input type="radio" name="assoc_sexo" value="Masculino" required> Masculino
+    </label>
+    <label class="radio-group">
+      <input type="radio" name="assoc_sexo" value="Feminino" required> Feminino
+    </label>
+  </div>
+</div>
 
           <div class="form-group col-4">
-            <label for="cor_raca">Cor ou Raça</label>
-            <select id="cor_raca">
-              <option value="">Selecione</option>
-              <option value="Branca">Branca</option>
-              <option value="Preta">Preta</option>
-              <option value="Parda">Parda</option>
-              <option value="Amarela">Amarela</option>
-              <option value="Indígena">Indígena</option>
-              <option value="Não declarada">Não declarada</option>
-            </select>
-          </div>
+  <label for="cor_raca">Cor ou Raça</label>
+  <div class="req-field-container">
+    <span class="req-dot"></span>
+    <select id="cor_raca" class="req-field" required>
+      <option value="">Selecione</option>
+      <option value="Branca">Branca</option>
+      <option value="Preta">Preta</option>
+      <option value="Parda">Parda</option>
+      <option value="Amarela">Amarela</option>
+      <option value="Indígena">Indígena</option>
+      <option value="Não declarada">Não declarada</option>
+    </select>
+  </div>
+</div>
 
           <div class="form-group col-4">
             <label for="data_nascimento">Data de Nascimento</label>
@@ -777,18 +784,21 @@
               </div>
             </div>
 
-            <div class="form-group col-4">
-              <label>Gênero</label>
-              <div style="display: flex; gap: 15px; margin-top: 6px;">
-                <label class="radio-group"><input type="radio" name="resp1_sexo" value="Masculino" checked> Masculino</label>
-                <label class="radio-group"><input type="radio" name="resp1_sexo" value="Feminino"> Feminino</label>
-              </div>
-            </div>
+           <div class="form-group col-4">
+  <label>Gênero</label>
+  <div style="display: flex; gap: 15px; margin-top: 6px;">
+    <label class="radio-group"><input type="radio" name="resp1_sexo" value="Masculino" checked required> Masculino</label>
+    <label class="radio-group"><input type="radio" name="resp1_sexo" value="Feminino" required> Feminino</label>
+  </div>
+</div>
 
-            <div class="form-group col-4">
-              <label for="resp1_data_nascimento">Data de Nascimento</label>
-              <input type="date" id="resp1_data_nascimento">
-            </div>
+<div class="form-group col-4">
+  <label for="resp1_data_nascimento">Data de Nascimento</label>
+  <div class="req-field-container">
+    <span class="req-dot"></span>
+    <input type="date" id="resp1_data_nascimento" class="req-field" required>
+  </div>
+</div>
 
             <div class="form-group col-4">
               <label for="resp1_cpf">CPF</label>
@@ -917,17 +927,20 @@
             </div>
 
             <div class="form-group col-4">
-              <label>Gênero</label>
-              <div style="display: flex; gap: 15px; margin-top: 6px;">
-                <label class="radio-group"><input type="radio" name="resp2_sexo" value="Masculino" checked> Masculino</label>
-                <label class="radio-group"><input type="radio" name="resp2_sexo" value="Feminino"> Feminino</label>
-              </div>
-            </div>
+  <label>Gênero</label>
+  <div style="display: flex; gap: 15px; margin-top: 6px;">
+    <label class="radio-group"><input type="radio" name="resp2_sexo" value="Masculino" checked required> Masculino</label>
+    <label class="radio-group"><input type="radio" name="resp2_sexo" value="Feminino" required> Feminino</label>
+  </div>
+</div>
 
-            <div class="form-group col-4">
-              <label for="resp2_data_nascimento">Data de Nascimento</label>
-              <input type="date" id="resp2_data_nascimento">
-            </div>
+<div class="form-group col-4">
+  <label for="resp2_data_nascimento">Data de Nascimento</label>
+  <div class="req-field-container">
+    <span class="req-dot"></span>
+    <input type="date" id="resp2_data_nascimento" class="req-field" required>
+  </div>
+</div>
 
             <div class="form-group col-4">
               <label for="resp2_cpf">CPF</label>
