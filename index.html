@@ -492,7 +492,7 @@
       <div id="tab-basicas" class="tab-content active">
         <div class="form-grid">
           
-          <div class="form-group col-12">
+          <div class="form-group col-8">
             <label for="nome_completo">Nome Completo</label>
             <div class="req-field-container">
               <span class="req-dot"></span>
@@ -500,10 +500,19 @@
             </div>
           </div>
 
-          <div class="form-group col-8">
+          <div class="form-group col-4">
             <label for="nome_abreviado">Nome Abreviado (Será impresso na credencial)</label>
             <input type="text" id="nome_abreviado" placeholder="Nome Abreviado">
           </div>
+
+          <div class="form-group col-4">
+            <label>Gênero</label>
+            <div style="display: flex; gap: 15px; margin-top: 6px;">
+              <label class="radio-group"><input type="radio" name="assoc_sexo" value="Masculino" checked> Masculino</label>
+              <label class="radio-group"><input type="radio" name="assoc_sexo" value="Feminino"> Feminino</label>
+            </div>
+          </div>
+
           <div class="form-group col-4">
             <label for="cor_raca">Cor ou Raça</label>
             <select id="cor_raca">
@@ -524,6 +533,7 @@
               <input type="date" id="data_nascimento" class="req-field" required>
             </div>
           </div>
+
           <div class="form-group col-4">
             <label for="uf_nascimento">UF Nascimento</label>
             <div class="req-field-container">
@@ -533,7 +543,7 @@
               </select>
             </div>
           </div>
-          <div class="form-group col-4">
+          <div class="form-group col-8">
             <label for="cidade_nascimento">Cidade de Nascimento</label>
             <div class="req-field-container">
               <span class="req-dot"></span>
@@ -745,7 +755,7 @@
         <!-- 1º Responsável -->
         <div id="subtab-resp1">
           <div class="form-grid">
-            <div class="form-group col-6">
+            <div class="form-group col-4">
               <label for="resp1_parentesco">Parentesco</label>
               <div class="req-field-container">
                 <span class="req-dot"></span>
@@ -759,11 +769,32 @@
               </div>
             </div>
 
-            <div class="form-group col-6">
+            <div class="form-group col-8">
               <label for="resp1_nome">Nome Completo do Responsável</label>
               <div class="req-field-container">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_nome" class="req-field" placeholder="Nome Completo do Responsável" required>
+              </div>
+            </div>
+
+            <div class="form-group col-4">
+              <label>Gênero</label>
+              <div style="display: flex; gap: 15px; margin-top: 6px;">
+                <label class="radio-group"><input type="radio" name="resp1_sexo" value="Masculino" checked> Masculino</label>
+                <label class="radio-group"><input type="radio" name="resp1_sexo" value="Feminino"> Feminino</label>
+              </div>
+            </div>
+
+            <div class="form-group col-4">
+              <label for="resp1_data_nascimento">Data de Nascimento</label>
+              <input type="date" id="resp1_data_nascimento">
+            </div>
+
+            <div class="form-group col-4">
+              <label for="resp1_cpf">CPF</label>
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="resp1_cpf" class="req-field" placeholder="CPF" required>
               </div>
             </div>
 
@@ -787,15 +818,7 @@
               </div>
             </div>
 
-            <div class="form-group col-6">
-              <label for="resp1_cpf">CPF</label>
-              <div class="req-field-container">
-                <span class="req-dot"></span>
-                <input type="text" id="resp1_cpf" class="req-field" placeholder="CPF" required>
-              </div>
-            </div>
-
-            <div class="form-group col-6">
+            <div class="form-group col-4">
               <label for="resp1_celular">Telefone Celular</label>
               <div class="req-field-container">
                 <span class="req-dot"></span>
@@ -803,10 +826,11 @@
               </div>
             </div>
 
-            <div class="form-group col-6">
+            <div class="form-group col-8">
               <label for="resp1_email">E-mail</label>
               <input type="email" id="resp1_email" placeholder="E-mail">
             </div>
+
             <div class="form-group col-6">
               <label for="resp1_area_atuacao">Área de Atuação</label>
               <input type="text" id="resp1_area_atuacao" placeholder="Área de Atuação">
@@ -876,7 +900,7 @@
         <!-- 2º Responsável -->
         <div id="subtab-resp2" class="hidden">
           <div class="form-grid">
-            <div class="form-group col-6">
+            <div class="form-group col-4">
               <label for="resp2_parentesco">Parentesco</label>
               <select id="resp2_parentesco">
                 <option value="">Parentesco</option>
@@ -887,9 +911,27 @@
               </select>
             </div>
 
-            <div class="form-group col-6">
+            <div class="form-group col-8">
               <label for="resp2_nome">Nome Completo do Responsável</label>
               <input type="text" id="resp2_nome" placeholder="Nome Completo do Responsável">
+            </div>
+
+            <div class="form-group col-4">
+              <label>Gênero</label>
+              <div style="display: flex; gap: 15px; margin-top: 6px;">
+                <label class="radio-group"><input type="radio" name="resp2_sexo" value="Masculino" checked> Masculino</label>
+                <label class="radio-group"><input type="radio" name="resp2_sexo" value="Feminino"> Feminino</label>
+              </div>
+            </div>
+
+            <div class="form-group col-4">
+              <label for="resp2_data_nascimento">Data de Nascimento</label>
+              <input type="date" id="resp2_data_nascimento">
+            </div>
+
+            <div class="form-group col-4">
+              <label for="resp2_cpf">CPF</label>
+              <input type="text" id="resp2_cpf" placeholder="CPF">
             </div>
 
             <div class="form-group col-6">
@@ -906,22 +948,23 @@
               </select>
             </div>
 
-            <div class="form-group col-6">
-              <label for="resp2_cpf">CPF</label>
-              <input type="text" id="resp2_cpf" placeholder="CPF">
-            </div>
-            <div class="form-group col-6">
+            <div class="form-group col-4">
               <label for="resp2_celular">Telefone Celular</label>
               <input type="text" id="resp2_celular" placeholder="Telefone Celular">
             </div>
 
-            <div class="form-group col-6">
+            <div class="form-group col-8">
               <label for="resp2_email">E-mail</label>
               <input type="email" id="resp2_email" placeholder="E-mail">
             </div>
+
             <div class="form-group col-6">
               <label for="resp2_area_atuacao">Área de Atuação</label>
               <input type="text" id="resp2_area_atuacao" placeholder="Área de Atuação">
+            </div>
+            <div class="form-group col-6">
+              <label for="resp2_local_trabalho">Local de Trabalho</label>
+              <input type="text" id="resp2_local_trabalho" placeholder="Local de Trabalho">
             </div>
 
             <div class="form-group col-12" style="margin-top: 5px;">
@@ -1737,6 +1780,9 @@
 
       document.getElementById('cadastroForm').addEventListener('input', salvarEstadoFormulario);
       document.getElementById('cadastroForm').addEventListener('change', salvarEstadoFormulario);
+
+      window.addEventListener('beforeprint', prepararDatasImpressao);
+      window.addEventListener('afterprint', restaurarDatasImpressao);
     });
 
     function povoarSelects() {
@@ -1965,6 +2011,8 @@
           else if (el.type === 'radio') {
             if (el.checked) data[el.name] = el.value;
           } else data[el.id] = el.value;
+        } else if (el.type === 'radio' && el.checked) {
+          data[el.name] = el.value;
         }
       });
       if (assinaturaFeita) {
@@ -2019,6 +2067,28 @@
       }
     }
 
+    /* FORMATAR DATAS DE YYYY-MM-DD PARA DD/MM/AAAA NA IMPRESSÃO */
+    function prepararDatasImpressao() {
+      const inputsData = document.querySelectorAll('input[type="date"]');
+      inputsData.forEach(input => {
+        input.dataset.originalVal = input.value;
+        if (input.value && input.value.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          const [yyyy, mm, dd] = input.value.split('-');
+          input.type = 'text';
+          input.value = `${dd}/${mm}/${yyyy}`;
+        }
+      });
+    }
+
+    function restaurarDatasImpressao() {
+      const inputsData = document.querySelectorAll('input[data-original-val]');
+      inputsData.forEach(input => {
+        input.type = 'date';
+        input.value = input.dataset.originalVal;
+        delete input.dataset.originalVal;
+      });
+    }
+
     async function executarAcao(acao) {
       if (!validarFormularioCompleto()) return;
 
@@ -2031,6 +2101,7 @@
       }
 
       window.scrollTo(0, 0);
+      prepararDatasImpressao();
       document.body.classList.add('generating-pdf');
 
       const elemento = document.body;
@@ -2071,6 +2142,7 @@
         window.print();
       } finally {
         document.body.classList.remove('generating-pdf');
+        restaurarDatasImpressao();
         forcarMudancaAba(abaAtual);
       }
     }
