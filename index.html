@@ -1173,7 +1173,7 @@
               <label class="checkbox-group"><input type="checkbox" id="aux_outros_check" onchange="toggleBox('aux_outros_desc_box', this.checked)"> Outros</label>
             </div>
             <div id="aux_outros_desc_box" class="hidden" style="margin-top: 8px;">
-              <input type="text" id="aux_outros_desc" placeholder="Outros equipamentos...">
+              <input type="text" id="aux_outros_desc" placeholder="Especificar outros equipamentos...">
             </div>
           </div>
         </fieldset>
@@ -1392,31 +1392,31 @@
             <div style="display:flex; flex-direction:column; gap:8px;">
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_inseto"> Picada de inseto</label>
-                <input type="text" id="alg_inseto_desc" placeholder="Detalhes / reações">
+                <input type="text" id="alg_inseto_desc" placeholder="Detalhes / reações *">
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_med"> Medicamentos</label>
-                <input type="text" id="alg_med_desc" placeholder="Quais remédios?">
+                <input type="text" id="alg_med_desc" placeholder="Quais remédios? *">
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_plantas"> Plantas</label>
-                <input type="text" id="alg_plantas_desc" placeholder="Detalhes">
+                <input type="text" id="alg_plantas_desc" placeholder="Detalhes *">
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_alimentos"> Alimentos</label>
-                <input type="text" id="alg_alimentos_desc" placeholder="Quais alimentos?">
+                <input type="text" id="alg_alimentos_desc" placeholder="Quais alimentos? *">
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_acaro"> Ácaro</label>
-                <input type="text" id="alg_acaro_desc" placeholder="Detalhes">
+                <input type="text" id="alg_acaro_desc" placeholder="Detalhes *">
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_fungo"> Fungo</label>
-                <input type="text" id="alg_fungo_desc" placeholder="Detalhes">
+                <input type="text" id="alg_fungo_desc" placeholder="Detalhes *">
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
                 <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_outros"> Outros:</label>
-                <input type="text" id="alg_outros_desc" placeholder="Especifique">
+                <input type="text" id="alg_outros_desc" placeholder="Especifique *">
               </div>
             </div>
           </div>
@@ -1564,11 +1564,11 @@
 
           <div id="deficiencia_box" class="conditional-box hidden">
             <div style="display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_fisica"> Física</label><input type="text" id="def_fisica_desc" placeholder="Especificar"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_visual"> Visual</label><input type="text" id="def_visual_desc" placeholder="Especificar"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_auditiva"> Auditiva</label><input type="text" id="def_auditiva_desc" placeholder="Especificar"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_intelectual"> Intelectual</label><input type="text" id="def_intelectual_desc" placeholder="Especificar"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_autismo"> Autismo</label><input type="text" id="def_autismo_desc" placeholder="Especificar"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_fisica"> Física</label><input type="text" id="def_fisica_desc" placeholder="Especificar detalhes *"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_visual"> Visual</label><input type="text" id="def_visual_desc" placeholder="Especificar detalhes *"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_auditiva"> Auditiva</label><input type="text" id="def_auditiva_desc" placeholder="Especificar detalhes *"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_intelectual"> Intelectual</label><input type="text" id="def_intelectual_desc" placeholder="Especificar detalhes *"></div>
+              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_autismo"> Autismo</label><input type="text" id="def_autismo_desc" placeholder="Especificar detalhes *"></div>
             </div>
             <p style="font-size:0.75rem; color:#777; margin-top:8px;">*(equiparado às deficiências pela Lei 12.764 de 2012)*</p>
           </div>
@@ -1955,7 +1955,6 @@
       if (indexTarget > indexAtual) {
         for (let i = indexAtual; i < indexTarget; i++) {
           if (!validarAba(ordemAbas[i])) {
-            alert('Por favor, preencha todos os campos obrigatórios da aba atual antes de avançar.');
             return;
           }
         }
@@ -2010,16 +2009,127 @@
     function validarAba(abaId) {
       const abaEl = document.getElementById('tab-' + abaId);
       const camposObrigatorios = abaEl.querySelectorAll('[required]');
-      let tudoValido = true;
+      let camposEmBranco = false;
 
       camposObrigatorios.forEach(campo => {
         if (!campo.value.trim()) {
           campo.classList.add('req-field');
-          tudoValido = false;
+          camposEmBranco = true;
+        } else {
+          campo.classList.remove('req-field');
         }
       });
 
-      return tudoValido;
+      if (camposEmBranco) {
+        alert('Por favor, preencha todos os campos obrigatórios em destaque na aba.');
+        return false;
+      }
+
+      if (abaId === 'medica') {
+        if (!validarSecoesMedicasEspecificas()) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    /* VALIDAÇÕES ESPECÍFICAS DE EQUIPAMENTOS, ALERGIAS E DEFICIÊNCIAS */
+    function validarSecoesMedicasEspecificas() {
+      // 1. Equipamentos de auxílio
+      const auxOpt = document.getElementById('med_auxilio_opt').value;
+      if (auxOpt === 'Sim') {
+        const auxCheckboxes = ['aux_oculos', 'aux_lentes', 'aux_aparelho_dentario', 'aux_sondas', 'aux_marcapasso', 'aux_audicao', 'aux_bomba_insulina', 'aux_outros_check'];
+        const algumAuxMarcado = auxCheckboxes.some(id => document.getElementById(id)?.checked);
+        if (!algumAuxMarcado) {
+          alert('Você marcou que utiliza equipamentos de auxílio. Por favor, selecione ao menos uma das opções.');
+          document.getElementById('aux_oculos')?.focus();
+          return false;
+        }
+        if (document.getElementById('aux_outros_check')?.checked) {
+          const outrosDesc = document.getElementById('aux_outros_desc');
+          if (!outrosDesc || !outrosDesc.value.trim()) {
+            alert('Por favor, especifique o equipamento de auxílio no campo "Outros".');
+            outrosDesc?.classList.add('req-field');
+            outrosDesc?.focus();
+            return false;
+          } else {
+            outrosDesc?.classList.remove('req-field');
+          }
+        }
+      }
+
+      // 2. Alergias
+      const algOpt = document.getElementById('alergia_opt').value;
+      if (algOpt === 'Sim') {
+        const alergiasList = [
+          { chk: 'alg_inseto', desc: 'alg_inseto_desc', nome: 'Picada de inseto' },
+          { chk: 'alg_med', desc: 'alg_med_desc', nome: 'Medicamentos' },
+          { chk: 'alg_plantas', desc: 'alg_plantas_desc', nome: 'Plantas' },
+          { chk: 'alg_alimentos', desc: 'alg_alimentos_desc', nome: 'Alimentos' },
+          { chk: 'alg_acaro', desc: 'alg_acaro_desc', nome: 'Ácaro' },
+          { chk: 'alg_fungo', desc: 'alg_fungo_desc', nome: 'Fungo' },
+          { chk: 'alg_outros', desc: 'alg_outros_desc', nome: 'Outros' }
+        ];
+
+        const algumaAlergiaMarcada = alergiasList.some(item => document.getElementById(item.chk)?.checked);
+        if (!algumaAlergiaMarcada) {
+          alert('Você marcou que possui alergia. Por favor, selecione ao menos um tipo de alergia.');
+          document.getElementById('alg_inseto')?.focus();
+          return false;
+        }
+
+        for (let item of alergiasList) {
+          const chkEl = document.getElementById(item.chk);
+          const descEl = document.getElementById(item.desc);
+          if (chkEl && chkEl.checked) {
+            if (!descEl || !descEl.value.trim()) {
+              alert(`Por favor, detalhe a alergia selecionada (${item.nome}).`);
+              descEl?.classList.add('req-field');
+              descEl?.focus();
+              return false;
+            } else {
+              descEl?.classList.remove('req-field');
+            }
+          }
+        }
+      }
+
+      // 3. Deficiências
+      const defOpt = document.getElementById('deficiencia_opt').value;
+      if (defOpt === 'Sim') {
+        const deficienciasList = [
+          { chk: 'def_fisica', desc: 'def_fisica_desc', nome: 'Física' },
+          { chk: 'def_visual', desc: 'def_visual_desc', nome: 'Visual' },
+          { chk: 'def_auditiva', desc: 'def_auditiva_desc', nome: 'Auditiva' },
+          { chk: 'def_intelectual', desc: 'def_intelectual_desc', nome: 'Intelectual' },
+          { chk: 'def_autismo', desc: 'def_autismo_desc', nome: 'Autismo' }
+        ];
+
+        const algumaDeficienciaMarcada = deficienciasList.some(item => document.getElementById(item.chk)?.checked);
+        if (!algumaDeficienciaMarcada) {
+          alert('Você marcou que possui deficiência. Por favor, selecione ao menos um tipo de deficiência.');
+          document.getElementById('def_fisica')?.focus();
+          return false;
+        }
+
+        for (let item of deficienciasList) {
+          const chkEl = document.getElementById(item.chk);
+          const descEl = document.getElementById(item.desc);
+          if (chkEl && chkEl.checked) {
+            if (!descEl || !descEl.value.trim()) {
+              alert(`Por favor, especifique os detalhes da deficiência selecionada (${item.nome}).`);
+              descEl?.classList.add('req-field');
+              descEl?.focus();
+              return false;
+            } else {
+              descEl?.classList.remove('req-field');
+            }
+          }
+        }
+      }
+
+      return true;
     }
 
     function validarFormularioCompleto() {
@@ -2027,7 +2137,6 @@
       for (let aba of ordemAbas) {
         if (!validarAba(aba)) {
           forcarMudancaAba(aba);
-          alert('Por favor, preencha todos os campos obrigatórios em destaque.');
           return false;
         }
       }
