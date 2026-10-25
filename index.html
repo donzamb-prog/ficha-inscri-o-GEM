@@ -100,15 +100,61 @@
       padding: 0 15px;
     }
 
-    /* ABAS */
+    /* ABAS E INDICADOR DE ROLAGEM */
+    .tabs-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
     .tabs-nav {
       display: flex;
       gap: 5px;
       border-bottom: 3px solid var(--primary-color);
-      margin-bottom: 20px;
       background: #e9ecef;
       border-radius: 8px 8px 0 0;
       overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tabs-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tabs-scroll-hint {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 3px;
+      background: linear-gradient(to right, rgba(21, 25, 1, 0), rgba(21, 25, 1, 0.92) 35%);
+      color: #ffffff;
+      display: none;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 10px 0 25px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 0 8px 0 0;
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 5;
+      letter-spacing: 0.5px;
+    }
+
+    .tabs-scroll-hint.visible {
+      display: flex;
+    }
+
+    .tabs-scroll-hint .arrow-anim {
+      display: inline-block;
+      margin-left: 4px;
+      animation: pulseArrow 1.2s infinite alternate;
+    }
+
+    @keyframes pulseArrow {
+      0% { transform: translateX(0); opacity: 0.7; }
+      100% { transform: translateX(4px); opacity: 1; }
     }
 
     .tab-btn {
@@ -132,6 +178,17 @@
       background: var(--primary-color);
       color: #ffffff;
       border-radius: 6px 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+      .tab-btn {
+        flex: 1 1 0;
+        padding: 10px 4px;
+        font-size: 0.78rem;
+        text-align: center;
+        white-space: normal;
+        line-height: 1.2;
+      }
     }
 
     /* SUB-ABAS */
@@ -170,6 +227,15 @@
 
     .tab-content.active {
       display: block;
+    }
+
+    .tab-footer-nav {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
     }
 
     /* FIELDSETS */
@@ -218,7 +284,6 @@
       position: relative;
     }
 
-    /* Rótulos padrão para visualização em tela e impressão */
     .form-group label, 
     fieldset > label, 
     .form-grid label {
@@ -385,7 +450,7 @@
     .btn-danger:hover { opacity: 0.9; }
 
     @media print {
-      .tabs-nav, .sub-tabs, .form-actions, .btn-action, .btn {
+      .tabs-wrapper, .tabs-nav, .sub-tabs, .form-actions, .btn-action, .btn, .tab-footer-nav {
         display: none !important;
       }
       .tab-content {
@@ -398,11 +463,13 @@
     }
 
     /* ESTILOS TEMPORÁRIOS PARA A GERAÇÃO DO PDF / IMPRESSÃO */
+    body.generating-pdf .tabs-wrapper,
     body.generating-pdf .tabs-nav,
     body.generating-pdf .sub-tabs,
     body.generating-pdf .form-actions,
     body.generating-pdf .btn-action,
-    body.generating-pdf .btn {
+    body.generating-pdf .btn,
+    body.generating-pdf .tab-footer-nav {
       display: none !important;
     }
 
@@ -481,10 +548,15 @@
 
   <!-- MAIN -->
   <main>
-    <div class="tabs-nav">
-      <button type="button" class="tab-btn active" id="btn-tab-basicas" onclick="tentarMudarAba('basicas')">INFORMAÇÕES BÁSICAS</button>
-      <button type="button" class="tab-btn" id="btn-tab-responsaveis" onclick="tentarMudarAba('responsaveis')">RESPONSÁVEIS</button>
-      <button type="button" class="tab-btn" id="btn-tab-medica" onclick="tentarMudarAba('medica')">FICHA MÉDICA</button>
+    <div class="tabs-wrapper">
+      <div class="tabs-nav" id="tabsNav">
+        <button type="button" class="tab-btn active" id="btn-tab-basicas" onclick="tentarMudarAba('basicas')">INFORMAÇÕES BÁSICAS</button>
+        <button type="button" class="tab-btn" id="btn-tab-responsaveis" onclick="tentarMudarAba('responsaveis')">RESPONSÁVEIS</button>
+        <button type="button" class="tab-btn" id="btn-tab-medica" onclick="tentarMudarAba('medica')">FICHA MÉDICA</button>
+      </div>
+      <div class="tabs-scroll-hint" id="tabsScrollHint" onclick="scrollTabsRight()">
+        <span>Mais abas</span> <span class="arrow-anim">➔</span>
+      </div>
     </div>
 
     <form id="cadastroForm">
@@ -751,6 +823,13 @@
             </div>
           </div>
         </fieldset>
+
+        <!-- BOTÃO NAVEGAÇÃO DE ABA -->
+        <div class="tab-footer-nav">
+          <button type="button" class="btn btn-primary" onclick="tentarMudarAba('responsaveis')">
+            Avançar para Responsáveis ➔
+          </button>
+        </div>
       </div>
 
       <!-- ABA 2: RESPONSÁVEIS -->
@@ -1015,6 +1094,16 @@
               <input type="text" id="resp2_cidade" placeholder="Cidade">
             </div>
           </div>
+        </div>
+
+        <!-- BOTÕES NAVEGAÇÃO DE ABA -->
+        <div class="tab-footer-nav" style="justify-content: space-between; flex-wrap: wrap;">
+          <button type="button" class="btn btn-outline" onclick="forcarMudancaAba('basicas')">
+            🠔 Voltar: Informações Básicas
+          </button>
+          <button type="button" class="btn btn-primary" onclick="tentarMudarAba('medica')">
+            Avançar para Ficha Médica ➔
+          </button>
         </div>
       </div>
 
@@ -1674,6 +1763,7 @@
 
         <!-- BOTÕES FINAIS -->
         <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="forcarMudancaAba('responsaveis')">🠔 Voltar: Responsáveis</button>
           <button type="button" class="btn btn-primary" onclick="executarAcao('salvar')">Salvar PDF</button>
           <button type="button" class="btn btn-secondary" onclick="executarAcao('compartilhar')">Compartilhar PDF</button>
           <button type="button" class="btn btn-outline" onclick="executarAcao('imprimir')">Imprimir PDF</button>
@@ -1794,6 +1884,13 @@
 
       window.addEventListener('beforeprint', prepararDatasImpressao);
       window.addEventListener('afterprint', restaurarDatasImpressao);
+
+      const tabsNav = document.getElementById('tabsNav');
+      if (tabsNav) {
+        tabsNav.addEventListener('scroll', verificarScrollAbas);
+      }
+      window.addEventListener('resize', verificarScrollAbas);
+      setTimeout(verificarScrollAbas, 300);
     });
 
     function povoarSelects() {
@@ -1874,6 +1971,31 @@
       document.getElementById('btn-tab-' + targetAba).classList.add('active');
       document.getElementById('tab-' + targetAba).classList.add('active');
       abaAtual = targetAba;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(verificarScrollAbas, 100);
+    }
+
+    function verificarScrollAbas() {
+      const nav = document.getElementById('tabsNav');
+      const hint = document.getElementById('tabsScrollHint');
+      if (!nav || !hint) return;
+
+      const temOverflow = nav.scrollWidth > nav.clientWidth + 5;
+      const estaNoFim = nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 10;
+
+      if (temOverflow && !estaNoFim) {
+        hint.classList.add('visible');
+      } else {
+        hint.classList.remove('visible');
+      }
+    }
+
+    function scrollTabsRight() {
+      const nav = document.getElementById('tabsNav');
+      if (nav) {
+        nav.scrollBy({ left: 120, behavior: 'smooth' });
+      }
     }
 
     function switchSubTab(subTabId) {
@@ -2078,7 +2200,6 @@
       }
     }
 
-    /* FORMATAR DATAS DE YYYY-MM-DD PARA DD/MM/AAAA NA IMPRESSÃO */
     function prepararDatasImpressao() {
       const inputsData = document.querySelectorAll('input[type="date"]');
       inputsData.forEach(input => {
