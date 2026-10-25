@@ -315,6 +315,7 @@
 
     .req-field-container {
       position: relative;
+      width: 100%;
     }
 
     .req-dot {
@@ -327,15 +328,21 @@
       background-color: #ffc107;
       border-radius: 50%;
       pointer-events: none;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       font-size: 9px;
       font-weight: bold;
+      z-index: 2;
     }
     .req-dot::after { content: '!'; }
 
-    input.req-field, select.req-field {
+    .req-field-container.is-required .req-dot {
+      display: flex;
+    }
+
+    .req-field-container.is-required input,
+    .req-field-container.is-required select {
       padding-left: 22px !important;
     }
 
@@ -567,7 +574,7 @@
           
           <div class="form-group col-8">
             <label for="nome_completo">Nome Completo</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="nome_completo" class="req-field" placeholder="Nome Completo" required>
             </div>
@@ -592,7 +599,7 @@
 
           <div class="form-group col-4">
             <label for="cor_raca">Cor ou Raça</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="cor_raca" class="req-field" required>
                 <option value="">Selecione</option>
@@ -608,7 +615,7 @@
 
           <div class="form-group col-4">
             <label for="data_nascimento">Data de Nascimento</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="date" id="data_nascimento" class="req-field" required>
             </div>
@@ -616,7 +623,7 @@
 
           <div class="form-group col-4">
             <label for="uf_nascimento">UF Nascimento</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="uf_nascimento" class="req-field" required>
                 <option value="">Selecione a UF</option>
@@ -625,7 +632,7 @@
           </div>
           <div class="form-group col-8">
             <label for="cidade_nascimento">Cidade de Nascimento</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="cidade_nascimento" class="req-field" placeholder="Cidade de Nascimento" required>
             </div>
@@ -633,7 +640,7 @@
 
           <div class="form-group col-8">
             <label for="escolaridade">Escolaridade</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="escolaridade" class="req-field" required>
                 <option value="">Selecione a escolaridade</option>
@@ -643,7 +650,7 @@
 
           <div class="form-group col-4">
             <label for="profissao">Profissão</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="profissao" class="req-field" required>
                 <option value="">Selecione a profissão</option>
@@ -672,14 +679,14 @@
           <!-- Endereço -->
           <div class="form-group col-4">
             <label for="assoc_cep">CEP</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="assoc_cep" class="req-field" placeholder="CEP (sem traço)" required onkeyup="buscarCEP(this.value, 'assoc_')">
             </div>
           </div>
           <div class="form-group col-8">
             <label for="assoc_endereco">Endereço</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="assoc_endereco" class="req-field" placeholder="Endereço" required>
             </div>
@@ -687,7 +694,7 @@
 
           <div class="form-group col-3">
             <label for="assoc_numero">Número</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="assoc_numero" class="req-field" placeholder="Número" required>
             </div>
@@ -698,7 +705,7 @@
           </div>
           <div class="form-group col-5">
             <label for="assoc_bairro">Bairro</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="assoc_bairro" class="req-field" placeholder="Bairro" required>
             </div>
@@ -706,7 +713,7 @@
 
           <div class="form-group col-6">
             <label for="assoc_uf">UF</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="assoc_uf" class="req-field" required>
                 <option value="">Selecione a UF</option>
@@ -715,7 +722,7 @@
           </div>
           <div class="form-group col-6">
             <label for="assoc_cidade">Cidade</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="assoc_cidade" class="req-field" placeholder="Cidade" required>
             </div>
@@ -732,7 +739,7 @@
           </div>
           <div class="form-group col-4">
             <label for="tel_celular">Telefone Celular</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="tel_celular" class="req-field" placeholder="Telefone Celular" required>
             </div>
@@ -740,7 +747,7 @@
 
           <div class="form-group col-8">
             <label for="email">E-mail</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="email" id="email" class="req-field" placeholder="E-mail" required>
             </div>
@@ -761,7 +768,7 @@
 
           <div class="form-group col-6">
             <label for="cpf">CPF</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="cpf" class="req-field" placeholder="CPF" required>
             </div>
@@ -844,7 +851,7 @@
           <div class="form-grid">
             <div class="form-group col-4">
               <label for="resp1_parentesco">Parentesco</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <select id="resp1_parentesco" class="req-field" required>
                   <option value="">Parentesco</option>
@@ -858,7 +865,7 @@
 
             <div class="form-group col-8">
               <label for="resp1_nome">Nome Completo do Responsável</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_nome" class="req-field" placeholder="Nome Completo do Responsável" required>
               </div>
@@ -874,7 +881,7 @@
 
             <div class="form-group col-4">
               <label for="resp1_data_nascimento">Data de Nascimento</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="date" id="resp1_data_nascimento" class="req-field" required>
               </div>
@@ -882,7 +889,7 @@
 
             <div class="form-group col-4">
               <label for="resp1_cpf">CPF</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_cpf" class="req-field" placeholder="CPF" required>
               </div>
@@ -890,7 +897,7 @@
 
             <div class="form-group col-6">
               <label for="resp1_escolaridade">Escolaridade</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <select id="resp1_escolaridade" class="req-field" required>
                   <option value="">Selecione a escolaridade</option>
@@ -900,7 +907,7 @@
 
             <div class="form-group col-6">
               <label for="resp1_profissao">Profissão</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <select id="resp1_profissao" class="req-field" required>
                   <option value="">Selecione a profissão</option>
@@ -910,7 +917,7 @@
 
             <div class="form-group col-4">
               <label for="resp1_celular">Telefone Celular</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_celular" class="req-field" placeholder="Telefone Celular" required>
               </div>
@@ -936,14 +943,14 @@
 
             <div class="form-group col-4">
               <label for="resp1_cep">CEP</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_cep" class="req-field" placeholder="CEP" required onkeyup="buscarCEP(this.value, 'resp1_')">
               </div>
             </div>
             <div class="form-group col-8">
               <label for="resp1_endereco">Endereço</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_endereco" class="req-field" placeholder="Endereço" required>
               </div>
@@ -951,7 +958,7 @@
 
             <div class="form-group col-3">
               <label for="resp1_numero">Número</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_numero" class="req-field" placeholder="Número" required>
               </div>
@@ -962,7 +969,7 @@
             </div>
             <div class="form-group col-5">
               <label for="resp1_bairro">Bairro</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_bairro" class="req-field" placeholder="Bairro" required>
               </div>
@@ -970,7 +977,7 @@
 
             <div class="form-group col-6">
               <label for="resp1_uf">UF</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <select id="resp1_uf" class="req-field" required>
                   <option value="">Selecione a UF</option>
@@ -979,7 +986,7 @@
             </div>
             <div class="form-group col-6">
               <label for="resp1_cidade">Cidade</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="resp1_cidade" class="req-field" placeholder="Cidade" required>
               </div>
@@ -1114,21 +1121,21 @@
         <div class="form-grid" style="margin-bottom: 20px;">
           <div class="form-group col-3">
             <label for="med_altura">Altura (ex: 1.70)</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="med_altura" class="req-field" placeholder="Altura (ex: 1.70)" required>
             </div>
           </div>
           <div class="form-group col-3">
             <label for="med_peso">Peso (ex: 65kg)</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <input type="text" id="med_peso" class="req-field" placeholder="Peso (ex: 65kg)" required>
             </div>
           </div>
           <div class="form-group col-3">
             <label for="med_tiposanguineo">Tipo Sanguíneo</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="med_tiposanguineo" class="req-field" required>
                 <option value="">Tipo Sanguíneo</option>
@@ -1138,7 +1145,7 @@
           </div>
           <div class="form-group col-3">
             <label for="med_fatorrh">Fator RH</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
               <select id="med_fatorrh" class="req-field" required>
                 <option value="">Fator RH</option>
@@ -1153,9 +1160,9 @@
           <legend>Utiliza os seguintes equipamentos de auxílio</legend>
           <div class="form-group" style="max-width: 200px; margin-bottom: 8px;">
             <label for="med_auxilio_opt">Utiliza equipamentos?</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
-              <select id="med_auxilio_opt" class="req-field" required onchange="toggleBox('auxilio_box', this.value === 'Sim')">
+              <select id="med_auxilio_opt" class="req-field" required onchange="toggleAuxilio(this.value)">
                 <option value="Não">Não</option>
                 <option value="Sim">Sim</option>
               </select>
@@ -1170,10 +1177,13 @@
               <label class="checkbox-group"><input type="checkbox" id="aux_marcapasso"> Marca-passo</label>
               <label class="checkbox-group"><input type="checkbox" id="aux_audicao"> Aparelhos de audição</label>
               <label class="checkbox-group"><input type="checkbox" id="aux_bomba_insulina"> Bomba de insulina</label>
-              <label class="checkbox-group"><input type="checkbox" id="aux_outros_check" onchange="toggleBox('aux_outros_desc_box', this.checked)"> Outros</label>
+              <label class="checkbox-group"><input type="checkbox" id="aux_outros_check" onchange="toggleAuxOutros(this.checked)"> Outros</label>
             </div>
             <div id="aux_outros_desc_box" class="hidden" style="margin-top: 8px;">
-              <input type="text" id="aux_outros_desc" placeholder="Especificar outros equipamentos...">
+              <div class="req-field-container">
+                <span class="req-dot"></span>
+                <input type="text" id="aux_outros_desc" placeholder="Especificar outros equipamentos...">
+              </div>
             </div>
           </div>
         </fieldset>
@@ -1185,15 +1195,15 @@
           <div style="margin-bottom: 12px;">
             <label style="font-size:0.88rem; font-weight:600;">Apresenta algum problema crônico de saúde?</label>
             <div style="display:flex; gap:15px; margin-top:4px;">
-              <label class="radio-group"><input type="radio" name="prob_cronico" value="Não" checked onclick="toggleBox('prob_cronico_box', false)"> Não</label>
-              <label class="radio-group"><input type="radio" name="prob_cronico" value="Sim" onclick="toggleBox('prob_cronico_box', true)"> Sim</label>
+              <label class="radio-group"><input type="radio" name="prob_cronico" value="Não" checked onclick="toggleProbCronico(false)"> Não</label>
+              <label class="radio-group"><input type="radio" name="prob_cronico" value="Sim" onclick="toggleProbCronico(true)"> Sim</label>
             </div>
             <div id="prob_cronico_box" class="conditional-box hidden">
               <div class="form-group">
                 <label for="prob_cronico_med">Medicação para este problema</label>
                 <div class="req-field-container">
                   <span class="req-dot"></span>
-                  <input type="text" id="prob_cronico_med" class="req-field" placeholder="Medicação para este problema">
+                  <input type="text" id="prob_cronico_med" placeholder="Medicação para este problema">
                 </div>
               </div>
             </div>
@@ -1202,15 +1212,15 @@
           <div style="margin-bottom: 12px;">
             <label style="font-size:0.88rem; font-weight:600;">Faz acompanhamento médico regular?</label>
             <div style="display:flex; gap:15px; margin-top:4px;">
-              <label class="radio-group"><input type="radio" name="acomp_medico" value="Não" checked onclick="toggleBox('acomp_medico_box', false)"> Não</label>
-              <label class="radio-group"><input type="radio" name="acomp_medico" value="Sim" onclick="toggleBox('acomp_medico_box', true)"> Sim</label>
+              <label class="radio-group"><input type="radio" name="acomp_medico" value="Não" checked onclick="toggleAcompMedico(false)"> Não</label>
+              <label class="radio-group"><input type="radio" name="acomp_medico" value="Sim" onclick="toggleAcompMedico(true)"> Sim</label>
             </div>
             <div id="acomp_medico_box" class="conditional-box hidden">
               <div class="form-group">
                 <label for="acomp_medico_especialidade">Especialidade</label>
                 <div class="req-field-container">
                   <span class="req-dot"></span>
-                  <input type="text" id="acomp_medico_especialidade" class="req-field" placeholder="Especialidade">
+                  <input type="text" id="acomp_medico_especialidade" placeholder="Especialidade">
                 </div>
               </div>
             </div>
@@ -1228,11 +1238,14 @@
             <label class="checkbox-group"><input type="checkbox" id="enf_renal"> Problemas renais</label>
             <label class="checkbox-group"><input type="checkbox" id="enf_reuma"> Problemas reumatológicos</label>
             <label class="checkbox-group"><input type="checkbox" id="enf_hemato"> Problemas hematológicos</label>
-            <label class="checkbox-group"><input type="checkbox" id="enf_outros"> Outros</label>
+            <label class="checkbox-group"><input type="checkbox" id="enf_outros" onchange="toggleEnfOutros(this.checked)"> Outros</label>
           </div>
           <div class="form-group" style="margin-top: 8px;">
             <label for="enf_outros_desc">Especifique outros</label>
-            <input type="text" id="enf_outros_desc" placeholder="Especifique outros se houver">
+            <div class="req-field-container">
+              <span class="req-dot"></span>
+              <input type="text" id="enf_outros_desc" placeholder="Especifique outros se houver">
+            </div>
           </div>
         </fieldset>
 
@@ -1241,9 +1254,9 @@
           <legend>Medicamentos em uso (contínuos ou não)</legend>
           <div class="form-group" style="max-width: 200px; margin-bottom: 8px;">
             <label for="meds_opt">Usa medicamentos?</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
-              <select id="meds_opt" class="req-field" required onchange="toggleBox('meds_box', this.value === 'Sim')">
+              <select id="meds_opt" class="req-field" required onchange="toggleMeds(this.value)">
                 <option value="Não">Não</option>
                 <option value="Sim">Sim</option>
               </select>
@@ -1258,13 +1271,15 @@
                   <th>Nome do medicamento</th>
                   <th>Uso contínuo</th>
                   <th>Informações</th>
+                  <th style="width: 100px; text-align: center;">Ação</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><input type="text" placeholder="Nome do remédio"></td>
-                  <td><select><option value="Sim">Sim</option><option value="Não">Não</option></select></td>
-                  <td><input type="text" placeholder="Dosagem / Horários"></td>
+                  <td><input type="text" class="med-nome" placeholder="Nome do remédio *"></td>
+                  <td><select class="med-continuo"><option value="Sim">Sim</option><option value="Não">Não</option></select></td>
+                  <td><input type="text" class="med-info" placeholder="Dosagem / Horários *"></td>
+                  <td style="text-align: center;"><button type="button" class="btn btn-danger" style="padding: 4px 8px; font-size: 0.75rem;" onclick="removerLinhaMedicamento(this)">❌ Remover</button></td>
                 </tr>
               </tbody>
             </table>
@@ -1272,24 +1287,30 @@
             <div style="margin-top: 15px;">
               <label style="font-size:0.85rem; font-weight:600;">Permite administrar medicamentos por profissionais em saúde que atuam no Grupo?</label>
               <div style="display:flex; gap:15px; margin: 4px 0;">
-                <label class="radio-group"><input type="radio" name="permite_med" value="Sim"> Sim</label>
-                <label class="radio-group"><input type="radio" name="permite_med" value="Não" checked> Não</label>
+                <label class="radio-group"><input type="radio" name="permite_med" value="Sim" onclick="togglePermiteMed(true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="permite_med" value="Não" checked onclick="togglePermiteMed(false)"> Não</label>
               </div>
               <div class="form-group" style="margin-top: 5px;">
                 <label for="permite_med_info">Informações sobre a administração</label>
-                <input type="text" id="permite_med_info" placeholder="Informações sobre a administração por profissionais">
+                <div class="req-field-container">
+                  <span class="req-dot"></span>
+                  <input type="text" id="permite_med_info" placeholder="Informações sobre a administração por profissionais">
+                </div>
               </div>
             </div>
 
             <div style="margin-top: 15px;">
               <label style="font-size:0.85rem; font-weight:600;">O jovem tem autonomia e está treinado para administrar a sua medicação sozinho?</label>
               <div style="display:flex; gap:15px; margin: 4px 0;">
-                <label class="radio-group"><input type="radio" name="autonomia_med" value="Sim"> Sim</label>
-                <label class="radio-group"><input type="radio" name="autonomia_med" value="Não" checked> Não</label>
+                <label class="radio-group"><input type="radio" name="autonomia_med" value="Sim" onclick="toggleAutonomiaMed(true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="autonomia_med" value="Não" checked onclick="toggleAutonomiaMed(false)"> Não</label>
               </div>
               <div class="form-group" style="margin-top: 5px;">
                 <label for="autonomia_med_info">Informações sobre a autonomia</label>
-                <input type="text" id="autonomia_med_info" placeholder="Informações sobre a autonomia na administração">
+                <div class="req-field-container">
+                  <span class="req-dot"></span>
+                  <input type="text" id="autonomia_med_info" placeholder="Informações sobre a autonomia na administração">
+                </div>
               </div>
             </div>
           </div>
@@ -1306,8 +1327,8 @@
           <div style="margin-top: 12px;">
             <label style="font-size:0.88rem; font-weight:600;">Avisar em emergências:</label>
             <div style="display:flex; gap:15px; margin-top:4px;">
-              <label class="radio-group"><input type="radio" name="avisar_emergencia" value="Pais" checked> Pais</label>
-              <label class="radio-group"><input type="radio" name="avisar_emergencia" value="Outros"> Outros</label>
+              <label class="radio-group"><input type="radio" name="avisar_emergencia" value="Pais" checked onclick="toggleAvisarEmergencia('Pais')"> Pais</label>
+              <label class="radio-group"><input type="radio" name="avisar_emergencia" value="Outros" onclick="toggleAvisarEmergencia('Outros')"> Outros</label>
             </div>
           </div>
 
@@ -1316,12 +1337,12 @@
               <label for="emergencia_nome">Nome do Contato de Emergência</label>
               <div class="req-field-container">
                 <span class="req-dot"></span>
-                <input type="text" id="emergencia_nome" class="req-field" placeholder="Nome do Contato de Emergência" required>
+                <input type="text" id="emergencia_nome" placeholder="Nome do Contato de Emergência">
               </div>
             </div>
             <div class="form-group col-4">
               <label for="emergencia_tel">Telefone</label>
-              <div class="req-field-container">
+              <div class="req-field-container is-required">
                 <span class="req-dot"></span>
                 <input type="text" id="emergencia_tel" class="req-field" placeholder="Telefone" required>
               </div>
@@ -1334,9 +1355,9 @@
           <legend>Plano de saúde</legend>
           <div class="form-group" style="max-width: 250px; margin-bottom: 8px;">
             <label for="plano_opt">Convênio / Plano de Saúde</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
-              <select id="plano_opt" class="req-field" required onchange="toggleBox('plano_box', this.value !== 'Não/SUS')">
+              <select id="plano_opt" class="req-field" required onchange="togglePlano(this.value)">
                 <option value="Não/SUS">Não/SUS</option>
                 <option value="Agemed">Agemed</option>
                 <option value="Amil">Amil</option>
@@ -1355,12 +1376,15 @@
                 <label for="plano_carteirinha">Nº Carteirinha</label>
                 <div class="req-field-container">
                   <span class="req-dot"></span>
-                  <input type="text" id="plano_carteirinha" class="req-field" placeholder="Nº Carteirinha">
+                  <input type="text" id="plano_carteirinha" placeholder="Nº Carteirinha">
                 </div>
               </div>
               <div class="form-group col-6">
                 <label for="plano_outro_especificar">Especifique o Plano</label>
-                <input type="text" id="plano_outro_especificar" placeholder="Especifique o Plano (caso tenha escolhido Outro)">
+                <div class="req-field-container">
+                  <span class="req-dot"></span>
+                  <input type="text" id="plano_outro_especificar" placeholder="Especifique o Plano (caso tenha escolhido Outro)">
+                </div>
               </div>
               <div class="form-group col-8">
                 <label for="medico_preferencia">Médico de preferência</label>
@@ -1379,9 +1403,9 @@
           <legend>Alergias</legend>
           <div class="form-group" style="max-width: 200px; margin-bottom: 8px;">
             <label for="alergia_opt">Possui alergia?</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
-              <select id="alergia_opt" class="req-field" required onchange="toggleBox('alergia_box', this.value === 'Sim')">
+              <select id="alergia_opt" class="req-field" required onchange="toggleAlergia(this.value)">
                 <option value="Não">Não</option>
                 <option value="Sim">Sim</option>
               </select>
@@ -1391,32 +1415,53 @@
           <div id="alergia_box" class="conditional-box hidden">
             <div style="display:flex; flex-direction:column; gap:8px;">
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_inseto"> Picada de inseto</label>
-                <input type="text" id="alg_inseto_desc" placeholder="Detalhes / reações *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_inseto" onchange="toggleAlergiaItem('alg_inseto', 'alg_inseto_desc')"> Picada de inseto</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_inseto_desc" placeholder="Detalhes / reações *">
+                </div>
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_med"> Medicamentos</label>
-                <input type="text" id="alg_med_desc" placeholder="Quais remédios? *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_med" onchange="toggleAlergiaItem('alg_med', 'alg_med_desc')"> Medicamentos</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_med_desc" placeholder="Quais remédios? *">
+                </div>
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_plantas"> Plantas</label>
-                <input type="text" id="alg_plantas_desc" placeholder="Detalhes *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_plantas" onchange="toggleAlergiaItem('alg_plantas', 'alg_plantas_desc')"> Plantas</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_plantas_desc" placeholder="Detalhes *">
+                </div>
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_alimentos"> Alimentos</label>
-                <input type="text" id="alg_alimentos_desc" placeholder="Quais alimentos? *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_alimentos" onchange="toggleAlergiaItem('alg_alimentos', 'alg_alimentos_desc')"> Alimentos</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_alimentos_desc" placeholder="Quais alimentos? *">
+                </div>
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_acaro"> Ácaro</label>
-                <input type="text" id="alg_acaro_desc" placeholder="Detalhes *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_acaro" onchange="toggleAlergiaItem('alg_acaro', 'alg_acaro_desc')"> Ácaro</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_acaro_desc" placeholder="Detalhes *">
+                </div>
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_fungo"> Fungo</label>
-                <input type="text" id="alg_fungo_desc" placeholder="Detalhes *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_fungo" onchange="toggleAlergiaItem('alg_fungo', 'alg_fungo_desc')"> Fungo</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_fungo_desc" placeholder="Detalhes *">
+                </div>
               </div>
               <div style="display:flex; gap:10px; align-items:center;">
-                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_outros"> Outros:</label>
-                <input type="text" id="alg_outros_desc" placeholder="Especifique *">
+                <label style="width:140px;" class="checkbox-group"><input type="checkbox" id="alg_outros" onchange="toggleAlergiaItem('alg_outros', 'alg_outros_desc')"> Outros:</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="alg_outros_desc" placeholder="Especifique *">
+                </div>
               </div>
             </div>
           </div>
@@ -1429,13 +1474,16 @@
             <div>
               <label style="font-size:0.85rem;">Possui impedimento físico?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="imp_fisico" value="Não" checked onclick="toggleBox('imp_fisico_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="imp_fisico" value="Sim" onclick="toggleBox('imp_fisico_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="imp_fisico" value="Não" checked onclick="toggleImpFisico(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="imp_fisico" value="Sim" onclick="toggleImpFisico(true)"> Sim</label>
               </div>
               <div id="imp_fisico_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="imp_fisico_desc">Cite o impedimento</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="imp_fisico_desc" class="req-field" placeholder="Cite o impedimento"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="imp_fisico_desc" placeholder="Cite o impedimento">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1443,13 +1491,16 @@
             <div>
               <label style="font-size:0.85rem;">Restrições a alimentos?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="rest_alimento" value="Não" checked onclick="toggleBox('rest_alimento_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="rest_alimento" value="Sim" onclick="toggleBox('rest_alimento_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="rest_alimento" value="Não" checked onclick="toggleRestAlimento(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="rest_alimento" value="Sim" onclick="toggleRestAlimento(true)"> Sim</label>
               </div>
               <div id="rest_alimento_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="rest_alimento_desc">Cite as restrições</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="rest_alimento_desc" class="req-field" placeholder="Cite as restrições"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="rest_alimento_desc" placeholder="Cite as restrições">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1479,13 +1530,16 @@
             <div>
               <label style="font-size:0.85rem;">Apresenta algum transtorno?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="transtorno" value="Não" checked onclick="toggleBox('transtorno_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="transtorno" value="Sim" onclick="toggleBox('transtorno_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="transtorno" value="Não" checked onclick="toggleTranstorno(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="transtorno" value="Sim" onclick="toggleTranstorno(true)"> Sim</label>
               </div>
               <div id="transtorno_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="transtorno_desc">Qual transtorno?</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="transtorno_desc" class="req-field" placeholder="Exemplo: Conduta, Hiperatividade por déficit de atenção, oposição desafiante, etc."></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="transtorno_desc" placeholder="Exemplo: Conduta, Hiperatividade por déficit de atenção, oposição desafiante, etc.">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1493,13 +1547,16 @@
             <div>
               <label style="font-size:0.85rem;">Faz uso de medicação para este transtorno?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="med_transtorno" value="Não" checked onclick="toggleBox('med_transtorno_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="med_transtorno" value="Sim" onclick="toggleBox('med_transtorno_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="med_transtorno" value="Não" checked onclick="toggleMedTranstorno(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="med_transtorno" value="Sim" onclick="toggleMedTranstorno(true)"> Sim</label>
               </div>
               <div id="med_transtorno_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="med_transtorno_desc">Qual medicação?</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="med_transtorno_desc" class="req-field" placeholder="Qual?"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="med_transtorno_desc" placeholder="Qual?">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1507,13 +1564,16 @@
             <div>
               <label style="font-size:0.85rem;">Faz acompanhamento com psicólogo?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="psicologo" value="Não" checked onclick="toggleBox('psicologo_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="psicologo" value="Sim" onclick="toggleBox('psicologo_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="psicologo" value="Não" checked onclick="togglePsicologo(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="psicologo" value="Sim" onclick="togglePsicologo(true)"> Sim</label>
               </div>
               <div id="psicologo_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="psicologo_desc">Contato / Profissional</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="psicologo_desc" class="req-field" placeholder="Qual?"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="psicologo_desc" placeholder="Qual?">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1521,13 +1581,16 @@
             <div>
               <label style="font-size:0.85rem;">Faz acompanhamento com médico?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="medico_mental" value="Não" checked onclick="toggleBox('medico_mental_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="medico_mental" value="Sim" onclick="toggleBox('medico_mental_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="medico_mental" value="Não" checked onclick="toggleMedicoMental(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="medico_mental" value="Sim" onclick="toggleMedicoMental(true)"> Sim</label>
               </div>
               <div id="medico_mental_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="medico_mental_desc">Contato</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="medico_mental_desc" class="req-field" placeholder="Contato"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="medico_mental_desc" placeholder="Contato">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1535,13 +1598,16 @@
             <div>
               <label style="font-size:0.85rem;">Faz acompanhamento com outro profissional?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="outro_prof" value="Não" checked onclick="toggleBox('outro_prof_cite', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="outro_prof" value="Sim" onclick="toggleBox('outro_prof_cite', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="outro_prof" value="Não" checked onclick="toggleOutroProf(false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="outro_prof" value="Sim" onclick="toggleOutroProf(true)"> Sim</label>
               </div>
               <div id="outro_prof_cite" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="outro_prof_desc">Contato</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="outro_prof_desc" class="req-field" placeholder="Contato"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="outro_prof_desc" placeholder="Contato">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1553,9 +1619,9 @@
           <legend>Deficiências</legend>
           <div class="form-group" style="max-width: 200px; margin-bottom: 8px;">
             <label for="deficiencia_opt">Possui deficiência?</label>
-            <div class="req-field-container">
+            <div class="req-field-container is-required">
               <span class="req-dot"></span>
-              <select id="deficiencia_opt" class="req-field" required onchange="toggleBox('deficiencia_box', this.value === 'Sim')">
+              <select id="deficiencia_opt" class="req-field" required onchange="toggleDeficiencia(this.value)">
                 <option value="Não">Não</option>
                 <option value="Sim">Sim</option>
               </select>
@@ -1564,11 +1630,41 @@
 
           <div id="deficiencia_box" class="conditional-box hidden">
             <div style="display:flex; flex-direction:column; gap:8px;">
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_fisica"> Física</label><input type="text" id="def_fisica_desc" placeholder="Especificar detalhes *"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_visual"> Visual</label><input type="text" id="def_visual_desc" placeholder="Especificar detalhes *"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_auditiva"> Auditiva</label><input type="text" id="def_auditiva_desc" placeholder="Especificar detalhes *"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_intelectual"> Intelectual</label><input type="text" id="def_intelectual_desc" placeholder="Especificar detalhes *"></div>
-              <div style="display:flex; gap:10px; align-items:center;"><label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_autismo"> Autismo</label><input type="text" id="def_autismo_desc" placeholder="Especificar detalhes *"></div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_fisica" onchange="toggleDeficienciaItem('def_fisica', 'def_fisica_desc')"> Física</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="def_fisica_desc" placeholder="Especificar detalhes *">
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_visual" onchange="toggleDeficienciaItem('def_visual', 'def_visual_desc')"> Visual</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="def_visual_desc" placeholder="Especificar detalhes *">
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_auditiva" onchange="toggleDeficienciaItem('def_auditiva', 'def_auditiva_desc')"> Auditiva</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="def_auditiva_desc" placeholder="Especificar detalhes *">
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_intelectual" onchange="toggleDeficienciaItem('def_intelectual', 'def_intelectual_desc')"> Intelectual</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="def_intelectual_desc" placeholder="Especificar detalhes *">
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <label style="width:120px;" class="checkbox-group"><input type="checkbox" id="def_autismo" onchange="toggleDeficienciaItem('def_autismo', 'def_autismo_desc')"> Autismo</label>
+                <div class="req-field-container" style="flex:1;">
+                  <span class="req-dot"></span>
+                  <input type="text" id="def_autismo_desc" placeholder="Especificar detalhes *">
+                </div>
+              </div>
             </div>
             <p style="font-size:0.75rem; color:#777; margin-top:8px;">*(equiparado às deficiências pela Lei 12.764 de 2012)*</p>
           </div>
@@ -1582,13 +1678,16 @@
             <div>
               <label style="font-size:0.85rem;">Crises de explosão em que agrida a si mesmo?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_agride_si" value="Não" checked onclick="toggleBox('comp_agride_si_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_agride_si" value="Sim" onclick="toggleBox('comp_agride_si_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_agride_si" value="Não" checked onclick="toggleBehavior('comp_agride_si_obs', 'comp_agride_si_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_agride_si" value="Sim" onclick="toggleBehavior('comp_agride_si_obs', 'comp_agride_si_desc', true)"> Sim</label>
               </div>
               <div id="comp_agride_si_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_agride_si_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_agride_si_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_agride_si_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1596,13 +1695,16 @@
             <div>
               <label style="font-size:0.85rem;">Crises de explosão em que agrida os outros?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_agride_outros" value="Não" checked onclick="toggleBox('comp_agride_outros_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_agride_outros" value="Sim" onclick="toggleBox('comp_agride_outros_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_agride_outros" value="Não" checked onclick="toggleBehavior('comp_agride_outros_obs', 'comp_agride_outros_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_agride_outros" value="Sim" onclick="toggleBehavior('comp_agride_outros_obs', 'comp_agride_outros_desc', true)"> Sim</label>
               </div>
               <div id="comp_agride_outros_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_agride_outros_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_agride_outros_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_agride_outros_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1610,13 +1712,16 @@
             <div>
               <label style="font-size:0.85rem;">Agitação psicomotora que atrapalhe a concentração?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_agitacao" value="Não" checked onclick="toggleBox('comp_agitacao_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_agitacao" value="Sim" onclick="toggleBox('comp_agitacao_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_agitacao" value="Não" checked onclick="toggleBehavior('comp_agitacao_obs', 'comp_agitacao_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_agitacao" value="Sim" onclick="toggleBehavior('comp_agitacao_obs', 'comp_agitacao_desc', true)"> Sim</label>
               </div>
               <div id="comp_agitacao_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_agitacao_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_agitacao_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_agitacao_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1624,13 +1729,16 @@
             <div>
               <label style="font-size:0.85rem;">Dificuldade de obedecer instruções verbais? De que tipo?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_instrucao" value="Não" checked onclick="toggleBox('comp_instrucao_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_instrucao" value="Sim" onclick="toggleBox('comp_instrucao_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_instrucao" value="Não" checked onclick="toggleBehavior('comp_instrucao_obs', 'comp_instrucao_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_instrucao" value="Sim" onclick="toggleBehavior('comp_instrucao_obs', 'comp_instrucao_desc', true)"> Sim</label>
               </div>
               <div id="comp_instrucao_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_instrucao_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_instrucao_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_instrucao_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1638,13 +1746,16 @@
             <div>
               <label style="font-size:0.85rem;">Tendência a fugas?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_fugas" value="Não" checked onclick="toggleBox('comp_fugas_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_fugas" value="Sim" onclick="toggleBox('comp_fugas_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_fugas" value="Não" checked onclick="toggleBehavior('comp_fugas_obs', 'comp_fugas_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_fugas" value="Sim" onclick="toggleBehavior('comp_fugas_obs', 'comp_fugas_desc', true)"> Sim</label>
               </div>
               <div id="comp_fugas_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_fugas_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_fugas_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_fugas_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1652,13 +1763,16 @@
             <div>
               <label style="font-size:0.85rem;">Comportamento auto-destrutivo (cortes, arranhões, etc.)?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_autodestruicao" value="Não" checked onclick="toggleBox('comp_autodestruicao_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_autodestruicao" value="Sim" onclick="toggleBox('comp_autodestruicao_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_autodestruicao" value="Não" checked onclick="toggleBehavior('comp_autodestruicao_obs', 'comp_autodestruicao_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_autodestruicao" value="Sim" onclick="toggleBehavior('comp_autodestruicao_obs', 'comp_autodestruicao_desc', true)"> Sim</label>
               </div>
               <div id="comp_autodestruicao_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_autodestruicao_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_autodestruicao_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_autodestruicao_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1666,13 +1780,16 @@
             <div>
               <label style="font-size:0.85rem;">Crises de ansiedade ou pânico?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_ansiedade" value="Não" checked onclick="toggleBox('comp_ansiedade_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_ansiedade" value="Sim" onclick="toggleBox('comp_ansiedade_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_ansiedade" value="Não" checked onclick="toggleBehavior('comp_ansiedade_obs', 'comp_ansiedade_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_ansiedade" value="Sim" onclick="toggleBehavior('comp_ansiedade_obs', 'comp_ansiedade_desc', true)"> Sim</label>
               </div>
               <div id="comp_ansiedade_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_ansiedade_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_ansiedade_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_ansiedade_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1680,13 +1797,16 @@
             <div>
               <label style="font-size:0.85rem;">Dificuldade de comunicação com outras pessoas?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_comunicacao" value="Não" checked onclick="toggleBox('comp_comunicacao_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_comunicacao" value="Sim" onclick="toggleBox('comp_comunicacao_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_comunicacao" value="Não" checked onclick="toggleBehavior('comp_comunicacao_obs', 'comp_comunicacao_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_comunicacao" value="Sim" onclick="toggleBehavior('comp_comunicacao_obs', 'comp_comunicacao_desc', true)"> Sim</label>
               </div>
               <div id="comp_comunicacao_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_comunicacao_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_comunicacao_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_comunicacao_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1694,13 +1814,16 @@
             <div>
               <label style="font-size:0.85rem;">Dificuldades alimentares?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_alimentar" value="Não" checked onclick="toggleBox('comp_alimentar_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_alimentar" value="Sim" onclick="toggleBox('comp_alimentar_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_alimentar" value="Não" checked onclick="toggleBehavior('comp_alimentar_obs', 'comp_alimentar_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_alimentar" value="Sim" onclick="toggleBehavior('comp_alimentar_obs', 'comp_alimentar_desc', true)"> Sim</label>
               </div>
               <div id="comp_alimentar_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_alimentar_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_alimentar_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_alimentar_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1708,13 +1831,16 @@
             <div>
               <label style="font-size:0.85rem;">Dificuldades de sono?</label>
               <div style="display:flex; gap:15px;">
-                <label class="radio-group"><input type="radio" name="comp_sono" value="Não" checked onclick="toggleBox('comp_sono_obs', false)"> Não</label>
-                <label class="radio-group"><input type="radio" name="comp_sono" value="Sim" onclick="toggleBox('comp_sono_obs', true)"> Sim</label>
+                <label class="radio-group"><input type="radio" name="comp_sono" value="Não" checked onclick="toggleBehavior('comp_sono_obs', 'comp_sono_desc', false)"> Não</label>
+                <label class="radio-group"><input type="radio" name="comp_sono" value="Sim" onclick="toggleBehavior('comp_sono_obs', 'comp_sono_desc', true)"> Sim</label>
               </div>
               <div id="comp_sono_obs" class="hidden" style="margin-top:4px;">
                 <div class="form-group">
                   <label for="comp_sono_desc">Observações</label>
-                  <div class="req-field-container"><span class="req-dot"></span><input type="text" id="comp_sono_desc" class="req-field" placeholder="Observações"></div>
+                  <div class="req-field-container">
+                    <span class="req-dot"></span>
+                    <input type="text" id="comp_sono_desc" placeholder="Observações">
+                  </div>
                 </div>
               </div>
             </div>
@@ -1878,9 +2004,16 @@
       povoarSelects();
       inicializarCanvas();
       carregarEstadoFormulario();
+      sincronizarValidacoesEVisibilidade();
 
-      document.getElementById('cadastroForm').addEventListener('input', salvarEstadoFormulario);
-      document.getElementById('cadastroForm').addEventListener('change', salvarEstadoFormulario);
+      document.getElementById('cadastroForm').addEventListener('input', () => {
+        salvarEstadoFormulario();
+        sincronizarValidacoesEVisibilidade();
+      });
+      document.getElementById('cadastroForm').addEventListener('change', () => {
+        salvarEstadoFormulario();
+        sincronizarValidacoesEVisibilidade();
+      });
 
       window.addEventListener('beforeprint', prepararDatasImpressao);
       window.addEventListener('afterprint', restaurarDatasImpressao);
@@ -2006,6 +2139,240 @@
       document.getElementById('subtab-' + subTabId).classList.remove('hidden');
     }
 
+    /* FUNÇÕES AUXILIARES DE CAMPO OBRIGATÓRIO */
+    function setCampoObrigatorio(inputId, isObrigatorio) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const container = input.closest('.req-field-container') || input.parentElement;
+      if (isObrigatorio) {
+        input.setAttribute('required', 'required');
+        input.classList.add('req-field');
+        if (container && container.classList.contains('req-field-container')) {
+          container.classList.add('is-required');
+        }
+      } else {
+        input.removeAttribute('required');
+        input.classList.remove('req-field');
+        if (container && container.classList.contains('req-field-container')) {
+          container.classList.remove('is-required');
+        }
+      }
+    }
+
+    function toggleBox(boxId, show) {
+      const box = document.getElementById(boxId);
+      if (show) box.classList.remove('hidden');
+      else box.classList.add('hidden');
+    }
+
+    /* HANDLERS DE ALTERAÇÃO E VISIBILIDADE DINÂMICA */
+    function toggleProbCronico(isSim) {
+      toggleBox('prob_cronico_box', isSim);
+      setCampoObrigatorio('prob_cronico_med', isSim);
+    }
+
+    function toggleAcompMedico(isSim) {
+      toggleBox('acomp_medico_box', isSim);
+      setCampoObrigatorio('acomp_medico_especialidade', isSim);
+    }
+
+    function toggleEnfOutros(isChecked) {
+      setCampoObrigatorio('enf_outros_desc', isChecked);
+    }
+
+    function toggleAuxilio(val) {
+      const isSim = (val === 'Sim');
+      toggleBox('auxilio_box', isSim);
+      if (!isSim) {
+        setCampoObrigatorio('aux_outros_desc', false);
+      } else {
+        const isOutrosChecked = document.getElementById('aux_outros_check')?.checked;
+        setCampoObrigatorio('aux_outros_desc', !!isOutrosChecked);
+      }
+    }
+
+    function toggleAuxOutros(isChecked) {
+      toggleBox('aux_outros_desc_box', isChecked);
+      setCampoObrigatorio('aux_outros_desc', isChecked);
+    }
+
+    function toggleMeds(val) {
+      const isSim = (val === 'Sim');
+      toggleBox('meds_box', isSim);
+    }
+
+    function togglePermiteMed(isSim) {
+      setCampoObrigatorio('permite_med_info', isSim);
+    }
+
+    function toggleAutonomiaMed(isSim) {
+      setCampoObrigatorio('autonomia_med_info', isSim);
+    }
+
+    function toggleAvisarEmergencia(val) {
+      if (val === 'Pais') {
+        setCampoObrigatorio('emergencia_nome', false);
+        setCampoObrigatorio('emergencia_tel', true);
+      } else if (val === 'Outros') {
+        setCampoObrigatorio('emergencia_nome', true);
+        setCampoObrigatorio('emergencia_tel', true);
+      }
+    }
+
+    function togglePlano(val) {
+      if (val === 'Não/SUS') {
+        toggleBox('plano_box', false);
+        setCampoObrigatorio('plano_carteirinha', false);
+        setCampoObrigatorio('plano_outro_especificar', false);
+      } else if (val === 'Outro') {
+        toggleBox('plano_box', true);
+        setCampoObrigatorio('plano_carteirinha', true);
+        setCampoObrigatorio('plano_outro_especificar', true);
+      } else {
+        toggleBox('plano_box', true);
+        setCampoObrigatorio('plano_carteirinha', true);
+        setCampoObrigatorio('plano_outro_especificar', false);
+      }
+    }
+
+    function toggleAlergia(val) {
+      const isSim = (val === 'Sim');
+      toggleBox('alergia_box', isSim);
+      const alergiasList = ['inseto', 'med', 'plantas', 'alimentos', 'acaro', 'fungo', 'outros'];
+      alergiasList.forEach(k => {
+        if (!isSim) {
+          setCampoObrigatorio(`alg_${k}_desc`, false);
+        } else {
+          toggleAlergiaItem(`alg_${k}`, `alg_${k}_desc`);
+        }
+      });
+    }
+
+    function toggleAlergiaItem(chkId, descId) {
+      const chk = document.getElementById(chkId);
+      if (chk) {
+        setCampoObrigatorio(descId, chk.checked);
+      }
+    }
+
+    function toggleDeficiencia(val) {
+      const isSim = (val === 'Sim');
+      toggleBox('deficiencia_box', isSim);
+      const defsList = ['fisica', 'visual', 'auditiva', 'intelectual', 'autismo'];
+      defsList.forEach(k => {
+        if (!isSim) {
+          setCampoObrigatorio(`def_${k}_desc`, false);
+        } else {
+          toggleDeficienciaItem(`def_${k}`, `def_${k}_desc`);
+        }
+      });
+    }
+
+    function toggleDeficienciaItem(chkId, descId) {
+      const chk = document.getElementById(chkId);
+      if (chk) {
+        setCampoObrigatorio(descId, chk.checked);
+      }
+    }
+
+    function toggleImpFisico(isSim) {
+      toggleBox('imp_fisico_cite', isSim);
+      setCampoObrigatorio('imp_fisico_desc', isSim);
+    }
+
+    function toggleRestAlimento(isSim) {
+      toggleBox('rest_alimento_cite', isSim);
+      setCampoObrigatorio('rest_alimento_desc', isSim);
+    }
+
+    function toggleTranstorno(isSim) {
+      toggleBox('transtorno_cite', isSim);
+      setCampoObrigatorio('transtorno_desc', isSim);
+    }
+
+    function toggleMedTranstorno(isSim) {
+      toggleBox('med_transtorno_cite', isSim);
+      setCampoObrigatorio('med_transtorno_desc', isSim);
+    }
+
+    function togglePsicologo(isSim) {
+      toggleBox('psicologo_cite', isSim);
+      setCampoObrigatorio('psicologo_desc', isSim);
+    }
+
+    function toggleMedicoMental(isSim) {
+      toggleBox('medico_mental_cite', isSim);
+      setCampoObrigatorio('medico_mental_desc', isSim);
+    }
+
+    function toggleOutroProf(isSim) {
+      toggleBox('outro_prof_cite', isSim);
+      setCampoObrigatorio('outro_prof_desc', isSim);
+    }
+
+    function toggleBehavior(obsBoxId, descInputId, isSim) {
+      toggleBox(obsBoxId, isSim);
+      setCampoObrigatorio(descInputId, isSim);
+    }
+
+    /* SINCRONIZAÇÃO COMPLETA DE VALIDAÇÃO E VISIBILIDADE */
+    function sincronizarValidacoesEVisibilidade() {
+      // Saúde Física
+      toggleProbCronico(!!document.querySelector('input[name="prob_cronico"][value="Sim"]')?.checked);
+      toggleAcompMedico(!!document.querySelector('input[name="acomp_medico"][value="Sim"]')?.checked);
+      toggleEnfOutros(!!document.getElementById('enf_outros')?.checked);
+
+      // Equipamentos
+      toggleAuxilio(document.getElementById('med_auxilio_opt')?.value || 'Não');
+
+      // Medicamentos
+      toggleMeds(document.getElementById('meds_opt')?.value || 'Não');
+      togglePermiteMed(!!document.querySelector('input[name="permite_med"][value="Sim"]')?.checked);
+      toggleAutonomiaMed(!!document.querySelector('input[name="autonomia_med"][value="Sim"]')?.checked);
+
+      // Emergências
+      toggleAvisarEmergencia(document.querySelector('input[name="avisar_emergencia"]:checked')?.value || 'Pais');
+
+      // Plano de Saúde
+      togglePlano(document.getElementById('plano_opt')?.value || 'Não/SUS');
+
+      // Alergias
+      toggleAlergia(document.getElementById('alergia_opt')?.value || 'Não');
+
+      // Deficiências
+      toggleDeficiencia(document.getElementById('deficiencia_opt')?.value || 'Não');
+
+      // Informações Gerais
+      toggleImpFisico(!!document.querySelector('input[name="imp_fisico"][value="Sim"]')?.checked);
+      toggleRestAlimento(!!document.querySelector('input[name="rest_alimento"][value="Sim"]')?.checked);
+
+      // Saúde Mental
+      toggleTranstorno(!!document.querySelector('input[name="transtorno"][value="Sim"]')?.checked);
+      toggleMedTranstorno(!!document.querySelector('input[name="med_transtorno"][value="Sim"]')?.checked);
+      togglePsicologo(!!document.querySelector('input[name="psicologo"][value="Sim"]')?.checked);
+      toggleMedicoMental(!!document.querySelector('input[name="medico_mental"][value="Sim"]')?.checked);
+      toggleOutroProf(!!document.querySelector('input[name="outro_prof"][value="Sim"]')?.checked);
+
+      // Apresenta no Comportamento
+      const behList = [
+        { name: 'comp_agride_si', box: 'comp_agride_si_obs', desc: 'comp_agride_si_desc' },
+        { name: 'comp_agride_outros', box: 'comp_agride_outros_obs', desc: 'comp_agride_outros_desc' },
+        { name: 'comp_agitacao', box: 'comp_agitacao_obs', desc: 'comp_agitacao_desc' },
+        { name: 'comp_instrucao', box: 'comp_instrucao_obs', desc: 'comp_instrucao_desc' },
+        { name: 'comp_fugas', box: 'comp_fugas_obs', desc: 'comp_fugas_desc' },
+        { name: 'comp_autodestruicao', box: 'comp_autodestruicao_obs', desc: 'comp_autodestruicao_desc' },
+        { name: 'comp_ansiedade', box: 'comp_ansiedade_obs', desc: 'comp_ansiedade_desc' },
+        { name: 'comp_comunicacao', box: 'comp_comunicacao_obs', desc: 'comp_comunicacao_desc' },
+        { name: 'comp_alimentar', box: 'comp_alimentar_obs', desc: 'comp_alimentar_desc' },
+        { name: 'comp_sono', box: 'comp_sono_obs', desc: 'comp_sono_desc' }
+      ];
+      behList.forEach(item => {
+        const isSim = !!document.querySelector(`input[name="${item.name}"][value="Sim"]`)?.checked;
+        toggleBehavior(item.box, item.desc, isSim);
+      });
+    }
+
+    /* VALIDAÇÃO GERAL DA ABA */
     function validarAba(abaId) {
       const abaEl = document.getElementById('tab-' + abaId);
       const camposObrigatorios = abaEl.querySelectorAll('[required]');
@@ -2034,9 +2401,40 @@
       return true;
     }
 
-    /* VALIDAÇÕES ESPECÍFICAS DE EQUIPAMENTOS, ALERGIAS E DEFICIÊNCIAS */
+    /* VALIDAÇÕES ESPECÍFICAS DA FICHA MÉDICA */
     function validarSecoesMedicasEspecificas() {
-      // 1. Equipamentos de auxílio
+      // 1. Saúde Física
+      if (document.querySelector('input[name="prob_cronico"][value="Sim"]')?.checked) {
+        const el = document.getElementById('prob_cronico_med');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, especifique a medicação para o problema crônico de saúde.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.querySelector('input[name="acomp_medico"][value="Sim"]')?.checked) {
+        const el = document.getElementById('acomp_medico_especialidade');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, especifique a especialidade do acompanhamento médico.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.getElementById('enf_outros')?.checked) {
+        const el = document.getElementById('enf_outros_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, especifique as outras enfermidades crônicas.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      // 2. Equipamentos de auxílio
       const auxOpt = document.getElementById('med_auxilio_opt').value;
       if (auxOpt === 'Sim') {
         const auxCheckboxes = ['aux_oculos', 'aux_lentes', 'aux_aparelho_dentario', 'aux_sondas', 'aux_marcapasso', 'aux_audicao', 'aux_bomba_insulina', 'aux_outros_check'];
@@ -2053,13 +2451,104 @@
             outrosDesc?.classList.add('req-field');
             outrosDesc?.focus();
             return false;
-          } else {
-            outrosDesc?.classList.remove('req-field');
           }
         }
       }
 
-      // 2. Alergias
+      // 3. Medicamentos em Uso
+      const medsOpt = document.getElementById('meds_opt').value;
+      if (medsOpt === 'Sim') {
+        const rows = document.querySelectorAll('#tabelaMedicamentos tbody tr');
+        if (rows.length === 0) {
+          alert('Você indicou que usa medicamentos. Por favor, adicione pelo menos um medicamento na tabela.');
+          return false;
+        }
+        for (let i = 0; i < rows.length; i++) {
+          const nomeInput = rows[i].querySelector('.med-nome') || rows[i].querySelectorAll('input')[0];
+          const infoInput = rows[i].querySelector('.med-info') || rows[i].querySelectorAll('input')[1];
+
+          if (!nomeInput || !nomeInput.value.trim()) {
+            alert(`Por favor, preencha o nome do medicamento na linha ${i + 1}.`);
+            if (nomeInput) { nomeInput.classList.add('req-field'); nomeInput.focus(); }
+            return false;
+          }
+          if (!infoInput || !infoInput.value.trim()) {
+            alert(`Por favor, preencha as informações de dosagem/horários na linha ${i + 1}.`);
+            if (infoInput) { infoInput.classList.add('req-field'); infoInput.focus(); }
+            return false;
+          }
+        }
+
+        if (document.querySelector('input[name="permite_med"][value="Sim"]')?.checked) {
+          const el = document.getElementById('permite_med_info');
+          if (!el || !el.value.trim()) {
+            alert('Por favor, informe detalhes sobre a administração de medicamentos por profissionais.');
+            el?.classList.add('req-field');
+            el?.focus();
+            return false;
+          }
+        }
+
+        if (document.querySelector('input[name="autonomia_med"][value="Sim"]')?.checked) {
+          const el = document.getElementById('autonomia_med_info');
+          if (!el || !el.value.trim()) {
+            alert('Por favor, informe detalhes sobre a autonomia do jovem na administração dos medicamentos.');
+            el?.classList.add('req-field');
+            el?.focus();
+            return false;
+          }
+        }
+      }
+
+      // 4. Emergências Médicas
+      const avisarEmergencia = document.querySelector('input[name="avisar_emergencia"]:checked')?.value || 'Pais';
+      if (avisarEmergencia === 'Pais') {
+        const tel = document.getElementById('emergencia_tel');
+        if (!tel || !tel.value.trim()) {
+          alert('Por favor, preencha o telefone do contato de emergência.');
+          tel?.classList.add('req-field');
+          tel?.focus();
+          return false;
+        }
+      } else if (avisarEmergencia === 'Outros') {
+        const nome = document.getElementById('emergencia_nome');
+        const tel = document.getElementById('emergencia_tel');
+        if (!nome || !nome.value.trim()) {
+          alert('Por favor, preencha o nome do contato de emergência.');
+          nome?.classList.add('req-field');
+          nome?.focus();
+          return false;
+        }
+        if (!tel || !tel.value.trim()) {
+          alert('Por favor, preencha o telefone do contato de emergência.');
+          tel?.classList.add('req-field');
+          tel?.focus();
+          return false;
+        }
+      }
+
+      // 5. Plano de Saúde
+      const planoOpt = document.getElementById('plano_opt').value;
+      if (planoOpt !== 'Não/SUS') {
+        if (planoOpt === 'Outro') {
+          const espec = document.getElementById('plano_outro_especificar');
+          if (!espec || !espec.value.trim()) {
+            alert('Por favor, especifique o nome do Plano de Saúde.');
+            espec?.classList.add('req-field');
+            espec?.focus();
+            return false;
+          }
+        }
+        const cart = document.getElementById('plano_carteirinha');
+        if (!cart || !cart.value.trim()) {
+          alert('Por favor, preencha o número da carteirinha do Plano de Saúde.');
+          cart?.classList.add('req-field');
+          cart?.focus();
+          return false;
+        }
+      }
+
+      // 6. Alergias
       const algOpt = document.getElementById('alergia_opt').value;
       if (algOpt === 'Sim') {
         const alergiasList = [
@@ -2088,14 +2577,84 @@
               descEl?.classList.add('req-field');
               descEl?.focus();
               return false;
-            } else {
-              descEl?.classList.remove('req-field');
             }
           }
         }
       }
 
-      // 3. Deficiências
+      // 7. Informações Gerais
+      if (document.querySelector('input[name="imp_fisico"][value="Sim"]')?.checked) {
+        const el = document.getElementById('imp_fisico_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, cite o impedimento físico.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.querySelector('input[name="rest_alimento"][value="Sim"]')?.checked) {
+        const el = document.getElementById('rest_alimento_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, cite as restrições alimentares.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      // 8. Saúde Mental
+      if (document.querySelector('input[name="transtorno"][value="Sim"]')?.checked) {
+        const el = document.getElementById('transtorno_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, especifique qual transtorno de saúde mental.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.querySelector('input[name="med_transtorno"][value="Sim"]')?.checked) {
+        const el = document.getElementById('med_transtorno_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, especifique qual medicação para o transtorno.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.querySelector('input[name="psicologo"][value="Sim"]')?.checked) {
+        const el = document.getElementById('psicologo_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, preencha o contato/profissional psicólogo.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.querySelector('input[name="medico_mental"][value="Sim"]')?.checked) {
+        const el = document.getElementById('medico_mental_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, preencha o contato do médico responsável.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      if (document.querySelector('input[name="outro_prof"][value="Sim"]')?.checked) {
+        const el = document.getElementById('outro_prof_desc');
+        if (!el || !el.value.trim()) {
+          alert('Por favor, preencha o contato do outro profissional.');
+          el?.classList.add('req-field');
+          el?.focus();
+          return false;
+        }
+      }
+
+      // 9. Deficiências
       const defOpt = document.getElementById('deficiencia_opt').value;
       if (defOpt === 'Sim') {
         const deficienciasList = [
@@ -2122,9 +2681,33 @@
               descEl?.classList.add('req-field');
               descEl?.focus();
               return false;
-            } else {
-              descEl?.classList.remove('req-field');
             }
+          }
+        }
+      }
+
+      // 10. Apresenta no Comportamento
+      const behList = [
+        { name: 'comp_agride_si', desc: 'comp_agride_si_desc', label: 'Crises de explosão em que agrida a si mesmo' },
+        { name: 'comp_agride_outros', desc: 'comp_agride_outros_desc', label: 'Crises de explosão em que agrida os outros' },
+        { name: 'comp_agitacao', desc: 'comp_agitacao_desc', label: 'Agitação psicomotora' },
+        { name: 'comp_instrucao', desc: 'comp_instrucao_desc', label: 'Dificuldade de obedecer instruções' },
+        { name: 'comp_fugas', desc: 'comp_fugas_desc', label: 'Tendência a fugas' },
+        { name: 'comp_autodestruicao', desc: 'comp_autodestruicao_desc', label: 'Comportamento auto-destrutivo' },
+        { name: 'comp_ansiedade', desc: 'comp_ansiedade_desc', label: 'Crises de ansiedade ou pânico' },
+        { name: 'comp_comunicacao', desc: 'comp_comunicacao_desc', label: 'Dificuldade de comunicação' },
+        { name: 'comp_alimentar', desc: 'comp_alimentar_desc', label: 'Dificuldades alimentares' },
+        { name: 'comp_sono', desc: 'comp_sono_desc', label: 'Dificuldades de sono' }
+      ];
+
+      for (let item of behList) {
+        if (document.querySelector(`input[name="${item.name}"][value="Sim"]`)?.checked) {
+          const el = document.getElementById(item.desc);
+          if (!el || !el.value.trim()) {
+            alert(`Por favor, preencha as observações para "${item.label}".`);
+            el?.classList.add('req-field');
+            el?.focus();
+            return false;
           }
         }
       }
@@ -2186,21 +2769,27 @@
       salvarEstadoFormulario();
     }
 
-    function toggleBox(boxId, show) {
-      const box = document.getElementById(boxId);
-      if (show) box.classList.remove('hidden');
-      else box.classList.add('hidden');
-    }
-
     function adicionarLinhaMedicamento() {
       const tbody = document.querySelector('#tabelaMedicamentos tbody');
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><input type="text" placeholder="Nome do remédio"></td>
-        <td><select><option value="Sim">Sim</option><option value="Não">Não</option></select></td>
-        <td><input type="text" placeholder="Dosagem / Horários"></td>
+        <td><input type="text" class="med-nome" placeholder="Nome do remédio *"></td>
+        <td><select class="med-continuo"><option value="Sim">Sim</option><option value="Não">Não</option></select></td>
+        <td><input type="text" class="med-info" placeholder="Dosagem / Horários *"></td>
+        <td style="text-align: center;"><button type="button" class="btn btn-danger" style="padding: 4px 8px; font-size: 0.75rem;" onclick="removerLinhaMedicamento(this)">❌ Remover</button></td>
       `;
       tbody.appendChild(tr);
+    }
+
+    function removerLinhaMedicamento(btn) {
+      const row = btn.closest('tr');
+      const tbody = row.parentElement;
+      if (tbody.children.length > 1) {
+        row.remove();
+      } else {
+        alert('A tabela deve conter pelo menos um medicamento.');
+      }
+      salvarEstadoFormulario();
     }
 
     function inicializarCanvas() {
@@ -2284,12 +2873,6 @@
       if (data['religiao']) atualizarDenominacoes();
       if (data['denominacao']) document.getElementById('denominacao').value = data['denominacao'];
 
-      if (data['med_auxilio_opt'] === 'Sim') toggleBox('auxilio_box', true);
-      if (data['meds_opt'] === 'Sim') toggleBox('meds_box', true);
-      if (data['plano_opt'] && data['plano_opt'] !== 'Não/SUS') toggleBox('plano_box', true);
-      if (data['alergia_opt'] === 'Sim') toggleBox('alergia_box', true);
-      if (data['deficiencia_opt'] === 'Sim') toggleBox('deficiencia_box', true);
-
       if (data['assinatura_img']) {
         const img = new Image();
         img.onload = function() {
@@ -2305,6 +2888,7 @@
         localStorage.removeItem('gem_ficha_dados');
         document.getElementById('cadastroForm').reset();
         limparAssinatura();
+        sincronizarValidacoesEVisibilidade();
         forcarMudancaAba('basicas');
       }
     }
